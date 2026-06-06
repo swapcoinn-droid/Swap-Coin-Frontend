@@ -1,0 +1,50 @@
+.sc-goal-card {
+  min-height: 100%;
+}
+
+.sc-goal-card__header {
+  display: flex;
+  align-items: start;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.sc-goal-card__title-group {
+  display: grid;
+  gap: 0.5rem;
+}
+
+.sc-goal-card__title {
+  font-size: 1.2rem;
+  line-height: 1.15;
+}
+
+.sc-goal-card__progress-text {
+  color: #225984;
+  font-size: 0.95rem;
+}
+
+.sc-goal-card__meta {
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid rgba(74, 104, 145, 0.14);
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.sc-goal-card__meta-label {
+  display: block;
+  font-size: 0.85rem;
+  color: #5d6c7e;
+  margin-bottom: 0.15rem;
+}
+
+.sc-goal-card__meta-value {
+  color: #1d2b3d;
+}
+
+.sc-goal-card__meta--end {
+  text-align: right;
+}

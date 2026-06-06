@@ -1,0 +1,23 @@
+.sc-fab {
+  position: fixed;
+  right: 1.25rem;
+  bottom: 1.25rem;
+  width: 3.4rem;
+  height: 3.4rem;
+  border: 0;
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #ffd233 0%, #ffcb14 100%);
+  color: #4c3a00;
+  box-shadow: 0 16px 35px rgba(255, 203, 20, 0.3);
+  cursor: pointer;
+  z-index: 30;
+}
+
+.sc-fab__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}

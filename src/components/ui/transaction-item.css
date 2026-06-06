@@ -1,0 +1,56 @@
+.sc-transaction-item {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 0.9rem;
+  padding: 1rem 0;
+}
+
+.sc-transaction-item__icon {
+  width: 2.8rem;
+  height: 2.8rem;
+  border-radius: 16px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(221, 233, 247, 0.9);
+  color: #2f6f9f;
+}
+
+.sc-transaction-item__copy {
+  display: grid;
+  gap: 0.2rem;
+}
+
+.sc-transaction-item__title {
+  color: #1d2b3d;
+}
+
+.sc-transaction-item__subtitle {
+  color: #5d6c7e;
+  font-size: 0.9rem;
+}
+
+.sc-transaction-item__aside {
+  display: grid;
+  justify-items: end;
+  gap: 0.15rem;
+  text-align: right;
+}
+
+.sc-transaction-item__amount {
+  color: #1d2b3d;
+}
+
+.sc-transaction-item__amount--positive {
+  color: #2f7d4a;
+}
+
+.sc-transaction-item__amount--negative {
+  color: #b43e4b;
+}
+
+.sc-transaction-item__meta {
+  color: #5d6c7e;
+  font-size: 0.88rem;
+}
