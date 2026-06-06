@@ -1,6 +1,6 @@
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom'
 
-import { AuthProvider } from '../auth/AuthProvider'
+import { AuthProvider } from '../providers/AuthProvider'
 import { AppLayout } from '../layouts/AppLayout'
 import { RoutePlaceholder } from '../pages/RoutePlaceholder'
 import { GuestGuard } from './guards/GuestGuard'
