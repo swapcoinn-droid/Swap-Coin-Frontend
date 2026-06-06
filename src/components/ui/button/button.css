@@ -1,0 +1,82 @@
+.sc-button {
+  appearance: none;
+  border: 1px solid transparent;
+  border-radius: 14px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  font: inherit;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  cursor: pointer;
+  transition:
+    transform 180ms ease,
+    box-shadow 180ms ease,
+    background-color 180ms ease,
+    border-color 180ms ease,
+    color 180ms ease;
+}
+
+.sc-button:hover {
+  transform: translateY(-1px);
+}
+
+.sc-button:focus-visible {
+  outline: 3px solid rgba(54, 110, 169, 0.25);
+  outline-offset: 2px;
+}
+
+.sc-button--sm {
+  min-height: 36px;
+  padding: 0.45rem 0.9rem;
+  font-size: 0.9rem;
+}
+
+.sc-button--md {
+  min-height: 44px;
+  padding: 0.7rem 1.15rem;
+  font-size: 0.95rem;
+}
+
+.sc-button--lg {
+  min-height: 52px;
+  padding: 0.9rem 1.4rem;
+  font-size: 1rem;
+}
+
+.sc-button--primary {
+  background: linear-gradient(135deg, #ffd233 0%, #ffcb14 100%);
+  color: #4c3a00;
+  box-shadow: 0 10px 22px rgba(255, 203, 20, 0.24);
+}
+
+.sc-button--secondary {
+  background: rgba(255, 255, 255, 0.92);
+  color: #2e6797;
+  border-color: rgba(70, 111, 160, 0.35);
+  box-shadow: 0 8px 18px rgba(59, 92, 126, 0.08);
+}
+
+.sc-button--ghost {
+  background: transparent;
+  color: #224f76;
+  border-color: transparent;
+}
+
+.sc-button--outline {
+  background: transparent;
+  color: #224f76;
+  border-color: rgba(70, 111, 160, 0.4);
+}
+
+.sc-button__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.sc-button__label {
+  display: inline-flex;
+  align-items: center;
+}
