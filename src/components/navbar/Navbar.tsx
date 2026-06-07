@@ -1,6 +1,7 @@
+import type { ReactNode } from 'react'
+
 import { NavLink } from 'react-router-dom'
 
-import { Button } from '../ui/button/Button'
 import { BrandMark } from '../icons/BrandMark'
 
 import './navbar.css'
@@ -12,9 +13,10 @@ type NavbarLink = {
 
 type NavbarAction = {
   label: string
-  to: string
+  to?: string
   onClick?: () => void
-  variant?: 'primary' | 'secondary' | 'ghost' | 'outline'
+  icon?: ReactNode
+  variant?: 'pill' | 'icon'
 }
 
 type NavbarProps = {
@@ -52,13 +54,37 @@ export function Navbar({ brand, brandTo, links, actions = [], activeLinkLabel }:
       </nav>
 
       <div className="sc-navbar__actions">
-        {actions.map((action) => (
-          <NavLink key={action.to} to={action.to} className="sc-navbar__action-link">
-            <Button variant={action.variant ?? 'ghost'} size="sm" onClick={action.onClick}>
-              {action.label}
-            </Button>
-          </NavLink>
-        ))}
+        {actions.map((action) =>
+          action.to ? (
+            <NavLink
+              key={action.label}
+              to={action.to}
+              className={({ isActive }) =>
+                [
+                  'sc-navbar__action',
+                  action.variant === 'icon' ? 'sc-navbar__action--icon' : 'sc-navbar__action--pill',
+                  isActive ? 'is-active' : '',
+                ]
+                  .filter(Boolean)
+                  .join(' ')
+              }
+              aria-label={action.variant === 'icon' ? action.label : undefined}
+            >
+              {action.icon ? <span className="sc-navbar__action-icon">{action.icon}</span> : null}
+              {action.variant !== 'icon' ? <span>{action.label}</span> : null}
+            </NavLink>
+          ) : (
+            <button
+              key={action.label}
+              type="button"
+              className={['sc-navbar__action', 'sc-navbar__action--pill'].join(' ')}
+              onClick={action.onClick}
+            >
+              {action.icon ? <span className="sc-navbar__action-icon">{action.icon}</span> : null}
+              <span>{action.label}</span>
+            </button>
+          ),
+        )}
       </div>
     </header>
   )

@@ -1,0 +1,65 @@
+.sc-goal-row {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: 0.95rem;
+  align-items: start;
+  padding: 1rem 0;
+}
+
+.sc-goal-row__icon {
+  width: 3rem;
+  height: 3rem;
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(227, 236, 250, 0.92);
+  color: #2f6f9f;
+  font-size: 1.35rem;
+  flex: 0 0 auto;
+}
+
+.sc-goal-row__content {
+  min-width: 0;
+  display: grid;
+  gap: 0.6rem;
+}
+
+.sc-goal-row__heading {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.sc-goal-row__title {
+  font-size: 1rem;
+  line-height: 1.2;
+}
+
+.sc-goal-row__subtitle {
+  margin-top: 0.2rem;
+  color: #6a7685;
+  font-size: 0.88rem;
+}
+
+.sc-goal-row__progress,
+.sc-goal-row__amount {
+  color: #4f5f71;
+  font-weight: 700;
+}
+
+.sc-goal-row__amount {
+  align-self: center;
+  white-space: nowrap;
+}
+
+@media (max-width: 720px) {
+  .sc-goal-row {
+    grid-template-columns: auto 1fr;
+  }
+
+  .sc-goal-row__amount {
+    grid-column: 2;
+    justify-self: end;
+  }
+}

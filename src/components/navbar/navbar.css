@@ -69,6 +69,64 @@
   flex-wrap: wrap;
 }
 
+.sc-navbar__action {
+  min-height: 2.5rem;
+  border: 0;
+  padding: 0.4rem 0.95rem;
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  text-decoration: none;
+  font-weight: 700;
+  color: #fff;
+  background: rgba(255, 255, 255, 0.14);
+  cursor: pointer;
+  transition:
+    transform 180ms ease,
+    background-color 180ms ease,
+    box-shadow 180ms ease;
+}
+
+.sc-navbar__action:hover {
+  transform: translateY(-1px);
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.sc-navbar__action:focus-visible {
+  outline: 3px solid rgba(255, 210, 51, 0.35);
+  outline-offset: 2px;
+}
+
+.sc-navbar__action--icon {
+  width: 2.5rem;
+  padding-inline: 0;
+  justify-content: center;
+}
+
+.sc-navbar__action--icon .sc-navbar__action-icon {
+  width: 1rem;
+  height: 1rem;
+}
+
+.sc-navbar__action.is-active {
+  background: rgba(255, 255, 255, 0.24);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.12);
+}
+
+.sc-navbar__action-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1rem;
+  height: 1rem;
+}
+
+.sc-navbar__action-icon svg {
+  width: 100%;
+  height: 100%;
+}
+
 .sc-navbar__action-link {
   text-decoration: none;
 }

@@ -10,6 +10,11 @@ export type LocalUser = {
 
 export type PublicUser = Omit<LocalUser, 'passwordHash'>
 
+export type LocalSessionUser = {
+  userId: string
+  email: string
+}
+
 type AuthResult =
   | { ok: true; user: PublicUser }
   | { ok: false; message: string }
@@ -87,6 +92,24 @@ export function createLocalSession(user: PublicUser, persistent: boolean) {
   localStorage.removeItem(AUTH_TOKEN_KEY)
   sessionStorage.removeItem(AUTH_TOKEN_KEY)
   storage.setItem(AUTH_TOKEN_KEY, token)
+}
+
+export function getLocalSessionUser(): LocalSessionUser | null {
+  const token = localStorage.getItem(AUTH_TOKEN_KEY) || sessionStorage.getItem(AUTH_TOKEN_KEY)
+
+  if (!token) {
+    return null
+  }
+
+  try {
+    const decoded = JSON.parse(atob(token)) as LocalSessionUser
+
+    return typeof decoded?.email === 'string' && typeof decoded?.userId === 'string'
+      ? decoded
+      : null
+  } catch {
+    return null
+  }
 }
 
 export function hasLocalSession() {

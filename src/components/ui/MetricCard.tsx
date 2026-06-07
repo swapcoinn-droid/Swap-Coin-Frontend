@@ -11,9 +11,17 @@ type MetricCardProps = {
   label?: string
   tone?: 'brand' | 'secondary'
   icon?: ReactNode
+  footerLabel?: string
 }
 
-export function MetricCard({ title, value, label, tone = 'brand', icon }: MetricCardProps) {
+export function MetricCard({
+  title,
+  value,
+  label,
+  tone = 'brand',
+  icon,
+  footerLabel,
+}: MetricCardProps) {
   return (
     <Card className={['sc-metric-card', `sc-metric-card--${tone}`].join(' ')}>
       <div className="sc-metric-card__top">
@@ -24,9 +32,11 @@ export function MetricCard({ title, value, label, tone = 'brand', icon }: Metric
         </div>
         {icon ? <div className="sc-metric-card__icon">{icon}</div> : null}
       </div>
-      <div className="sc-metric-card__footer">
-        <Badge tone={tone === 'brand' ? 'brand' : 'neutral'}>{tone === 'brand' ? 'Balance' : 'Secondary'}</Badge>
-      </div>
+      {footerLabel ? (
+        <div className="sc-metric-card__footer">
+          <Badge tone={tone === 'brand' ? 'brand' : 'neutral'}>{footerLabel}</Badge>
+        </div>
+      ) : null}
     </Card>
   )
 }
