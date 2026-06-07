@@ -1,6 +1,7 @@
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom'
 
 import { AppLayout } from '../layouts/AppLayout'
+import { DashboardPage } from '../pages/dashboard/DashboardPage'
 import { RoutePlaceholder } from '../pages/RoutePlaceholder'
 import { LoginPage } from '../pages/auth/LoginPage'
 import { RegisterPage } from '../pages/auth/RegisterPage'
@@ -27,10 +28,7 @@ export function AppRouter() {
           <Route element={<ProtectedRoute />}>
             <Route path={routes.app} element={<AppLayout />}>
               <Route index element={<Navigate to={routes.dashboard} replace />} />
-              <Route
-                path="dashboard"
-                element={<RoutePlaceholder title="Dashboard" />}
-              />
+              <Route path="dashboard" element={<DashboardPage />} />
               <Route
                 path="metas"
                 element={<RoutePlaceholder title="Metas" />}

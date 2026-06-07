@@ -1,0 +1,53 @@
+.sc-quick-action-card {
+  min-height: 5.6rem;
+  width: 100%;
+  border: 1px solid rgba(123, 139, 160, 0.3);
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.92);
+  color: #27496a;
+  display: grid;
+  place-items: center;
+  gap: 0.55rem;
+  padding: 1rem 1rem 0.9rem;
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 8px 18px rgba(47, 78, 117, 0.06);
+  transition:
+    transform 180ms ease,
+    box-shadow 180ms ease,
+    border-color 180ms ease,
+    background-color 180ms ease;
+}
+
+.sc-quick-action-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 14px 28px rgba(47, 78, 117, 0.12);
+}
+
+.sc-quick-action-card:focus-visible {
+  outline: 3px solid rgba(47, 111, 159, 0.22);
+  outline-offset: 2px;
+}
+
+.sc-quick-action-card--highlight {
+  background: linear-gradient(180deg, #ffd94f 0%, #ffcf1d 100%);
+  border-color: transparent;
+  color: #5a4300;
+  box-shadow: 0 14px 28px rgba(255, 208, 29, 0.28);
+}
+
+.sc-quick-action-card__icon {
+  font-size: 2rem;
+  line-height: 1;
+}
+
+.sc-quick-action-card__label {
+  font-size: 0.98rem;
+}
+
+@media (max-width: 720px) {
+  .sc-quick-action-card {
+    min-height: 5.25rem;
+  }
+}
