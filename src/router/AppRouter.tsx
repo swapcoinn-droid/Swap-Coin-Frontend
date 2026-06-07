@@ -3,6 +3,7 @@ import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom'
 import { AppLayout } from '../layouts/AppLayout'
 import { RoutePlaceholder } from '../pages/RoutePlaceholder'
 import { LoginPage } from '../pages/auth/LoginPage'
+import { RegisterPage } from '../pages/auth/RegisterPage'
 import { AuthProvider } from '../providers/AuthProvider'
 import { GuestGuard } from './guards/GuestGuard'
 import { ProtectedRoute } from './guards/ProtectedRoute'
@@ -20,10 +21,7 @@ export function AppRouter() {
 
           <Route element={<GuestGuard />}>
             <Route path={routes.login} element={<LoginPage />} />
-            <Route
-              path={routes.register}
-              element={<RoutePlaceholder title="Crear cuenta" />}
-            />
+            <Route path={routes.register} element={<RegisterPage />} />
           </Route>
 
           <Route element={<ProtectedRoute />}>
