@@ -15,6 +15,7 @@ import { useAuth } from '../../hooks/useAuth'
 import { routes } from '../../router/routes'
 import {
   getPasswordStrength,
+  validateEmail,
   validateRegister,
   type RegisterErrors,
   type RegisterValues,
@@ -65,6 +66,10 @@ export function RegisterPage() {
     navigate(routes.login, { replace: true, state: { registered: true } })
   }
 
+  const handleEmailBlur = () => {
+    setErrors((current) => ({ ...current, email: validateEmail(values.email) }))
+  }
+
   const passwordToggle = (field: keyof typeof passwordVisibility, label: string) => (
     <button
       type="button"
@@ -93,7 +98,7 @@ export function RegisterPage() {
             <p>Únete a miles de viajeros modernos hoy mismo.</p>
           </header>
 
-          <form className="register-form" onSubmit={handleSubmit}>
+          <form className="register-form" onSubmit={handleSubmit} noValidate>
             <TextField
               id="full-name"
               label="Nombre completo"
@@ -117,6 +122,7 @@ export function RegisterPage() {
               value={values.email}
               errorText={errors.email}
               onChange={handleChange}
+              onBlur={handleEmailBlur}
               required
             />
             <div className="register-password">

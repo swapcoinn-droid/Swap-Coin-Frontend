@@ -72,6 +72,16 @@
   box-shadow: 0 0 0 4px rgba(47, 111, 159, 0.1);
 }
 
+.sc-field__input[aria-invalid='true'] {
+  border-color: #c53f4f;
+  box-shadow: 0 0 0 3px rgba(197, 63, 79, 0.1);
+}
+
+.sc-field__input[aria-invalid='true']:focus {
+  border-color: #b23a48;
+  box-shadow: 0 0 0 4px rgba(178, 58, 72, 0.12);
+}
+
 .sc-field__input::placeholder {
   color: #8a95a5;
 }
@@ -88,6 +98,7 @@
 
 .sc-field__help.is-error {
   color: #b23a48;
+  font-weight: 600;
 }
 
 .sc-checkbox {

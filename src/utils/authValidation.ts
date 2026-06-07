@@ -10,6 +10,10 @@ export type RegisterErrors = Partial<Record<keyof RegisterValues, string>>
 
 const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 
+export function validateEmail(email: string) {
+  return EMAIL_PATTERN.test(email.trim()) ? undefined : 'Ingresa un correo electrónico válido.'
+}
+
 export function validateRegister(values: RegisterValues): RegisterErrors {
   const errors: RegisterErrors = {}
 
@@ -17,9 +21,7 @@ export function validateRegister(values: RegisterValues): RegisterErrors {
     errors.fullName = 'El nombre debe tener al menos 3 caracteres.'
   }
 
-  if (!EMAIL_PATTERN.test(values.email.trim())) {
-    errors.email = 'Ingresa un correo electrónico válido.'
-  }
+  errors.email = validateEmail(values.email)
 
   if (values.password.length < 8) {
     errors.password = 'La contraseña debe tener al menos 8 caracteres.'
@@ -41,7 +43,9 @@ export function validateRegister(values: RegisterValues): RegisterErrors {
     errors.acceptTerms = 'Debes aceptar los términos y la política de privacidad.'
   }
 
-  return errors
+  return Object.fromEntries(
+    Object.entries(errors).filter(([, message]) => Boolean(message)),
+  ) as RegisterErrors
 }
 
 export function getPasswordStrength(password: string) {
