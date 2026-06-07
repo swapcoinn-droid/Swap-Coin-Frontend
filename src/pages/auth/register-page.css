@@ -144,41 +144,10 @@
   border-radius: 9px;
 }
 
-.register-divider {
-  margin: 2rem 0;
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  color: #626c79;
-  font-size: 0.72rem;
-}
-
-.register-divider::before,
-.register-divider::after {
-  content: '';
-  height: 1px;
-  flex: 1;
-  background: rgba(91, 119, 153, 0.35);
-}
-
-.register-google {
-  min-width: 200px;
-  border-radius: 9px;
-  color: #253246;
-}
-
-.register-google .sc-button__icon {
-  width: 20px;
-  height: 20px;
-  border-radius: 3px;
-  background: linear-gradient(135deg, #4285f4 0 25%, #ea4335 25% 50%, #fbbc05 50% 75%, #34a853 75%);
-  color: #fff;
-  font-size: 0.72rem;
-  font-weight: 800;
-}
-
 .register-card__footer {
-  margin-top: 2.25rem;
+  margin-top: 2rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid rgba(91, 119, 153, 0.25);
   display: flex;
   justify-content: center;
   gap: 0.45rem;
@@ -190,27 +159,6 @@
   color: var(--brand);
   font-weight: 800;
   text-decoration: none;
-}
-
-.register-chat {
-  position: fixed;
-  right: 1.5rem;
-  bottom: 1.5rem;
-  width: 52px;
-  height: 52px;
-  border: 0;
-  border-radius: 50%;
-  display: grid;
-  place-items: center;
-  background: var(--accent);
-  color: #614a00;
-  box-shadow: 0 12px 24px rgba(119, 91, 0, 0.2);
-  cursor: pointer;
-}
-
-.register-chat:focus-visible {
-  outline: 3px solid rgba(47, 111, 159, 0.3);
-  outline-offset: 3px;
 }
 
 @media (max-width: 560px) {
@@ -225,10 +173,6 @@
 
   .register-card {
     padding: 1.5rem 1.2rem 1.75rem;
-  }
-
-  .register-google {
-    width: 100%;
   }
 
   .register-card__footer {

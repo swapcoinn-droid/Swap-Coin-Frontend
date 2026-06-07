@@ -7,7 +7,6 @@ import {
   EyeIcon,
   LockIcon,
   MailIcon,
-  MessageIcon,
 } from '../../components/icons/AuthIcons'
 import { BrandMark } from '../../components/icons/BrandMark'
 import { Button } from '../../components/ui/button/Button'
@@ -130,9 +129,6 @@ export function LoginPage() {
         </div>
       </aside>
 
-      <button className="login-chat" type="button" aria-label="Abrir chat de ayuda">
-        <MessageIcon />
-      </button>
     </main>
   )
 }
