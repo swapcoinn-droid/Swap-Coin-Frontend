@@ -12,6 +12,7 @@ import { BrandMark } from '../../components/icons/BrandMark'
 import { Button } from '../../components/ui/button/Button'
 import { useAuth } from '../../hooks/useAuth'
 import { routes } from '../../router/routes'
+import { validateEmail } from '../../utils/authValidation'
 import './login-page.css'
 
 export function LoginPage() {
@@ -20,17 +21,32 @@ export function LoginPage() {
   const { login } = useAuth()
   const [showPassword, setShowPassword] = useState(false)
   const [values, setValues] = useState({ email: '', password: '' })
+  const [emailError, setEmailError] = useState<string>()
   const [formError, setFormError] = useState('')
   const registered = Boolean((location.state as { registered?: boolean } | null)?.registered)
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target
     setValues((current) => ({ ...current, [name]: value }))
+    if (name === 'email') {
+      setEmailError(undefined)
+    }
     setFormError('')
+  }
+
+  const handleEmailBlur = () => {
+    setEmailError(validateEmail(values.email))
   }
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault()
+    const validationError = validateEmail(values.email)
+
+    if (validationError) {
+      setEmailError(validationError)
+      return
+    }
+
     const result = await login(values.email, values.password, false)
 
     if (!result.ok) {
@@ -57,7 +73,7 @@ export function LoginPage() {
             <p>Accede a tu billetera global del nomadismo digital.</p>
           </header>
 
-          <form className="login-form" onSubmit={handleSubmit}>
+          <form className="login-form" onSubmit={handleSubmit} noValidate>
             {registered ? <p className="login-form__success" role="status">Cuenta creada correctamente. Ya puedes iniciar sesión.</p> : null}
             <TextField
               id="email"
@@ -68,7 +84,9 @@ export function LoginPage() {
               placeholder="nombre@ejemplo.com"
               leadingIcon={<MailIcon />}
               value={values.email}
+              errorText={emailError}
               onChange={handleChange}
+              onBlur={handleEmailBlur}
               required
             />
 
