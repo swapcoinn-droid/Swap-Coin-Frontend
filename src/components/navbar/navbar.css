@@ -1,0 +1,86 @@
+.sc-navbar {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  min-height: 4.25rem;
+  padding: 0 1.5rem;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 1.25rem;
+  background: linear-gradient(180deg, #356f9e 0%, #2d6795 100%);
+  box-shadow: 0 6px 18px rgba(40, 71, 102, 0.18);
+}
+
+.sc-navbar__brand {
+  color: #fff;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.sc-navbar__brand-mark {
+  width: 2.15rem;
+  height: 2.15rem;
+  color: #1f5e92;
+  flex: 0 0 auto;
+}
+
+.sc-navbar__brand-mark svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.sc-navbar__brand-text {
+  font-size: 1.1rem;
+}
+
+.sc-navbar__links {
+  display: inline-flex;
+  justify-content: center;
+  gap: 0.9rem;
+  flex-wrap: wrap;
+}
+
+.sc-navbar__link {
+  color: rgba(255, 255, 255, 0.82);
+  text-decoration: none;
+  padding: 0.35rem 0.1rem;
+  font-weight: 600;
+  border-bottom: 2px solid transparent;
+  transition: color 180ms ease, border-color 180ms ease;
+}
+
+.sc-navbar__link:hover,
+.sc-navbar__link.is-active {
+  color: #ffd233;
+  border-bottom-color: #ffd233;
+}
+
+.sc-navbar__actions {
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.sc-navbar__action-link {
+  text-decoration: none;
+}
+
+@media (max-width: 900px) {
+  .sc-navbar {
+    grid-template-columns: 1fr;
+    justify-items: center;
+    padding-block: 1rem;
+  }
+
+  .sc-navbar__actions {
+    justify-content: center;
+  }
+}
