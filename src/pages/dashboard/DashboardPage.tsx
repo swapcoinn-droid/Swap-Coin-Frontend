@@ -124,10 +124,6 @@ export function DashboardPage() {
           <h1>¡Hola, {currentUserEmail ?? 'usuario'}!</h1>
           <p>Bienvenido de nuevo a tu centro financiero nómada.</p>
         </div>
-
-        <div className="dashboard-page__avatar" aria-hidden="true">
-          <span />
-        </div>
       </section>
 
       <section className="dashboard-page__metrics" aria-label="Resumen de saldos">
