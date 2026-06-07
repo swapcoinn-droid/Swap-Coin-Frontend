@@ -4,6 +4,7 @@ import { AuthContext } from '../context/AuthContext'
 import {
   clearLocalSession,
   createLocalSession,
+  getLocalSessionUser,
   hasLocalSession,
   loginLocalUser,
   registerLocalUser,
@@ -11,6 +12,9 @@ import {
 
 export function AuthProvider({ children }: { children: ReactNode }) {
   const [isAuthenticated, setIsAuthenticated] = useState(hasLocalSession)
+  const [currentUserEmail, setCurrentUserEmail] = useState<string | null>(() =>
+    getLocalSessionUser()?.email ?? null,
+  )
 
   const login = async (email: string, password: string, remember: boolean) => {
     const result = await loginLocalUser(email, password)
@@ -21,6 +25,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
     createLocalSession(result.user, remember)
     setIsAuthenticated(true)
+    setCurrentUserEmail(result.user.email)
 
     return { ok: true }
   }
@@ -34,11 +39,12 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const endSession = () => {
     clearLocalSession()
     setIsAuthenticated(false)
+    setCurrentUserEmail(null)
   }
 
   return (
     <AuthContext.Provider
-      value={{ isAuthenticated, login, register, endSession }}
+      value={{ isAuthenticated, currentUserEmail, login, register, endSession }}
     >
       {children}
     </AuthContext.Provider>

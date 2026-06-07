@@ -20,6 +20,7 @@ import {
   ShoppingCartIcon,
   SwapIcon,
 } from '../../components/icons/AuthIcons'
+import { useAuth } from '../../hooks/useAuth'
 
 import './dashboard-page.css'
 
@@ -109,11 +110,13 @@ const transactions = [
 ]
 
 export function DashboardPage() {
+  const { currentUserEmail } = useAuth()
+
   return (
     <div className="dashboard-page">
       <section className="dashboard-page__hero">
         <div>
-          <h1>¡Hola, Juan Andrés!</h1>
+          <h1>¡Hola, {currentUserEmail ?? 'usuario'}!</h1>
           <p>Bienvenido de nuevo a tu centro financiero nómada.</p>
         </div>
 
