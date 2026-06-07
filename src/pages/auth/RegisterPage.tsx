@@ -1,5 +1,5 @@
-import { useState, type FormEvent } from 'react'
-import { Link } from 'react-router-dom'
+import { useState, type ChangeEvent, type CSSProperties, type FormEvent } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
 
 import { CheckboxField, TextField } from '../../components/forms'
 import {
@@ -12,16 +12,57 @@ import {
 } from '../../components/icons/AuthIcons'
 import { BrandMark } from '../../components/icons/BrandMark'
 import { Button } from '../../components/ui/button/Button'
+import { useAuth } from '../../hooks/useAuth'
 import { routes } from '../../router/routes'
+import {
+  getPasswordStrength,
+  validateRegister,
+  type RegisterErrors,
+  type RegisterValues,
+} from '../../utils/authValidation'
 import './register-page.css'
 
 type PasswordField = 'password' | 'confirmPassword'
 
 export function RegisterPage() {
+  const navigate = useNavigate()
+  const { register } = useAuth()
   const [visiblePassword, setVisiblePassword] = useState<PasswordField | null>(null)
+  const [values, setValues] = useState<RegisterValues>({
+    fullName: '',
+    email: '',
+    password: '',
+    confirmPassword: '',
+    acceptTerms: false,
+  })
+  const [errors, setErrors] = useState<RegisterErrors>({})
+  const [formError, setFormError] = useState('')
+  const passwordStrength = getPasswordStrength(values.password)
 
-  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
+    const { name, type, checked, value } = event.target
+    setValues((current) => ({ ...current, [name]: type === 'checkbox' ? checked : value }))
+    setErrors((current) => ({ ...current, [name]: undefined }))
+    setFormError('')
+  }
+
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault()
+    const validationErrors = validateRegister(values)
+
+    if (Object.keys(validationErrors).length > 0) {
+      setErrors(validationErrors)
+      return
+    }
+
+    const result = await register(values)
+
+    if (!result.ok) {
+      setFormError(result.message ?? 'No fue posible crear la cuenta.')
+      return
+    }
+
+    navigate(routes.login, { replace: true, state: { registered: true } })
   }
 
   const passwordToggle = (field: PasswordField, label: string) => (
@@ -60,6 +101,9 @@ export function RegisterPage() {
               autoComplete="name"
               placeholder="Ej. Juan Pérez"
               leadingIcon={<UserIcon />}
+              value={values.fullName}
+              errorText={errors.fullName}
+              onChange={handleChange}
               required
             />
             <TextField
@@ -70,6 +114,9 @@ export function RegisterPage() {
               autoComplete="email"
               placeholder="nombre@ejemplo.com"
               leadingIcon={<MailIcon />}
+              value={values.email}
+              errorText={errors.email}
+              onChange={handleChange}
               required
             />
             <div className="register-password">
@@ -82,11 +129,14 @@ export function RegisterPage() {
                 placeholder="Crea una contraseña"
                 leadingIcon={<LockIcon />}
                 trailingIcon={passwordToggle('password', 'contraseña')}
+                value={values.password}
+                errorText={errors.password}
+                onChange={handleChange}
                 required
               />
-              <div className="register-password__strength" aria-label="Seguridad de contraseña pendiente">
-                <span>Seguridad: Esperando...</span>
-                <span className="register-password__track" />
+              <div className="register-password__strength" aria-label={`Seguridad de contraseña: ${passwordStrength.label}`}>
+                <span>Seguridad: {passwordStrength.label}</span>
+                <span className="register-password__track" style={{ '--strength': `${passwordStrength.score * 20}%` } as CSSProperties} />
               </div>
             </div>
             <TextField
@@ -98,6 +148,9 @@ export function RegisterPage() {
               placeholder="Repite tu contraseña"
               leadingIcon={<LockIcon />}
               trailingIcon={passwordToggle('confirmPassword', 'confirmación de contraseña')}
+              value={values.confirmPassword}
+              errorText={errors.confirmPassword}
+              onChange={handleChange}
               required
             />
 
@@ -105,14 +158,18 @@ export function RegisterPage() {
               id="accept-terms"
               className="register-form__terms"
               name="acceptTerms"
+              checked={values.acceptTerms}
+              helperText={errors.acceptTerms}
+              onChange={handleChange}
               label={
                 <span>
                   Acepto los <a href="#terms">Términos de Servicio</a> y la{' '}
                   <a href="#privacy">Política de Privacidad</a> de Swap-Coin.
                 </span>
               }
-              required
             />
+
+            {formError ? <p className="register-form__error" role="alert">{formError}</p> : null}
 
             <Button className="register-form__submit" type="submit" size="lg" trailingIcon={<ArrowRightIcon />}>
               Crear cuenta

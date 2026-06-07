@@ -101,10 +101,20 @@
 .register-password__track::before {
   content: '';
   display: block;
-  width: 18%;
+  width: var(--strength, 0%);
   height: 100%;
   border-radius: inherit;
   background: #c8d5ef;
+}
+
+.register-form__error {
+  color: #b23a48;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.register-form__terms .sc-checkbox__help {
+  color: #b23a48;
 }
 
 .register-form__terms {

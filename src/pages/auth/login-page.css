@@ -114,6 +114,24 @@
   border-radius: 9px;
 }
 
+.login-form__error,
+.login-form__success {
+  padding: 0.7rem 0.8rem;
+  border-radius: 8px;
+  font-size: 0.82rem;
+  font-weight: 600;
+}
+
+.login-form__error {
+  background: rgba(178, 58, 72, 0.08);
+  color: #b23a48;
+}
+
+.login-form__success {
+  background: rgba(42, 126, 90, 0.1);
+  color: #23704f;
+}
+
 .login-card__footer {
   margin-top: 2rem;
   padding-top: 2rem;
