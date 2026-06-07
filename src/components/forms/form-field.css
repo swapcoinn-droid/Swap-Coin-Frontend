@@ -30,6 +30,29 @@
   right: 0.95rem;
 }
 
+.sc-field__control:has(.sc-field__icon:not(.sc-field__icon--trailing)) .sc-field__input {
+  padding-left: 2.9rem;
+}
+
+.sc-field__control:has(.sc-field__icon--trailing) .sc-field__input {
+  padding-right: 2.9rem;
+}
+
+.sc-field__icon button {
+  display: inline-flex;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+}
+
+.sc-field__icon button:focus-visible {
+  outline: 2px solid rgba(47, 111, 159, 0.4);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
 .sc-field__input {
   width: 100%;
   min-height: 3rem;
