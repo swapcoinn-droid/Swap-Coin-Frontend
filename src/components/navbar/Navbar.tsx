@@ -13,6 +13,7 @@ type NavbarLink = {
 type NavbarAction = {
   label: string
   to: string
+  onClick?: () => void
   variant?: 'primary' | 'secondary' | 'ghost' | 'outline'
 }
 
@@ -53,7 +54,7 @@ export function Navbar({ brand, brandTo, links, actions = [], activeLinkLabel }:
       <div className="sc-navbar__actions">
         {actions.map((action) => (
           <NavLink key={action.to} to={action.to} className="sc-navbar__action-link">
-            <Button variant={action.variant ?? 'ghost'} size="sm">
+            <Button variant={action.variant ?? 'ghost'} size="sm" onClick={action.onClick}>
               {action.label}
             </Button>
           </NavLink>
