@@ -70,6 +70,20 @@
   padding: 1.2rem 1.25rem 1rem;
 }
 
+.dashboard-panel--clickable {
+  cursor: pointer;
+}
+
+.dashboard-panel--clickable:focus-visible {
+  outline: 3px solid rgba(47, 111, 159, 0.2);
+  outline-offset: 3px;
+}
+
+.dashboard-panel__link-label {
+  color: #2f6f9f;
+  font-weight: 700;
+}
+
 .dashboard-panel__goals-list,
 .dashboard-panel__transactions-list {
   display: grid;

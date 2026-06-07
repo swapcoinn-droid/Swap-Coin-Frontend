@@ -1,3 +1,5 @@
+import { useNavigate } from 'react-router-dom'
+
 import {
   Button,
   Card,
@@ -9,7 +11,6 @@ import {
   SectionHeader,
   TransactionItem,
 } from '../../components/ui'
-
 import {
   BagIcon,
   BankIcon,
@@ -17,10 +18,10 @@ import {
   HomeIcon,
   PlaneIcon,
   PlusIcon,
-  ShoppingCartIcon,
   SwapIcon,
 } from '../../components/icons/AuthIcons'
 import { useAuth } from '../../hooks/useAuth'
+import { routes } from '../../router/routes'
 
 import './dashboard-page.css'
 
@@ -49,10 +50,9 @@ const metrics = [
 ]
 
 const quickActions = [
-  { label: 'Comprar divisa', tone: 'highlight' as const, icon: <ShoppingCartIcon /> },
-  { label: 'Cambiar divisa', tone: 'neutral' as const, icon: <SwapIcon /> },
-  { label: 'Retirar', tone: 'neutral' as const, icon: <BankIcon /> },
-  { label: 'Agregar saldo', tone: 'neutral' as const, icon: <PlusIcon /> },
+  { label: 'Cambiar divisa', tone: 'highlight' as const, icon: <SwapIcon />, to: routes.exchange },
+  { label: 'Retirar', tone: 'neutral' as const, icon: <BankIcon />, to: routes.withdraw },
+  { label: 'Agregar saldo', tone: 'neutral' as const, icon: <PlusIcon />, to: routes.topUp },
 ]
 
 const goals = [
@@ -111,6 +111,11 @@ const transactions = [
 
 export function DashboardPage() {
   const { currentUserEmail } = useAuth()
+  const navigate = useNavigate()
+
+  const openGoals = () => {
+    navigate(routes.goals)
+  }
 
   return (
     <div className="dashboard-page">
@@ -143,21 +148,34 @@ export function DashboardPage() {
 
         <div className="dashboard-page__quick-actions">
           {quickActions.map((action) => (
-            <QuickActionCard key={action.label} label={action.label} tone={action.tone} icon={action.icon} />
+            <QuickActionCard
+              key={action.label}
+              label={action.label}
+              tone={action.tone}
+              icon={action.icon}
+              to={action.to}
+            />
           ))}
         </div>
       </section>
 
       <section className="dashboard-page__main-grid">
-        <Card className="dashboard-panel dashboard-panel--goals">
+        <Card
+          className="dashboard-panel dashboard-panel--goals dashboard-panel--clickable"
+          onClick={openGoals}
+          role="link"
+          tabIndex={0}
+          onKeyDown={(event) => {
+            if (event.key === 'Enter' || event.key === ' ') {
+              event.preventDefault()
+              openGoals()
+            }
+          }}
+        >
           <SectionHeader
             eyebrow="Mis metas"
             title="Mis metas"
-            action={
-              <Button variant="ghost" size="sm">
-                Ver todas
-              </Button>
-            }
+            action={<span className="dashboard-panel__link-label">Ver todas</span>}
           />
 
           <div className="dashboard-panel__goals-list">
@@ -173,10 +191,10 @@ export function DashboardPage() {
               />
             ))}
 
-            <button type="button" className="dashboard-panel__new-goal">
+            <div className="dashboard-panel__new-goal" aria-hidden="true">
               <span>+</span>
               <span>Nueva meta</span>
-            </button>
+            </div>
           </div>
         </Card>
 

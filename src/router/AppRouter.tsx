@@ -30,6 +30,18 @@ export function AppRouter() {
               <Route index element={<Navigate to={routes.dashboard} replace />} />
               <Route path="dashboard" element={<DashboardPage />} />
               <Route
+                path="cambiar-divisa"
+                element={<RoutePlaceholder title="Cambiar divisa" />}
+              />
+              <Route
+                path="retirar"
+                element={<RoutePlaceholder title="Retirar" />}
+              />
+              <Route
+                path="agregar-saldo"
+                element={<RoutePlaceholder title="Agregar saldo" />}
+              />
+              <Route
                 path="metas"
                 element={<RoutePlaceholder title="Metas" />}
               />
