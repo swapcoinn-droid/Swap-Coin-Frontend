@@ -1,9 +1,12 @@
 import { Outlet } from 'react-router-dom'
 
 import { Navbar } from '../components/navbar/Navbar'
+import { useAuth } from '../hooks/useAuth'
 import { routes } from '../router/routes'
 
 export function AppLayout() {
+  const { endSession } = useAuth()
+
   return (
     <div className="app-shell">
       <Navbar
@@ -16,7 +19,7 @@ export function AppLayout() {
         ]}
         actions={[
           { label: 'Profile', to: routes.dashboard, variant: 'ghost' },
-          { label: 'Logout', to: routes.home, variant: 'primary' },
+          { label: 'Logout', to: routes.home, variant: 'primary', onClick: endSession },
         ]}
         activeLinkLabel="Dashboard"
       />
