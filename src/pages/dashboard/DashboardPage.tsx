@@ -10,7 +10,16 @@ import {
   TransactionItem,
 } from '../../components/ui'
 
-import { ChatIcon } from '../../components/icons/AuthIcons'
+import {
+  BagIcon,
+  BankIcon,
+  ChatIcon,
+  HomeIcon,
+  PlaneIcon,
+  PlusIcon,
+  ShoppingCartIcon,
+  SwapIcon,
+} from '../../components/icons/AuthIcons'
 
 import './dashboard-page.css'
 
@@ -39,10 +48,10 @@ const metrics = [
 ]
 
 const quickActions = [
-  { label: 'Comprar divisa', tone: 'highlight' as const, icon: '🛒' },
-  { label: 'Cambiar divisa', tone: 'neutral' as const, icon: '⇄' },
-  { label: 'Retirar', tone: 'neutral' as const, icon: '🏛' },
-  { label: 'Agregar saldo', tone: 'neutral' as const, icon: '+' },
+  { label: 'Comprar divisa', tone: 'highlight' as const, icon: <ShoppingCartIcon /> },
+  { label: 'Cambiar divisa', tone: 'neutral' as const, icon: <SwapIcon /> },
+  { label: 'Retirar', tone: 'neutral' as const, icon: <BankIcon /> },
+  { label: 'Agregar saldo', tone: 'neutral' as const, icon: <PlusIcon /> },
 ]
 
 const goals = [
@@ -51,7 +60,7 @@ const goals = [
     amount: '$850 / $1,200 USD',
     progress: 70,
     subtitle: 'Ahorro para viaje',
-    icon: '✈',
+    icon: <PlaneIcon />,
     progressTone: 'brand' as const,
   },
   {
@@ -59,7 +68,7 @@ const goals = [
     amount: '€400 / €600 EUR',
     progress: 66,
     subtitle: 'Renta mensual',
-    icon: '⌂',
+    icon: <HomeIcon />,
     progressTone: 'warning' as const,
   },
 ]
@@ -71,7 +80,7 @@ const transactions = [
     amount: '- $ 18,500 COP',
     amountTone: 'negative' as const,
     meta: 'Comida y bebida',
-    icon: '👜',
+    icon: <BagIcon />,
   },
   {
     title: 'Cambio USD a COP',
@@ -79,7 +88,7 @@ const transactions = [
     amount: '+ $ 350,000 COP',
     amountTone: 'positive' as const,
     meta: 'Conversión',
-    icon: '⇄',
+    icon: <SwapIcon />,
   },
   {
     title: 'Airbnb Madrid',
@@ -87,7 +96,7 @@ const transactions = [
     amount: '- € 120.00 EUR',
     amountTone: 'negative' as const,
     meta: 'Alojamiento',
-    icon: '✈',
+    icon: <PlaneIcon />,
   },
   {
     title: 'Recarga de saldo',
@@ -95,7 +104,7 @@ const transactions = [
     amount: '+ $ 500,00 USD',
     amountTone: 'positive' as const,
     meta: 'Transferencia',
-    icon: '+',
+    icon: <PlusIcon />,
   },
 ]
 
