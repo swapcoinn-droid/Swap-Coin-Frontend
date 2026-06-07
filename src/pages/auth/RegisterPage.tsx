@@ -7,7 +7,6 @@ import {
   EyeIcon,
   LockIcon,
   MailIcon,
-  MessageIcon,
   UserIcon,
 } from '../../components/icons/AuthIcons'
 import { BrandMark } from '../../components/icons/BrandMark'
@@ -22,12 +21,13 @@ import {
 } from '../../utils/authValidation'
 import './register-page.css'
 
-type PasswordField = 'password' | 'confirmPassword'
-
 export function RegisterPage() {
   const navigate = useNavigate()
   const { register } = useAuth()
-  const [visiblePassword, setVisiblePassword] = useState<PasswordField | null>(null)
+  const [passwordVisibility, setPasswordVisibility] = useState({
+    password: false,
+    confirmPassword: false,
+  })
   const [values, setValues] = useState<RegisterValues>({
     fullName: '',
     email: '',
@@ -65,12 +65,12 @@ export function RegisterPage() {
     navigate(routes.login, { replace: true, state: { registered: true } })
   }
 
-  const passwordToggle = (field: PasswordField, label: string) => (
+  const passwordToggle = (field: keyof typeof passwordVisibility, label: string) => (
     <button
       type="button"
-      aria-label={`${visiblePassword === field ? 'Ocultar' : 'Mostrar'} ${label}`}
-      aria-pressed={visiblePassword === field}
-      onClick={() => setVisiblePassword((current) => (current === field ? null : field))}
+      aria-label={`${passwordVisibility[field] ? 'Ocultar' : 'Mostrar'} ${label}`}
+      aria-pressed={passwordVisibility[field]}
+      onClick={() => setPasswordVisibility((current) => ({ ...current, [field]: !current[field] }))}
     >
       <EyeIcon />
     </button>
@@ -124,7 +124,7 @@ export function RegisterPage() {
                 id="register-password"
                 label="Contraseña"
                 name="password"
-                type={visiblePassword === 'password' ? 'text' : 'password'}
+                type={passwordVisibility.password ? 'text' : 'password'}
                 autoComplete="new-password"
                 placeholder="Crea una contraseña"
                 leadingIcon={<LockIcon />}
@@ -143,7 +143,7 @@ export function RegisterPage() {
               id="confirm-password"
               label="Confirmar contraseña"
               name="confirmPassword"
-              type={visiblePassword === 'confirmPassword' ? 'text' : 'password'}
+              type={passwordVisibility.confirmPassword ? 'text' : 'password'}
               autoComplete="new-password"
               placeholder="Repite tu contraseña"
               leadingIcon={<LockIcon />}
@@ -176,14 +176,6 @@ export function RegisterPage() {
             </Button>
           </form>
 
-          <div className="register-divider">
-            <span>O REGISTRARSE CON</span>
-          </div>
-
-          <Button className="register-google" variant="secondary" size="lg" leadingIcon={<span>G</span>}>
-            Google
-          </Button>
-
           <footer className="register-card__footer">
             <span>¿Ya tienes una cuenta?</span>
             <Link to={routes.login}>Inicia sesión</Link>
@@ -191,9 +183,6 @@ export function RegisterPage() {
         </div>
       </section>
 
-      <button className="register-chat" type="button" aria-label="Abrir chat de ayuda">
-        <MessageIcon />
-      </button>
     </main>
   )
 }
