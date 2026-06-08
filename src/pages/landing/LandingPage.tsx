@@ -1,7 +1,8 @@
 import { Link } from 'react-router-dom'
 
 import { ArrowRightIcon } from '../../components/icons/AuthIcons'
-import { BrandMark } from '../../components/icons/BrandMark'
+import { PublicFooter } from '../../components/public-layout/PublicFooter'
+import { PublicNavbar } from '../../components/public-layout/PublicNavbar'
 import { routes } from '../../router/routes'
 import './landing-page.css'
 
@@ -44,23 +45,7 @@ const currencies = [
 export function LandingPage() {
   return (
     <main className="landing-page">
-      <header className="landing-nav">
-        <Link className="landing-nav__brand" to={routes.home} aria-label="Swap-Coin inicio">
-          <span className="landing-nav__mark">
-            <BrandMark />
-          </span>
-          <span>Swap-Coin</span>
-        </Link>
-
-        <nav className="landing-nav__links" aria-label="Navegacion publica">
-          <a href="#features">Funciones</a>
-          <a href="#audience">Para quien es</a>
-          <Link to={routes.login}>Iniciar sesion</Link>
-          <Link className="landing-nav__cta" to={routes.register}>
-            Crear cuenta
-          </Link>
-        </nav>
-      </header>
+      <PublicNavbar />
 
       <section className="landing-hero">
         <div className="landing-hero__content">
@@ -158,22 +143,7 @@ export function LandingPage() {
         </Link>
       </section>
 
-      <footer className="landing-footer">
-        <Link className="landing-footer__brand" to={routes.home} aria-label="Swap-Coin inicio">
-          <span className="landing-footer__mark">
-            <BrandMark />
-          </span>
-          <span>Swap-Coin</span>
-        </Link>
-
-        <p>Finanzas simples para personas que se mueven entre monedas, metas y destinos.</p>
-
-        <nav className="landing-footer__links" aria-label="Enlaces del footer">
-          <a href="#features">Funciones</a>
-          <a href="#audience">Para quien es</a>
-          <Link to={routes.login}>Iniciar sesion</Link>
-        </nav>
-      </footer>
+      <PublicFooter />
     </main>
   )
 }
