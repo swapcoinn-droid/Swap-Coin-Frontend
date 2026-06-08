@@ -9,7 +9,6 @@ import {
   MailIcon,
   UserIcon,
 } from '../../components/icons/AuthIcons'
-import { BrandMark } from '../../components/icons/BrandMark'
 import { PublicFooter } from '../../components/public-layout/PublicFooter'
 import { PublicNavbar } from '../../components/public-layout/PublicNavbar'
 import { Button } from '../../components/ui/button/Button'
@@ -88,13 +87,29 @@ export function RegisterPage() {
       <PublicNavbar />
 
       <section className="register-page__content" aria-labelledby="register-title">
-        <header className="register-brand">
-          <Link className="register-brand__mark" to={routes.home} aria-label="Ir al inicio de Swap-Coin">
-            <BrandMark />
-          </Link>
-          <Link to={routes.home}>Swap-Coin</Link>
-          <p>Tu puente financiero hacia el mundo.</p>
-        </header>
+        <div className="register-copy">
+          <span className="register-copy__eyebrow">Crea tu wallet</span>
+          <h2>Empieza a planear tus metas.</h2>
+          <p>
+            Registra tu cuenta para organizar monedas, seguir objetivos de ahorro y
+            preparar tu proximo destino desde un solo lugar.
+          </p>
+
+          <div className="register-copy__stats" aria-label="Beneficios de Swap-Coin">
+            <span>
+              <strong>3+</strong>
+              Monedas
+            </span>
+            <span>
+              <strong>85%</strong>
+              Meta activa
+            </span>
+            <span>
+              <strong>24/7</strong>
+              Acceso
+            </span>
+          </div>
+        </div>
 
         <div className="register-card">
           <header className="register-card__header">
