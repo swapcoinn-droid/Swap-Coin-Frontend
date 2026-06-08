@@ -1,7 +1,7 @@
 .login-page {
   position: relative;
   min-height: 100vh;
-  overflow-x: hidden;
+  overflow-x: clip;
   display: grid;
   place-items: center;
   padding: 8rem 2rem 0;
