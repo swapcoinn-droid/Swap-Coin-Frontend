@@ -48,6 +48,7 @@ const metrics = [
     title: 'Peso colombiano',
     value: '$ 4.560.200',
     label: 'COP',
+    footerLabel: 'Cuenta principal',
     tone: 'brand' as const,
     icon: <CurrencyFlag currency="COP" />,
   },
@@ -55,6 +56,7 @@ const metrics = [
     title: 'Dólar americano',
     value: '$ 1,120.50',
     label: 'USD',
+    footerLabel: 'Disponible',
     tone: 'secondary' as const,
     icon: <CurrencyFlag currency="USD" />,
   },
@@ -62,9 +64,16 @@ const metrics = [
     title: 'Euro',
     value: '€ 950.00',
     label: 'EUR',
+    footerLabel: 'Ahorro activo',
     tone: 'brand' as const,
     icon: <CurrencyFlag currency="EUR" />,
   },
+]
+
+const exchangeRates = [
+  { from: 'USD' as const, to: 'COP', rate: '1 USD = $ 4.075 COP' },
+  { from: 'EUR' as const, to: 'COP', rate: '1 EUR = $ 4.390 COP' },
+  { from: 'COP' as const, to: 'USD', rate: '$ 100.000 COP = 24.54 USD' },
 ]
 
 const quickActions = [
@@ -138,10 +147,26 @@ export function DashboardPage() {
   return (
     <div className="dashboard-page">
       <section className="dashboard-page__hero">
-        <div>
+        <div className="dashboard-page__hero-copy">
+          <span className="dashboard-page__eyebrow">Dashboard financiero</span>
           <h1>¡Hola, {currentUserEmail ?? 'usuario'}!</h1>
           <p>Bienvenido de nuevo a tu centro financiero nómada.</p>
         </div>
+
+        <aside className="dashboard-page__hero-panel" aria-label="Resumen financiero">
+          <span className="dashboard-page__hero-panel-label">Saldo total estimado</span>
+          <strong>$ 5.960.450 COP</strong>
+          <span className="dashboard-page__hero-panel-note">Actualizado hoy</span>
+
+          <div className="dashboard-page__rates" aria-label="Tasas destacadas">
+            {exchangeRates.map((rate) => (
+              <div className="dashboard-page__rate" key={`${rate.from}-${rate.to}`}>
+                <CurrencyFlag currency={rate.from} />
+                <span>{rate.rate}</span>
+              </div>
+            ))}
+          </div>
+        </aside>
       </section>
 
       <section className="dashboard-page__metrics" aria-label="Resumen de saldos">
@@ -153,6 +178,7 @@ export function DashboardPage() {
             label={metric.label}
             tone={metric.tone}
             icon={metric.icon}
+            footerLabel={metric.footerLabel}
           />
         ))}
       </section>
