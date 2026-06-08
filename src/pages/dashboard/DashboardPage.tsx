@@ -27,19 +27,63 @@ import './dashboard-page.css'
 
 type CurrencyCode = 'COP' | 'USD' | 'EUR'
 
-const currencyFlags: Record<CurrencyCode, { flag: string; label: string }> = {
-  COP: { flag: '🇨🇴', label: 'Bandera de Colombia' },
-  USD: { flag: '🇺🇸', label: 'Bandera de Estados Unidos' },
-  EUR: { flag: '🇪🇺', label: 'Bandera de la Unión Europea' },
+const currencyFlags: Record<CurrencyCode, { label: string }> = {
+  COP: { label: 'Bandera de Colombia' },
+  USD: { label: 'Bandera de Estados Unidos' },
+  EUR: { label: 'Bandera de la Unión Europea' },
 }
 
 function CurrencyFlag({ currency }: { currency: CurrencyCode }) {
-  const { flag, label } = currencyFlags[currency]
+  const { label } = currencyFlags[currency]
 
   return (
-    <span className="dashboard-currency-flag" role="img" aria-label={label}>
-      {flag}
-    </span>
+    <svg
+      className={`dashboard-currency-flag dashboard-currency-flag--${currency.toLowerCase()}`}
+      viewBox="0 0 48 32"
+      role="img"
+      aria-label={label}
+      focusable="false"
+    >
+      {currency === 'COP' ? (
+        <>
+          <rect width="48" height="16" fill="#fcd116" />
+          <rect y="16" width="48" height="8" fill="#003893" />
+          <rect y="24" width="48" height="8" fill="#ce1126" />
+        </>
+      ) : null}
+
+      {currency === 'USD' ? (
+        <>
+          <rect width="48" height="32" fill="#ffffff" />
+          {Array.from({ length: 7 }).map((_, index) => (
+            <rect key={index} y={index * 4.92} width="48" height="2.46" fill="#b22234" />
+          ))}
+          <rect width="20.5" height="17.2" fill="#3c3b6e" />
+          {Array.from({ length: 12 }).map((_, index) => (
+            <circle
+              key={index}
+              cx={3.2 + (index % 4) * 4.6}
+              cy={3.2 + Math.floor(index / 4) * 4.6}
+              r="0.8"
+              fill="#ffffff"
+            />
+          ))}
+        </>
+      ) : null}
+
+      {currency === 'EUR' ? (
+        <>
+          <rect width="48" height="32" fill="#003399" />
+          {Array.from({ length: 12 }).map((_, index) => {
+            const angle = (index / 12) * Math.PI * 2 - Math.PI / 2
+            const cx = 24 + Math.cos(angle) * 8.2
+            const cy = 16 + Math.sin(angle) * 8.2
+
+            return <circle key={index} cx={cx} cy={cy} r="1.25" fill="#ffcc00" />
+          })}
+        </>
+      ) : null}
+    </svg>
   )
 }
 
