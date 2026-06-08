@@ -13,6 +13,7 @@ export type PublicUser = Omit<LocalUser, 'passwordHash'>
 export type LocalSessionUser = {
   userId: string
   email: string
+  fullName: string
 }
 
 type AuthResult =
@@ -86,7 +87,7 @@ export async function loginLocalUser(emailInput: string, password: string): Prom
 }
 
 export function createLocalSession(user: PublicUser, persistent: boolean) {
-  const token = btoa(JSON.stringify({ userId: user.id, email: user.email }))
+  const token = btoa(JSON.stringify({ userId: user.id, email: user.email, fullName: user.fullName }))
   const storage = persistent ? localStorage : sessionStorage
 
   localStorage.removeItem(AUTH_TOKEN_KEY)
@@ -103,10 +104,22 @@ export function getLocalSessionUser(): LocalSessionUser | null {
 
   try {
     const decoded = JSON.parse(atob(token)) as LocalSessionUser
+    const storedUser = readUsers().find(
+      (user) => user.id === decoded?.userId || user.email === decoded?.email,
+    )
 
-    return typeof decoded?.email === 'string' && typeof decoded?.userId === 'string'
-      ? decoded
-      : null
+    if (typeof decoded?.email !== 'string' || typeof decoded?.userId !== 'string') {
+      return null
+    }
+
+    return {
+      userId: decoded.userId,
+      email: decoded.email,
+      fullName:
+        typeof decoded.fullName === 'string' && decoded.fullName.trim()
+          ? decoded.fullName
+          : storedUser?.fullName ?? '',
+    }
   } catch {
     return null
   }
