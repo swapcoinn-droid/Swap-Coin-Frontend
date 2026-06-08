@@ -25,27 +25,45 @@ import { routes } from '../../router/routes'
 
 import './dashboard-page.css'
 
+type CurrencyCode = 'COP' | 'USD' | 'EUR'
+
+const currencyFlags: Record<CurrencyCode, { flag: string; label: string }> = {
+  COP: { flag: '🇨🇴', label: 'Bandera de Colombia' },
+  USD: { flag: '🇺🇸', label: 'Bandera de Estados Unidos' },
+  EUR: { flag: '🇪🇺', label: 'Bandera de la Unión Europea' },
+}
+
+function CurrencyFlag({ currency }: { currency: CurrencyCode }) {
+  const { flag, label } = currencyFlags[currency]
+
+  return (
+    <span className="dashboard-currency-flag" role="img" aria-label={label}>
+      {flag}
+    </span>
+  )
+}
+
 const metrics = [
   {
     title: 'Peso colombiano',
     value: '$ 4.560.200',
     label: 'COP',
     tone: 'brand' as const,
-    icon: <IconBubble tone="blue">₱</IconBubble>,
+    icon: <CurrencyFlag currency="COP" />,
   },
   {
     title: 'Dólar americano',
     value: '$ 1,120.50',
     label: 'USD',
     tone: 'secondary' as const,
-    icon: <IconBubble tone="navy">$</IconBubble>,
+    icon: <CurrencyFlag currency="USD" />,
   },
   {
     title: 'Euro',
     value: '€ 950.00',
     label: 'EUR',
     tone: 'brand' as const,
-    icon: <IconBubble tone="blue">€</IconBubble>,
+    icon: <CurrencyFlag currency="EUR" />,
   },
 ]
 

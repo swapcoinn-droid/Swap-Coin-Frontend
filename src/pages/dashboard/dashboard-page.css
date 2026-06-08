@@ -48,6 +48,22 @@
   gap: 1rem;
 }
 
+.dashboard-currency-flag {
+  width: 2.35rem;
+  height: 2.35rem;
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.82);
+  box-shadow:
+    inset 0 0 0 1px rgba(47, 111, 159, 0.1),
+    0 8px 18px rgba(47, 78, 117, 0.12);
+  font-size: 1.55rem;
+  line-height: 1;
+}
+
 .dashboard-page__section {
   display: grid;
   gap: 1rem;
