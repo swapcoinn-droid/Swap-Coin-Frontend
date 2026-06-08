@@ -180,16 +180,65 @@
   gap: 0.8rem;
 }
 
-.landing-wallet__cards span,
+.landing-wallet__cards > span,
 .landing-wallet__goal {
   border-radius: 18px;
   background: #e8f0fb;
 }
 
-.landing-wallet__cards span {
+.landing-wallet__cards > span {
   padding: 1rem;
   color: #223348;
   font-weight: 800;
+}
+
+.landing-wallet__currency {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.landing-wallet__currency > span:last-child {
+  display: grid;
+  gap: 0.1rem;
+}
+
+.landing-wallet__currency strong {
+  color: #5a6a7d;
+  font-size: 0.76rem;
+  letter-spacing: 0.05em;
+}
+
+.landing-flag {
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+  flex: 0 0 auto;
+  border: 2px solid rgba(255, 255, 255, 0.8);
+  box-shadow: 0 5px 12px rgba(47, 83, 119, 0.16);
+}
+
+.landing-flag--us {
+  background:
+    linear-gradient(90deg, #24456f 0 42%, transparent 42%),
+    repeating-linear-gradient(180deg, #b23a48 0 11%, #fff 11% 22%);
+}
+
+.landing-flag--eu {
+  position: relative;
+  background: #2554a4;
+}
+
+.landing-flag--eu::before {
+  content: '';
+  position: absolute;
+  inset: 0.55rem;
+  border-radius: 50%;
+  border: 3px dotted #ffd233;
+}
+
+.landing-flag--co {
+  background: linear-gradient(180deg, #ffd233 0 50%, #2554a4 50% 75%, #b23a48 75%);
 }
 
 .landing-wallet__goal {

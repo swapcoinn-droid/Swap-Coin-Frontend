@@ -35,6 +35,12 @@ const metrics = [
   { value: '100%', label: 'Metas claras por destino' },
 ]
 
+const currencies = [
+  { code: 'USD', amount: '$4,200', flag: 'us' },
+  { code: 'EUR', amount: '€3,850', flag: 'eu' },
+  { code: 'COP', amount: '$16.8M', flag: 'co' },
+]
+
 export function LandingPage() {
   return (
     <main className="landing-page">
@@ -81,9 +87,15 @@ export function LandingPage() {
             <strong>$12,450.00</strong>
           </div>
           <div className="landing-wallet__cards">
-            <span>USD $4,200</span>
-            <span>EUR €3,850</span>
-            <span>COP $16.8M</span>
+            {currencies.map((currency) => (
+              <span className="landing-wallet__currency" key={currency.code}>
+                <span className={`landing-flag landing-flag--${currency.flag}`} aria-hidden="true" />
+                <span>
+                  <strong>{currency.code}</strong>
+                  {currency.amount}
+                </span>
+              </span>
+            ))}
           </div>
           <div className="landing-wallet__goal">
             <span>Meta: Viaje a Medellin</span>
