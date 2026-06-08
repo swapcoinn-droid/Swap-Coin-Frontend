@@ -1,3 +1,5 @@
+import type { ReactNode } from 'react'
+
 import { useNavigate } from 'react-router-dom'
 
 import {
@@ -22,10 +24,19 @@ import {
 } from '../../components/icons/AuthIcons'
 import { useAuth } from '../../hooks/useAuth'
 import { routes } from '../../router/routes'
+import {
+  dashboardMetricsMock,
+  dashboardSummaryMock,
+  exchangeRatesMock,
+  goalsMock,
+  quickActionsMock,
+  transactionsMock,
+  type CurrencyCode,
+  type DashboardIconKey,
+  type DashboardRouteKey,
+} from './dashboard.mocks'
 
 import './dashboard-page.css'
-
-type CurrencyCode = 'COP' | 'USD' | 'EUR'
 
 const currencyFlags: Record<CurrencyCode, { label: string }> = {
   COP: { label: 'Bandera de Colombia' },
@@ -87,98 +98,20 @@ function CurrencyFlag({ currency }: { currency: CurrencyCode }) {
   )
 }
 
-const metrics = [
-  {
-    title: 'Peso colombiano',
-    value: '$ 4.560.200',
-    label: 'COP',
-    footerLabel: 'Cuenta principal',
-    tone: 'brand' as const,
-    icon: <CurrencyFlag currency="COP" />,
-  },
-  {
-    title: 'Dólar americano',
-    value: '$ 1,120.50',
-    label: 'USD',
-    footerLabel: 'Disponible',
-    tone: 'secondary' as const,
-    icon: <CurrencyFlag currency="USD" />,
-  },
-  {
-    title: 'Euro',
-    value: '€ 950.00',
-    label: 'EUR',
-    footerLabel: 'Ahorro activo',
-    tone: 'brand' as const,
-    icon: <CurrencyFlag currency="EUR" />,
-  },
-]
+const dashboardIcons: Record<DashboardIconKey, ReactNode> = {
+  bag: <BagIcon />,
+  bank: <BankIcon />,
+  home: <HomeIcon />,
+  plane: <PlaneIcon />,
+  plus: <PlusIcon />,
+  swap: <SwapIcon />,
+}
 
-const exchangeRates = [
-  { from: 'USD' as const, to: 'COP', rate: '1 USD = $ 4.075 COP' },
-  { from: 'EUR' as const, to: 'COP', rate: '1 EUR = $ 4.390 COP' },
-  { from: 'COP' as const, to: 'USD', rate: '$ 100.000 COP = 24.54 USD' },
-]
-
-const quickActions = [
-  { label: 'Cambiar divisa', tone: 'highlight' as const, icon: <SwapIcon />, to: routes.exchange },
-  { label: 'Retirar', tone: 'neutral' as const, icon: <BankIcon />, to: routes.withdraw },
-  { label: 'Agregar saldo', tone: 'neutral' as const, icon: <PlusIcon />, to: routes.topUp },
-]
-
-const goals = [
-  {
-    title: 'Vuelo a Bali',
-    amount: '$850 / $1,200 USD',
-    progress: 70,
-    subtitle: 'Ahorro para viaje',
-    icon: <PlaneIcon />,
-    progressTone: 'brand' as const,
-  },
-  {
-    title: 'Nómada Hub Rent',
-    amount: '€400 / €600 EUR',
-    progress: 66,
-    subtitle: 'Renta mensual',
-    icon: <HomeIcon />,
-    progressTone: 'warning' as const,
-  },
-]
-
-const transactions = [
-  {
-    title: 'Starbucks Bogota',
-    subtitle: 'Hoy, 10:45 AM',
-    amount: '- $ 18,500 COP',
-    amountTone: 'negative' as const,
-    meta: 'Comida y bebida',
-    icon: <BagIcon />,
-  },
-  {
-    title: 'Cambio USD a COP',
-    subtitle: 'Ayer, 04:20 PM',
-    amount: '+ $ 350,000 COP',
-    amountTone: 'positive' as const,
-    meta: 'Conversión',
-    icon: <SwapIcon />,
-  },
-  {
-    title: 'Airbnb Madrid',
-    subtitle: '12 Oct 2023',
-    amount: '- € 120.00 EUR',
-    amountTone: 'negative' as const,
-    meta: 'Alojamiento',
-    icon: <PlaneIcon />,
-  },
-  {
-    title: 'Recarga de saldo',
-    subtitle: '10 Oct 2023',
-    amount: '+ $ 500,00 USD',
-    amountTone: 'positive' as const,
-    meta: 'Transferencia',
-    icon: <PlusIcon />,
-  },
-]
+const quickActionRoutes: Record<DashboardRouteKey, string> = {
+  exchange: routes.exchange,
+  topUp: routes.topUp,
+  withdraw: routes.withdraw,
+}
 
 export function DashboardPage() {
   const { currentUserEmail } = useAuth()
@@ -199,11 +132,11 @@ export function DashboardPage() {
 
         <aside className="dashboard-page__hero-panel" aria-label="Resumen financiero">
           <span className="dashboard-page__hero-panel-label">Saldo total estimado</span>
-          <strong>$ 5.960.450 COP</strong>
-          <span className="dashboard-page__hero-panel-note">Actualizado hoy</span>
+          <strong>{dashboardSummaryMock.totalBalance}</strong>
+          <span className="dashboard-page__hero-panel-note">{dashboardSummaryMock.updatedLabel}</span>
 
           <div className="dashboard-page__rates" aria-label="Tasas destacadas">
-            {exchangeRates.map((rate) => (
+            {exchangeRatesMock.map((rate) => (
               <div className="dashboard-page__rate" key={`${rate.from}-${rate.to}`}>
                 <CurrencyFlag currency={rate.from} />
                 <span>{rate.rate}</span>
@@ -214,14 +147,14 @@ export function DashboardPage() {
       </section>
 
       <section className="dashboard-page__metrics" aria-label="Resumen de saldos">
-        {metrics.map((metric) => (
+        {dashboardMetricsMock.map((metric) => (
           <MetricCard
             key={metric.title}
             title={metric.title}
             value={metric.value}
             label={metric.label}
             tone={metric.tone}
-            icon={metric.icon}
+            icon={<CurrencyFlag currency={metric.label} />}
             footerLabel={metric.footerLabel}
           />
         ))}
@@ -231,13 +164,13 @@ export function DashboardPage() {
         <SectionHeader eyebrow="Acciones rápidas" title="Acciones rápidas" />
 
         <div className="dashboard-page__quick-actions">
-          {quickActions.map((action) => (
+          {quickActionsMock.map((action) => (
             <QuickActionCard
               key={action.label}
               label={action.label}
               tone={action.tone}
-              icon={action.icon}
-              to={action.to}
+              icon={dashboardIcons[action.icon]}
+              to={quickActionRoutes[action.route]}
             />
           ))}
         </div>
@@ -263,14 +196,14 @@ export function DashboardPage() {
           />
 
           <div className="dashboard-panel__goals-list">
-            {goals.map((goal) => (
+            {goalsMock.map((goal) => (
               <GoalRow
                 key={goal.title}
                 title={goal.title}
                 amount={goal.amount}
                 progress={goal.progress}
                 subtitle={goal.subtitle}
-                icon={goal.icon}
+                icon={dashboardIcons[goal.icon]}
                 progressTone={goal.progressTone}
               />
             ))}
@@ -294,14 +227,14 @@ export function DashboardPage() {
           />
 
           <div className="dashboard-panel__transactions-list">
-            {transactions.map((transaction) => (
+            {transactionsMock.map((transaction) => (
               <TransactionItem
                 key={`${transaction.title}-${transaction.subtitle}`}
                 title={transaction.title}
                 subtitle={transaction.subtitle}
                 amount={transaction.amount}
                 amountTone={transaction.amountTone}
-                icon={<IconBubble tone="light">{transaction.icon}</IconBubble>}
+                icon={<IconBubble tone="light">{dashboardIcons[transaction.icon]}</IconBubble>}
                 meta={transaction.meta}
               />
             ))}
