@@ -15,12 +15,6 @@ export function PublicFooter() {
       </Link>
 
       <p>Finanzas simples para personas que se mueven entre monedas, metas y destinos.</p>
-
-      <nav className="public-footer__links" aria-label="Enlaces del footer">
-        <a href="/#features">Funciones</a>
-        <a href="/#audience">Para quien es</a>
-        <Link to={routes.login}>Iniciar sesion</Link>
-      </nav>
     </footer>
   )
 }
