@@ -32,7 +32,7 @@ const audiences = [
 const metrics = [
   { value: '24/7', label: 'Acceso a tu centro financiero' },
   { value: '3+', label: 'Monedas listas para organizar' },
-  { value: '100%', label: 'Flujo pensado para movilidad' },
+  { value: '100%', label: 'Metas claras por destino' },
 ]
 
 export function LandingPage() {
