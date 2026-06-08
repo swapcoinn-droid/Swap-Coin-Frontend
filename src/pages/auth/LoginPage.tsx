@@ -9,6 +9,8 @@ import {
   MailIcon,
 } from '../../components/icons/AuthIcons'
 import { BrandMark } from '../../components/icons/BrandMark'
+import { PublicFooter } from '../../components/public-layout/PublicFooter'
+import { PublicNavbar } from '../../components/public-layout/PublicNavbar'
 import { Button } from '../../components/ui/button/Button'
 import { useAuth } from '../../hooks/useAuth'
 import { routes } from '../../router/routes'
@@ -59,6 +61,8 @@ export function LoginPage() {
 
   return (
     <main className="login-page">
+      <PublicNavbar />
+
       <section className="login-page__content" aria-labelledby="login-title">
         <Link className="login-brand" to={routes.home} aria-label="Ir al inicio de Swap-Coin">
           <span className="login-brand__mark">
@@ -137,6 +141,7 @@ export function LoginPage() {
         </div>
       </aside>
 
+      <PublicFooter />
     </main>
   )
 }

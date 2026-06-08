@@ -10,6 +10,8 @@ import {
   UserIcon,
 } from '../../components/icons/AuthIcons'
 import { BrandMark } from '../../components/icons/BrandMark'
+import { PublicFooter } from '../../components/public-layout/PublicFooter'
+import { PublicNavbar } from '../../components/public-layout/PublicNavbar'
 import { Button } from '../../components/ui/button/Button'
 import { useAuth } from '../../hooks/useAuth'
 import { routes } from '../../router/routes'
@@ -83,6 +85,8 @@ export function RegisterPage() {
 
   return (
     <main className="register-page">
+      <PublicNavbar />
+
       <section className="register-page__content" aria-labelledby="register-title">
         <header className="register-brand">
           <Link className="register-brand__mark" to={routes.home} aria-label="Ir al inicio de Swap-Coin">
@@ -189,6 +193,7 @@ export function RegisterPage() {
         </div>
       </section>
 
+      <PublicFooter />
     </main>
   )
 }

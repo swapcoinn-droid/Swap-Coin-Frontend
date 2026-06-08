@@ -1,10 +1,10 @@
 .login-page {
   position: relative;
   min-height: 100vh;
-  overflow: hidden;
+  overflow-x: hidden;
   display: grid;
   place-items: center;
-  padding: 3rem 2rem;
+  padding: 8rem 2rem 0;
   background:
     radial-gradient(circle at 8% 8%, rgba(190, 218, 248, 0.55), transparent 24%),
     radial-gradient(circle at 88% 82%, rgba(255, 220, 92, 0.28), transparent 25%),
@@ -15,6 +15,7 @@
   position: relative;
   z-index: 2;
   width: min(100%, 440px);
+  margin-bottom: 4rem;
 }
 
 .login-brand {
@@ -200,7 +201,7 @@
 @media (max-width: 560px) {
   .login-page {
     align-items: start;
-    padding: 2rem 1rem 5rem;
+    padding: 12rem 1rem 0;
   }
 
   .login-brand {
