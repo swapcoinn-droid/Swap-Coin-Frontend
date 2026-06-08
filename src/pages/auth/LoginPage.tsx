@@ -64,6 +64,30 @@ export function LoginPage() {
       <PublicNavbar />
 
       <section className="login-page__content" aria-labelledby="login-title">
+        <div className="login-copy">
+          <span className="login-copy__eyebrow">Wallet multimoneda</span>
+          <h2>Bienvenido de vuelta a tus metas.</h2>
+          <p>
+            Accede a Swap-Coin para revisar tus monedas, seguir tus objetivos de ahorro y
+            preparar tu proximo destino con mas claridad.
+          </p>
+
+          <div className="login-copy__stats" aria-label="Resumen de Swap-Coin">
+            <span>
+              <strong>3+</strong>
+              Monedas
+            </span>
+            <span>
+              <strong>85%</strong>
+              Meta activa
+            </span>
+            <span>
+              <strong>24/7</strong>
+              Acceso
+            </span>
+          </div>
+        </div>
+
         <Link className="login-brand" to={routes.home} aria-label="Ir al inicio de Swap-Coin">
           <span className="login-brand__mark">
             <BrandMark />
