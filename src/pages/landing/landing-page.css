@@ -9,13 +9,22 @@
 }
 
 .landing-nav {
-  width: min(100%, 1180px);
-  margin: 0 auto;
+  position: fixed;
+  top: 1rem;
+  left: 50%;
+  z-index: 30;
+  width: min(calc(100% - 3rem), 1180px);
+  transform: translateX(-50%);
   padding: 1.2rem 1.5rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 1.5rem;
+  border: 1px solid rgba(74, 104, 145, 0.14);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.82);
+  box-shadow: 0 18px 42px rgba(64, 92, 128, 0.1);
+  backdrop-filter: blur(16px);
 }
 
 .landing-nav__brand,
@@ -68,7 +77,7 @@
 
 .landing-hero {
   min-height: calc(100vh - 5.5rem);
-  padding: 4rem 0 5rem;
+  padding: 8rem 0 5rem;
   display: grid;
   grid-template-columns: minmax(0, 1.08fr) minmax(320px, 0.92fr);
   align-items: center;
@@ -351,6 +360,7 @@
 
 @media (max-width: 920px) {
   .landing-nav {
+    border-radius: 28px;
     flex-direction: column;
   }
 
@@ -366,7 +376,7 @@
 
   .landing-hero {
     min-height: auto;
-    padding-top: 2.5rem;
+    padding-top: 12rem;
   }
 
   .landing-metrics,
@@ -390,6 +400,10 @@
 
   .landing-nav__links a:not(.landing-nav__cta) {
     font-size: 0.9rem;
+  }
+
+  .landing-nav {
+    width: min(calc(100% - 2rem), 1180px);
   }
 
   .landing-wallet {
