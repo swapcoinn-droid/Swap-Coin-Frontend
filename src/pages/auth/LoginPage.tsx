@@ -8,7 +8,6 @@ import {
   LockIcon,
   MailIcon,
 } from '../../components/icons/AuthIcons'
-import { BrandMark } from '../../components/icons/BrandMark'
 import { PublicFooter } from '../../components/public-layout/PublicFooter'
 import { PublicNavbar } from '../../components/public-layout/PublicNavbar'
 import { Button } from '../../components/ui/button/Button'
@@ -88,13 +87,6 @@ export function LoginPage() {
           </div>
         </div>
 
-        <Link className="login-brand" to={routes.home} aria-label="Ir al inicio de Swap-Coin">
-          <span className="login-brand__mark">
-            <BrandMark />
-          </span>
-          <span>Swap-Coin</span>
-        </Link>
-
         <div className="login-card">
           <header className="login-card__header">
             <h1 id="login-title">Bienvenido de nuevo</h1>
@@ -160,9 +152,6 @@ export function LoginPage() {
         <div className="login-visual__orbit login-visual__orbit--inner" />
         <div className="login-visual__platform login-visual__platform--back" />
         <div className="login-visual__platform login-visual__platform--front" />
-        <div className="login-visual__coin">
-          <BrandMark />
-        </div>
       </aside>
 
       <PublicFooter />
