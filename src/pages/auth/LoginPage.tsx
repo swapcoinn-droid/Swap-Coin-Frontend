@@ -8,7 +8,8 @@ import {
   LockIcon,
   MailIcon,
 } from '../../components/icons/AuthIcons'
-import { BrandMark } from '../../components/icons/BrandMark'
+import { PublicFooter } from '../../components/public-layout/PublicFooter'
+import { PublicNavbar } from '../../components/public-layout/PublicNavbar'
 import { Button } from '../../components/ui/button/Button'
 import { useAuth } from '../../hooks/useAuth'
 import { routes } from '../../router/routes'
@@ -59,13 +60,32 @@ export function LoginPage() {
 
   return (
     <main className="login-page">
+      <PublicNavbar />
+
       <section className="login-page__content" aria-labelledby="login-title">
-        <Link className="login-brand" to={routes.home} aria-label="Ir al inicio de Swap-Coin">
-          <span className="login-brand__mark">
-            <BrandMark />
-          </span>
-          <span>Swap-Coin</span>
-        </Link>
+        <div className="login-copy">
+          <span className="login-copy__eyebrow">Wallet multimoneda</span>
+          <h2>Bienvenido de vuelta a tus metas.</h2>
+          <p>
+            Accede a Swap-Coin para revisar tus monedas, seguir tus objetivos de ahorro y
+            preparar tu proximo destino con mas claridad.
+          </p>
+
+          <div className="login-copy__stats" aria-label="Resumen de Swap-Coin">
+            <span>
+              <strong>3+</strong>
+              Monedas
+            </span>
+            <span>
+              <strong>85%</strong>
+              Meta activa
+            </span>
+            <span>
+              <strong>24/7</strong>
+              Acceso
+            </span>
+          </div>
+        </div>
 
         <div className="login-card">
           <header className="login-card__header">
@@ -132,11 +152,9 @@ export function LoginPage() {
         <div className="login-visual__orbit login-visual__orbit--inner" />
         <div className="login-visual__platform login-visual__platform--back" />
         <div className="login-visual__platform login-visual__platform--front" />
-        <div className="login-visual__coin">
-          <BrandMark />
-        </div>
       </aside>
 
+      <PublicFooter />
     </main>
   )
 }

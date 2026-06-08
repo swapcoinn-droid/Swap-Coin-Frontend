@@ -2,7 +2,8 @@
   min-height: 100vh;
   display: grid;
   place-items: center;
-  padding: 2rem 1rem;
+  padding: 8rem 1rem 0;
+  overflow-x: hidden;
   background:
     radial-gradient(circle at 50% 28%, rgba(224, 233, 249, 0.5), transparent 30%),
     #f7f8fc;
@@ -10,6 +11,7 @@
 
 .register-page__content {
   width: min(100%, 480px);
+  margin-bottom: 4rem;
 }
 
 .register-brand {
@@ -164,7 +166,7 @@
 @media (max-width: 560px) {
   .register-page {
     place-content: start center;
-    padding: 1.5rem 1rem 5rem;
+    padding: 12rem 1rem 0;
   }
 
   .register-brand {

@@ -2,6 +2,7 @@ import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom'
 
 import { AppLayout } from '../layouts/AppLayout'
 import { DashboardPage } from '../pages/dashboard/DashboardPage'
+import { LandingPage } from '../pages/landing/LandingPage'
 import { RoutePlaceholder } from '../pages/RoutePlaceholder'
 import { LoginPage } from '../pages/auth/LoginPage'
 import { RegisterPage } from '../pages/auth/RegisterPage'
@@ -17,7 +18,7 @@ export function AppRouter() {
         <Routes>
           <Route
             path={routes.home}
-            element={<RoutePlaceholder title="Landing" />}
+            element={<LandingPage />}
           />
 
           <Route element={<GuestGuard />}>
