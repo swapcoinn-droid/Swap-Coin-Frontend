@@ -87,13 +87,13 @@ p {
   width: 100%;
   max-width: 1280px;
   margin: 0 auto;
-  padding: 2rem 1.5rem 3rem;
+  padding: 7.25rem 1.5rem 3rem;
   flex: 1;
 }
 
 @media (max-width: 900px) {
   .app-shell__content {
     padding-inline: 1rem;
-    padding-top: 1.25rem;
+    padding-top: 6.75rem;
   }
 }
