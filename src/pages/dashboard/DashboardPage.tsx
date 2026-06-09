@@ -121,6 +121,10 @@ export function DashboardPage() {
     navigate(routes.goals)
   }
 
+  const openHistory = () => {
+    navigate(routes.history)
+  }
+
   return (
     <div className="dashboard-page">
       <section className="dashboard-page__hero">
@@ -220,8 +224,8 @@ export function DashboardPage() {
             eyebrow="Últimas transacciones"
             title="Últimas transacciones"
             action={
-              <Button variant="ghost" size="sm">
-                Exportar
+              <Button variant="ghost" size="sm" onClick={openHistory}>
+                Ver historial
               </Button>
             }
           />
