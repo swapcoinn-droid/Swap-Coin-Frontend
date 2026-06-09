@@ -70,7 +70,7 @@
 
 .login-copy__stats strong {
   color: var(--brand);
-  font-family: 'Playfair Display', Georgia, serif;
+  font-family: 'Poppins', system-ui, sans-serif;
   font-size: 1.75rem;
   line-height: 1;
 }
@@ -91,7 +91,7 @@
 
 .login-card__header h1 {
   margin-bottom: 0.4rem;
-  font-family: 'Manrope', system-ui, sans-serif;
+  font-family: 'Poppins', system-ui, sans-serif;
   font-size: clamp(1.75rem, 3vw, 2rem);
   font-weight: 800;
 }

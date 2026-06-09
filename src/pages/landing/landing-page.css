@@ -116,7 +116,7 @@
 
 .landing-wallet__header strong {
   color: var(--brand);
-  font-family: 'Playfair Display', Georgia, serif;
+  font-family: 'Poppins', system-ui, sans-serif;
   font-size: 3rem;
   line-height: 1;
 }
@@ -238,7 +238,7 @@
 
 .landing-metrics strong {
   color: var(--brand);
-  font-family: 'Playfair Display', Georgia, serif;
+  font-family: 'Poppins', system-ui, sans-serif;
   font-size: 2rem;
 }
 
@@ -287,7 +287,7 @@
 }
 
 .landing-feature-card h3 {
-  font-family: 'Manrope', system-ui, sans-serif;
+  font-family: 'Poppins', system-ui, sans-serif;
   font-size: 1.25rem;
   font-weight: 800;
 }
