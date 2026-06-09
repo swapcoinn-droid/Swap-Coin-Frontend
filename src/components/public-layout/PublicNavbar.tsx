@@ -16,7 +16,7 @@ export function PublicNavbar() {
 
       <nav className="public-navbar__links" aria-label="Navegación pública">
         <a href="/#features">Funciones</a>
-        <a href="/#audience">Para quién es</a>
+        <a href="/#audience">Quiénes somos</a>
         <Link to={routes.login}>Iniciar sesión</Link>
         <Link className="public-navbar__cta" to={routes.register}>
           Crear cuenta

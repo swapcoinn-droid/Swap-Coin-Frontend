@@ -255,7 +255,7 @@
 .landing-section h2,
 .landing-audience h2,
 .landing-cta h2 {
-  font-size: clamp(2rem, 4vw, 3.2rem);
+  font-size: clamp(2rem, 4vw, 2.7rem);
   line-height: 1.05;
 }
 
