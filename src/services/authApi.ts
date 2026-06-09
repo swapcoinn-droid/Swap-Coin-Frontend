@@ -1,8 +1,8 @@
-import { ApiError, apiRequest } from '../api'
+import { apiRequest } from '../api'
 
 export type ApiUser = {
   id: string
-  name: string
+  name: string | null
   email: string
   created_at?: string
 }
@@ -18,15 +18,9 @@ type LoginResponse = {
 }
 
 function normalizeUser(user: ApiUserResponse): ApiUser {
-  const name = user.name ?? user.username
-
-  if (!name) {
-    throw new ApiError('La API no devolvió el nombre del usuario.', 502)
-  }
-
   return {
     id: user.id,
-    name,
+    name: user.name ?? user.username ?? null,
     email: user.email,
     created_at: user.created_at,
   }

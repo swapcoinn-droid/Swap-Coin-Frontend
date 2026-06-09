@@ -34,16 +34,14 @@ export function getSessionUser(): SessionUser | null {
 
   try {
     const parsedUser = JSON.parse(storedUser) as StoredSessionUser
-    const name = parsedUser.name ?? parsedUser.username
-
-    if (!parsedUser.id || !name || !parsedUser.email) {
+    if (!parsedUser.id || !parsedUser.email) {
       clearAuthSession()
       return null
     }
 
     return {
       id: parsedUser.id,
-      name,
+      name: parsedUser.name ?? parsedUser.username ?? null,
       email: parsedUser.email,
     }
   } catch {
