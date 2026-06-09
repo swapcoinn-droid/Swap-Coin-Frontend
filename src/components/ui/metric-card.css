@@ -15,6 +15,10 @@
   background: #ffffff;
 }
 
+.sc-metric-card .sc-card__body {
+  padding: 1.65rem 1.55rem 1.35rem;
+}
+
 .sc-metric-card::before {
   content: '';
   position: absolute;
@@ -40,7 +44,7 @@
   min-height: 12.2rem;
   display: grid;
   grid-template-rows: auto 1fr auto;
-  gap: 1.2rem;
+  gap: 1.3rem;
   padding-left: 0.35rem;
 }
 
