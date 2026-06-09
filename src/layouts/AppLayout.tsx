@@ -27,7 +27,6 @@ export function AppLayout() {
         actions={[
           { label: 'Cerrar Sesión', variant: 'pill', icon: <LogoutIcon />, onClick: handleLogout },
         ]}
-        activeLinkLabel="Inicio"
       />
 
       <main className="app-shell__content">
