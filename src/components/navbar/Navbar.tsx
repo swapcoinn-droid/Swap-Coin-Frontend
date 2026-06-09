@@ -24,10 +24,9 @@ type NavbarProps = {
   brandTo: string
   links: NavbarLink[]
   actions?: NavbarAction[]
-  activeLinkLabel?: string
 }
 
-export function Navbar({ brand, brandTo, links, actions = [], activeLinkLabel }: NavbarProps) {
+export function Navbar({ brand, brandTo, links, actions = [] }: NavbarProps) {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const closeMenu = () => setIsMenuOpen(false)
 
@@ -60,9 +59,7 @@ export function Navbar({ brand, brandTo, links, actions = [], activeLinkLabel }:
               key={link.to}
               to={link.to}
               className={({ isActive }) =>
-                ['sc-navbar__link', isActive || activeLinkLabel === link.label ? 'is-active' : '']
-                  .filter(Boolean)
-                  .join(' ')
+                ['sc-navbar__link', isActive ? 'is-active' : ''].filter(Boolean).join(' ')
               }
               onClick={closeMenu}
             >

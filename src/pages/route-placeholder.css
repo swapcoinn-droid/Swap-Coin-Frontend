@@ -1,0 +1,224 @@
+.route-placeholder {
+  min-height: clamp(28rem, 58vh, 38rem);
+  display: grid;
+  align-items: center;
+}
+
+.route-placeholder__content {
+  position: relative;
+  overflow: hidden;
+  min-height: 24rem;
+  border: 1px solid rgba(74, 104, 145, 0.14);
+  border-radius: 28px;
+  padding: clamp(1.5rem, 4vw, 3rem);
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(18rem, 0.8fr);
+  gap: 2rem;
+  align-items: center;
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.96) 0%, rgba(232, 243, 252, 0.94) 100%),
+    linear-gradient(90deg, rgba(255, 210, 51, 0.18), rgba(47, 111, 159, 0.1));
+  box-shadow: 0 22px 56px rgba(47, 78, 117, 0.11);
+}
+
+.route-placeholder__content::before {
+  content: '';
+  position: absolute;
+  inset: auto -8rem -10rem auto;
+  width: 24rem;
+  height: 24rem;
+  border-radius: 999px;
+  background: rgba(47, 111, 159, 0.11);
+}
+
+.route-placeholder__copy {
+  position: relative;
+  z-index: 1;
+  max-width: 42rem;
+}
+
+.route-placeholder__eyebrow {
+  width: fit-content;
+  margin-bottom: 0.85rem;
+  padding: 0.42rem 0.75rem;
+  border-radius: 999px;
+  display: inline-flex;
+  background: #ffd233;
+  color: #5a4500;
+  font-size: 0.8rem;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.route-placeholder h1 {
+  margin: 0;
+  color: #112844;
+  font-size: clamp(2.6rem, 6vw, 5.2rem);
+  line-height: 0.95;
+  letter-spacing: 0;
+}
+
+.route-placeholder p {
+  max-width: 37rem;
+  margin-top: 1.1rem;
+  color: #516579;
+  font-size: clamp(1rem, 2vw, 1.22rem);
+  font-weight: 600;
+}
+
+.route-placeholder__stage {
+  position: relative;
+  z-index: 1;
+  min-height: 18rem;
+  display: grid;
+  place-items: center;
+}
+
+.route-placeholder__orbit {
+  position: absolute;
+  width: 16rem;
+  height: 16rem;
+  border: 1px dashed rgba(47, 111, 159, 0.35);
+  border-radius: 999px;
+  animation: route-placeholder-spin 14s linear infinite;
+}
+
+.route-placeholder__card {
+  position: absolute;
+  border: 1px solid rgba(74, 104, 145, 0.14);
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.88);
+  box-shadow: 0 20px 42px rgba(47, 78, 117, 0.14);
+  backdrop-filter: blur(12px);
+}
+
+.route-placeholder__card--main {
+  width: min(100%, 17rem);
+  padding: 1.2rem;
+  display: grid;
+  gap: 0.45rem;
+  animation: route-placeholder-float 3.6s ease-in-out infinite;
+}
+
+.route-placeholder__card--main span {
+  color: #5d6c7e;
+  font-size: 0.82rem;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.route-placeholder__card--main strong {
+  color: #1d2b3d;
+  font-size: 1.85rem;
+}
+
+.route-placeholder__progress {
+  height: 0.55rem;
+  margin-top: 0.6rem;
+  border-radius: 999px;
+  overflow: hidden;
+  background: rgba(47, 111, 159, 0.12);
+}
+
+.route-placeholder__progress span {
+  width: 68%;
+  height: 100%;
+  border-radius: inherit;
+  display: block;
+  background: linear-gradient(90deg, #ffd233, #2f6f9f);
+  animation: route-placeholder-pulse 1.9s ease-in-out infinite;
+}
+
+.route-placeholder__card--mini {
+  right: 0.5rem;
+  bottom: 1.2rem;
+  padding: 0.7rem 0.85rem;
+  color: #285d87;
+  font-size: 0.86rem;
+  font-weight: 900;
+  animation: route-placeholder-float 3.6s ease-in-out infinite 0.7s;
+}
+
+.route-placeholder__spark {
+  position: absolute;
+  width: 0.85rem;
+  height: 0.85rem;
+  border-radius: 999px;
+  background: #ffd233;
+  box-shadow: 0 0 0 0.45rem rgba(255, 210, 51, 0.2);
+  animation: route-placeholder-pop 2.2s ease-in-out infinite;
+}
+
+.route-placeholder__spark--one {
+  top: 2.4rem;
+  right: 4.5rem;
+}
+
+.route-placeholder__spark--two {
+  left: 3rem;
+  bottom: 3.6rem;
+  background: #2f6f9f;
+  box-shadow: 0 0 0 0.45rem rgba(47, 111, 159, 0.15);
+  animation-delay: 0.55s;
+}
+
+@keyframes route-placeholder-float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-0.7rem);
+  }
+}
+
+@keyframes route-placeholder-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes route-placeholder-pulse {
+  0%,
+  100% {
+    opacity: 0.72;
+    transform: scaleX(0.9);
+    transform-origin: left;
+  }
+
+  50% {
+    opacity: 1;
+    transform: scaleX(1);
+  }
+}
+
+@keyframes route-placeholder-pop {
+  0%,
+  100% {
+    transform: scale(0.82);
+  }
+
+  50% {
+    transform: scale(1.15);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .route-placeholder__orbit,
+  .route-placeholder__card,
+  .route-placeholder__progress span,
+  .route-placeholder__spark {
+    animation: none;
+  }
+}
+
+@media (max-width: 860px) {
+  .route-placeholder__content {
+    grid-template-columns: 1fr;
+  }
+
+  .route-placeholder__stage {
+    min-height: 16rem;
+  }
+}
