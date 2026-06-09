@@ -68,7 +68,7 @@ export function LoginPage() {
           <h2>Bienvenido de vuelta a tus metas.</h2>
           <p>
             Accede a Swap-Coin para revisar tus monedas, seguir tus objetivos de ahorro y
-            preparar tu proximo destino con mas claridad.
+            preparar tu próximo destino con más claridad.
           </p>
 
           <div className="login-copy__stats" aria-label="Resumen de Swap-Coin">
