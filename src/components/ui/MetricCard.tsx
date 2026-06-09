@@ -22,19 +22,35 @@ export function MetricCard({
   footerNote,
 }: MetricCardProps) {
   return (
-    <Card className={['sc-metric-card', `sc-metric-card--${tone}`].join(' ')}>
+    <Card
+      className={[
+        'sc-metric-card',
+        `sc-metric-card--${tone}`,
+        label ? `sc-metric-card--${label.toLowerCase()}` : '',
+      ]
+        .filter(Boolean)
+        .join(' ')}
+    >
       <div className="sc-metric-card__content">
         <div className="sc-metric-card__header">
-          <span className="sc-metric-card__title">{title}</span>
           {icon ? <div className="sc-metric-card__icon">{icon}</div> : null}
+          <div className="sc-metric-card__heading">
+            <span className="sc-metric-card__title">{title}</span>
+            {label ? <span className="sc-metric-card__label">{label}</span> : null}
+          </div>
         </div>
 
         <div className="sc-metric-card__balance">
+          <span className="sc-metric-card__kicker">Saldo disponible</span>
           <strong className="sc-metric-card__value">{value}</strong>
-          {label ? <span className="sc-metric-card__label">Saldo en {label}</span> : null}
         </div>
 
-        {footerNote ? <span className="sc-metric-card__footer-note">{footerNote}</span> : null}
+        {footerNote ? (
+          <div className="sc-metric-card__footer">
+            <span>{footerNote}</span>
+            {label ? <strong>{label}</strong> : null}
+          </div>
+        ) : null}
       </div>
     </Card>
   )
