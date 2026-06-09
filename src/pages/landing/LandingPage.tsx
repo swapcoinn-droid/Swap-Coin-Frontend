@@ -8,24 +8,24 @@ import './landing-page.css'
 
 const features = [
   {
-    title: 'Cambio de divisas sin friccion',
+    title: 'Cambio de divisas sin fricción',
     description:
-      'Consulta balances, compra divisas y mueve tu dinero entre monedas desde un unico panel.',
+      'Consulta balances, compra divisas y mueve tu dinero entre monedas desde un único panel.',
   },
   {
     title: 'Metas de ahorro para viajeros',
     description:
-      'Organiza objetivos por destino, moneda y avance para saber cuanto falta antes de tu proximo viaje.',
+      'Organiza objetivos por destino, moneda y avance para saber cuánto falta antes de tu próximo viaje.',
   },
   {
     title: 'Historial claro de movimientos',
     description:
-      'Revisa compras, recargas, conversiones y gastos con informacion facil de entender.',
+      'Revisa compras, recargas, conversiones y gastos con información fácil de entender.',
   },
 ]
 
 const audiences = [
-  'Nomadas digitales que cobran o gastan en varias monedas.',
+  'Nómadas digitales que cobran o gastan en varias monedas.',
   'Viajeros frecuentes que quieren planear presupuestos por destino.',
   'Personas que buscan una billetera simple para organizar divisas y metas.',
 ]
@@ -50,7 +50,7 @@ export function LandingPage() {
       <section className="landing-hero">
         <div className="landing-hero__content">
           <span className="landing-eyebrow">Finanzas para moverte por el mundo</span>
-          <h1>Cambia divisas, alcanza tus metas y viaja con mas control.</h1>
+          <h1>Cambia divisas, alcanza tus metas y viaja con más control.</h1>
           <p>
             Swap-Coin es una billetera web para organizar monedas, comprar divisas y planear
             objetivos de ahorro desde una experiencia simple, visual y lista para viajeros.
@@ -83,7 +83,7 @@ export function LandingPage() {
             ))}
           </div>
           <div className="landing-wallet__goal">
-            <span>Meta: Viaje a Medellin</span>
+            <span>Meta: Viaje a Medellín</span>
             <strong>85%</strong>
             <div className="landing-wallet__progress">
               <span />
@@ -120,10 +120,10 @@ export function LandingPage() {
 
       <section className="landing-audience" id="audience">
         <div>
-          <span className="landing-eyebrow">A quien va dirigido</span>
+          <span className="landing-eyebrow">A quién va dirigido</span>
           <h2>Para personas que viven, trabajan o viajan entre monedas.</h2>
           <p>
-            La experiencia esta pensada para reducir el ruido de las finanzas personales cuando
+            La experiencia está pensada para reducir el ruido de las finanzas personales cuando
             tu vida no ocurre en una sola ciudad ni en una sola divisa.
           </p>
         </div>
@@ -136,7 +136,7 @@ export function LandingPage() {
       </section>
 
       <section className="landing-cta">
-        <h2>Empieza a organizar tu dinero antes del proximo destino.</h2>
+        <h2>Empieza a organizar tu dinero antes del próximo destino.</h2>
         <p>Crea tu cuenta, registra tus monedas y prueba el flujo de metas y dashboard.</p>
         <Link className="landing-button landing-button--primary" to={routes.register}>
           Crear cuenta gratis <ArrowRightIcon />

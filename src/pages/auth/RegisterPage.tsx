@@ -92,7 +92,7 @@ export function RegisterPage() {
           <h2>Empieza a planear tus metas.</h2>
           <p>
             Registra tu cuenta para organizar monedas, seguir objetivos de ahorro y
-            preparar tu proximo destino desde un solo lugar.
+            preparar tu próximo destino desde un solo lugar.
           </p>
 
           <div className="register-copy__stats" aria-label="Beneficios de Swap-Coin">

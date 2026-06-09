@@ -1,7 +1,7 @@
-@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Playfair+Display:wght@600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap');
 
 :root {
-  font-family: 'Manrope', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-family: 'Poppins', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   line-height: 1.5;
   font-weight: 400;
   color: #3f5065;
@@ -65,7 +65,7 @@ h5,
 h6 {
   margin: 0;
   color: var(--ink);
-  font-family: 'Playfair Display', Georgia, serif;
+  font-family: 'Poppins', system-ui, sans-serif;
   letter-spacing: -0.02em;
 }
 

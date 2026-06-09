@@ -79,7 +79,7 @@ export const goalsMock = [
 
 export const transactionsMock = [
   {
-    title: 'Starbucks Bogota',
+    title: 'Starbucks Bogotá',
     subtitle: 'Hoy, 10:45 AM',
     amount: '- $ 18,500 COP',
     amountTone: 'negative' as const,

@@ -49,8 +49,8 @@
 
 .landing-hero h1 {
   max-width: 720px;
-  font-size: clamp(2.7rem, 6vw, 5.5rem);
-  line-height: 0.98;
+  font-size: clamp(4rem, 3vw, 5.5rem);
+  line-height: 1;
 }
 
 .landing-hero p {
@@ -116,7 +116,7 @@
 
 .landing-wallet__header strong {
   color: var(--brand);
-  font-family: 'Playfair Display', Georgia, serif;
+  font-family: 'Poppins', system-ui, sans-serif;
   font-size: 3rem;
   line-height: 1;
 }
@@ -238,7 +238,7 @@
 
 .landing-metrics strong {
   color: var(--brand);
-  font-family: 'Playfair Display', Georgia, serif;
+  font-family: 'Poppins', system-ui, sans-serif;
   font-size: 2rem;
 }
 
@@ -255,7 +255,7 @@
 .landing-section h2,
 .landing-audience h2,
 .landing-cta h2 {
-  font-size: clamp(2rem, 4vw, 3.2rem);
+  font-size: clamp(2rem, 4vw, 2.7rem);
   line-height: 1.05;
 }
 
@@ -287,7 +287,7 @@
 }
 
 .landing-feature-card h3 {
-  font-family: 'Manrope', system-ui, sans-serif;
+  font-family: 'Poppins', system-ui, sans-serif;
   font-size: 1.25rem;
   font-weight: 800;
 }
@@ -362,7 +362,7 @@
 
   .landing-hero {
     min-height: auto;
-    padding-top: 12rem;
+    padding-top: 8rem;
   }
 
   .landing-metrics,
