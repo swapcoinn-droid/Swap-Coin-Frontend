@@ -1,34 +1,63 @@
-import { apiRequest } from '../api'
+import { ApiError, apiRequest } from '../api'
 
 export type ApiUser = {
   id: string
-  username: string
+  name: string
   email: string
   created_at?: string
 }
 
-type LoginResponse = {
-  token: string
-  user: ApiUser
+type ApiUserResponse = Omit<ApiUser, 'name'> & {
+  name?: string
+  username?: string
 }
 
-export function registerUser(input: { fullName: string; email: string; password: string }) {
-  return apiRequest<ApiUser>('/api/auth/register', {
+type LoginResponse = {
+  token: string
+  user: ApiUserResponse
+}
+
+function normalizeUser(user: ApiUserResponse): ApiUser {
+  const name = user.name ?? user.username
+
+  if (!name) {
+    throw new ApiError('La API no devolvió el nombre del usuario.', 502)
+  }
+
+  return {
+    id: user.id,
+    name,
+    email: user.email,
+    created_at: user.created_at,
+  }
+}
+
+export async function registerUser(input: { fullName: string; email: string; password: string }) {
+  const name = input.fullName.trim()
+  const user = await apiRequest<ApiUserResponse>('/api/auth/register', {
     method: 'POST',
     body: JSON.stringify({
-      username: input.fullName.trim(),
+      name,
+      username: name,
       email: input.email.trim().toLowerCase(),
       password: input.password,
     }),
   })
+
+  return normalizeUser(user)
 }
 
-export function loginUser(email: string, password: string) {
-  return apiRequest<LoginResponse>('/api/auth/login', {
+export async function loginUser(email: string, password: string) {
+  const result = await apiRequest<LoginResponse>('/api/auth/login', {
     method: 'POST',
     body: JSON.stringify({
       email: email.trim().toLowerCase(),
       password,
     }),
   })
+
+  return {
+    token: result.token,
+    user: normalizeUser(result.user),
+  }
 }

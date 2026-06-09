@@ -3,7 +3,11 @@ import type { ApiUser } from './authApi'
 const AUTH_TOKEN_KEY = 'swap-coin-access-token'
 const AUTH_USER_KEY = 'swap-coin-session-user'
 
-export type SessionUser = Pick<ApiUser, 'id' | 'username' | 'email'>
+export type SessionUser = Pick<ApiUser, 'id' | 'name' | 'email'>
+
+type StoredSessionUser = Partial<SessionUser> & {
+  username?: string
+}
 
 function getStorageItem(key: string) {
   return localStorage.getItem(key) ?? sessionStorage.getItem(key)
@@ -29,16 +33,17 @@ export function getSessionUser(): SessionUser | null {
   }
 
   try {
-    const parsedUser = JSON.parse(storedUser) as Partial<SessionUser>
+    const parsedUser = JSON.parse(storedUser) as StoredSessionUser
+    const name = parsedUser.name ?? parsedUser.username
 
-    if (!parsedUser.id || !parsedUser.username || !parsedUser.email) {
+    if (!parsedUser.id || !name || !parsedUser.email) {
       clearAuthSession()
       return null
     }
 
     return {
       id: parsedUser.id,
-      username: parsedUser.username,
+      name,
       email: parsedUser.email,
     }
   } catch {

@@ -114,7 +114,7 @@ const quickActionRoutes: Record<DashboardRouteKey, string> = {
 }
 
 export function DashboardPage() {
-  const { currentUserName } = useAuth()
+  const { currentName } = useAuth()
   const navigate = useNavigate()
 
   const openGoals = () => {
@@ -126,7 +126,7 @@ export function DashboardPage() {
       <section className="dashboard-page__hero">
         <div className="dashboard-page__hero-copy">
           <span className="dashboard-page__eyebrow">Dashboard financiero</span>
-          <h1>{currentUserName ? `¡Hola, ${currentUserName}!` : '¡Hola!'}</h1>
+          <h1>{currentName ? `¡Hola, ${currentName}!` : '¡Hola!'}</h1>
           <p>Bienvenido de nuevo a tu centro financiero nómada.</p>
         </div>
 

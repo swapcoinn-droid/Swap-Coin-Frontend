@@ -19,8 +19,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const [currentUserEmail, setCurrentUserEmail] = useState<string | null>(() =>
     getSessionUser()?.email ?? null,
   )
-  const [currentUserName, setCurrentUserName] = useState<string | null>(() =>
-    getSessionUser()?.username ?? null,
+  const [currentName, setCurrentName] = useState<string | null>(() =>
+    getSessionUser()?.name ?? null,
   )
 
   const login = async (email: string, password: string, remember: boolean) => {
@@ -30,7 +30,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       saveAuthSession(result.token, result.user, remember)
       setIsAuthenticated(true)
       setCurrentUserEmail(result.user.email)
-      setCurrentUserName(result.user.username)
+      setCurrentName(result.user.name)
 
       return { ok: true }
     } catch (error) {
@@ -51,12 +51,12 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     clearAuthSession()
     setIsAuthenticated(false)
     setCurrentUserEmail(null)
-    setCurrentUserName(null)
+    setCurrentName(null)
   }
 
   return (
     <AuthContext.Provider
-      value={{ isAuthenticated, currentUserEmail, currentUserName, login, register, endSession }}
+      value={{ isAuthenticated, currentUserEmail, currentName, login, register, endSession }}
     >
       {children}
     </AuthContext.Provider>
