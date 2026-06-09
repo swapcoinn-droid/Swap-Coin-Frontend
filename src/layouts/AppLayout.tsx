@@ -1,6 +1,6 @@
 import { Outlet, useNavigate } from 'react-router-dom'
 
-import { LogoutIcon, UserIcon } from '../components/icons/AuthIcons'
+import { LogoutIcon } from '../components/icons/AuthIcons'
 import { Navbar } from '../components/navbar/Navbar'
 import { useAuth } from '../hooks/useAuth'
 import { routes } from '../router/routes'
@@ -20,15 +20,14 @@ export function AppLayout() {
         brand="Swap-Coin"
         brandTo={routes.dashboard}
         links={[
-          { label: 'Dashboard', to: routes.dashboard },
-          { label: 'Goals', to: routes.goals },
-          { label: 'History', to: routes.history },
+          { label: 'Inicio', to: routes.dashboard },
+          { label: 'Metas de ahorro', to: routes.goals },
+          { label: 'Historial de Transacciones', to: routes.history },
         ]}
         actions={[
-          { label: 'Profile', to: routes.dashboard, variant: 'pill', icon: <UserIcon /> },
-          { label: 'Logout', variant: 'icon', icon: <LogoutIcon />, onClick: handleLogout },
+          { label: 'Cerrar Sesión', variant: 'pill', icon: <LogoutIcon />, onClick: handleLogout },
         ]}
-        activeLinkLabel="Dashboard"
+        activeLinkLabel="Inicio"
       />
 
       <main className="app-shell__content">
