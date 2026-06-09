@@ -49,8 +49,8 @@
 
 .landing-hero h1 {
   max-width: 720px;
-  font-size: clamp(2.7rem, 6vw, 5.5rem);
-  line-height: 0.98;
+  font-size: clamp(4rem, 3vw, 5.5rem);
+  line-height: 1;
 }
 
 .landing-hero p {
