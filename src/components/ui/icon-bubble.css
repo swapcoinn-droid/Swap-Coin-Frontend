@@ -1,0 +1,47 @@
+.sc-icon-bubble {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  font-weight: 800;
+  line-height: 1;
+  flex: 0 0 auto;
+}
+
+.sc-icon-bubble--sm {
+  width: 2rem;
+  height: 2rem;
+  font-size: 1rem;
+}
+
+.sc-icon-bubble--md {
+  width: 2.5rem;
+  height: 2.5rem;
+  font-size: 1.1rem;
+}
+
+.sc-icon-bubble--lg {
+  width: 3rem;
+  height: 3rem;
+  font-size: 1.25rem;
+}
+
+.sc-icon-bubble--blue {
+  background: rgba(216, 233, 250, 0.95);
+  color: #2f6f9f;
+}
+
+.sc-icon-bubble--gold {
+  background: rgba(255, 224, 122, 0.92);
+  color: #7f5d00;
+}
+
+.sc-icon-bubble--light {
+  background: rgba(238, 243, 253, 0.98);
+  color: #2f6f9f;
+}
+
+.sc-icon-bubble--navy {
+  background: rgba(47, 111, 159, 0.12);
+  color: #1f5b88;
+}

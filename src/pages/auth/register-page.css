@@ -1,0 +1,237 @@
+.register-page {
+  position: relative;
+  min-height: 100vh;
+  overflow-x: clip;
+  display: grid;
+  place-items: center;
+  padding: 8rem 2rem 0;
+  background:
+    radial-gradient(circle at 8% 8%, rgba(190, 218, 248, 0.55), transparent 24%),
+    radial-gradient(circle at 88% 82%, rgba(255, 220, 92, 0.28), transparent 25%),
+    #f7f8fc;
+}
+
+.register-page__content {
+  position: relative;
+  z-index: 2;
+  width: min(100%, 980px);
+  margin-bottom: 4rem;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(360px, 480px);
+  align-items: start;
+  gap: 4rem;
+}
+
+.register-copy {
+  display: grid;
+  gap: 1rem;
+}
+
+.register-copy__eyebrow {
+  width: fit-content;
+  padding: 0.45rem 0.85rem;
+  border-radius: 999px;
+  color: var(--brand-dark);
+  background: rgba(47, 111, 159, 0.11);
+  font-size: 0.82rem;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+}
+
+.register-copy h2 {
+  font-size: clamp(2.3rem, 5vw, 4.5rem);
+  line-height: 1;
+}
+
+.register-copy p {
+  max-width: 520px;
+  color: #4f6074;
+  font-size: 1.05rem;
+}
+
+.register-copy__stats {
+  margin-top: 0.5rem;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.8rem;
+}
+
+.register-copy__stats span {
+  padding: 1rem;
+  border: 1px solid rgba(74, 104, 145, 0.13);
+  border-radius: 18px;
+  display: grid;
+  gap: 0.2rem;
+  background: rgba(255, 255, 255, 0.74);
+  box-shadow: 0 16px 36px rgba(64, 92, 128, 0.08);
+  color: #56677b;
+  font-weight: 700;
+}
+
+.register-copy__stats strong {
+  color: var(--brand);
+  font-family: 'Poppins', system-ui, sans-serif;
+  font-size: 1.75rem;
+  line-height: 1;
+}
+
+.register-card {
+  grid-column: 2;
+  padding: 2.4rem 2.6rem 2.2rem;
+  border: 1px solid rgba(91, 119, 153, 0.3);
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.94);
+  box-shadow: 0 26px 70px rgba(60, 84, 116, 0.08);
+}
+
+.register-card__header {
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+.register-card__header h1 {
+  font-family: 'Poppins', system-ui, sans-serif;
+  font-size: 1.6rem;
+  font-weight: 800;
+}
+
+.register-card__header p {
+  color: #566274;
+  font-size: 0.9rem;
+}
+
+.register-form {
+  display: grid;
+  gap: 1rem;
+}
+
+.register-form .sc-field {
+  gap: 0.35rem;
+}
+
+.register-form .sc-field__label {
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.register-form .sc-field__input {
+  min-height: 3rem;
+  border-radius: 9px;
+}
+
+.register-password {
+  display: grid;
+  gap: 0.45rem;
+}
+
+.register-password__strength {
+  display: grid;
+  gap: 0.35rem;
+  color: #606a78;
+  font-size: 0.78rem;
+}
+
+.register-password__track {
+  height: 5px;
+  border-radius: 99px;
+  background: #e3e8f3;
+  overflow: hidden;
+}
+
+.register-password__track::before {
+  content: '';
+  display: block;
+  width: var(--strength, 0%);
+  height: 100%;
+  border-radius: inherit;
+  background: #c8d5ef;
+}
+
+.register-form__error {
+  color: #b23a48;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.register-form__terms .sc-checkbox__help {
+  color: #b23a48;
+}
+
+.register-form__terms {
+  margin: 0.25rem 0 1rem;
+  color: #515b69;
+  font-size: 0.76rem;
+  line-height: 1.35;
+}
+
+.register-form__terms .sc-checkbox__label {
+  font-weight: 400;
+}
+
+.register-form__terms a {
+  color: var(--brand);
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.register-form__terms a:hover,
+.register-card__footer a:hover {
+  text-decoration: underline;
+}
+
+.register-form__submit {
+  width: 100%;
+  border-radius: 9px;
+}
+
+.register-card__footer {
+  margin-top: 2rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid rgba(91, 119, 153, 0.25);
+  display: flex;
+  justify-content: center;
+  gap: 0.45rem;
+  color: #5b6574;
+  font-size: 0.88rem;
+}
+
+.register-card__footer a {
+  color: var(--brand);
+  font-weight: 800;
+  text-decoration: none;
+}
+
+@media (max-width: 980px) {
+  .register-page__content {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .register-copy {
+    text-align: center;
+    justify-items: center;
+  }
+
+  .register-card {
+    grid-column: auto;
+  }
+}
+
+@media (max-width: 560px) {
+  .register-page {
+    align-items: start;
+    padding: 7rem 1rem 0;
+  }
+
+  .register-copy__stats {
+    grid-template-columns: 1fr;
+  }
+
+  .register-card {
+    padding: 1.5rem 1.2rem 1.75rem;
+  }
+
+  .register-card__footer {
+    flex-wrap: wrap;
+  }
+}

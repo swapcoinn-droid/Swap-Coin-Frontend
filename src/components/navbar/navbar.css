@@ -3,11 +3,11 @@
   top: 0;
   z-index: 20;
   min-height: 4.25rem;
-  padding: 0 1.5rem;
+  padding: 0.75rem 1rem;
   display: grid;
-  grid-template-columns: auto 1fr auto;
+  grid-template-columns: 1fr auto;
   align-items: center;
-  gap: 1.25rem;
+  gap: 0.75rem 1rem;
   background: linear-gradient(180deg, #356f9e 0%, #2d6795 100%);
   box-shadow: 0 6px 18px rgba(40, 71, 102, 0.18);
 }
@@ -39,48 +39,180 @@
   font-size: 1.1rem;
 }
 
-.sc-navbar__links {
-  display: inline-flex;
-  justify-content: center;
-  gap: 0.9rem;
-  flex-wrap: wrap;
+.sc-navbar__toggle {
+  width: 2.75rem;
+  height: 2.75rem;
+  padding: 0.65rem;
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  border-radius: 14px;
+  display: grid;
+  align-content: center;
+  gap: 0.28rem;
+  background: rgba(255, 255, 255, 0.14);
+  cursor: pointer;
+}
+
+.sc-navbar__toggle span {
+  width: 100%;
+  height: 2px;
+  border-radius: 999px;
+  background: #fff;
+  transition: transform 180ms ease, opacity 180ms ease;
+}
+
+.sc-navbar__toggle[aria-expanded='true'] span:first-child {
+  transform: translateY(6px) rotate(45deg);
+}
+
+.sc-navbar__toggle[aria-expanded='true'] span:nth-child(2) {
+  opacity: 0;
+}
+
+.sc-navbar__toggle[aria-expanded='true'] span:last-child {
+  transform: translateY(-6px) rotate(-45deg);
+}
+
+.sc-navbar__menu {
+  grid-column: 1 / -1;
+  display: none;
+  padding-top: 0.75rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.18);
+  gap: 0.75rem;
+}
+
+.sc-navbar__menu.is-open {
+  display: grid;
+}
+
+.sc-navbar__links,
+.sc-navbar__actions {
+  display: grid;
+  gap: 0.5rem;
 }
 
 .sc-navbar__link {
+  padding: 0.7rem 0.8rem;
+  border-radius: 12px;
   color: rgba(255, 255, 255, 0.82);
   text-decoration: none;
-  padding: 0.35rem 0.1rem;
   font-weight: 600;
-  border-bottom: 2px solid transparent;
-  transition: color 180ms ease, border-color 180ms ease;
+  transition: color 180ms ease, background-color 180ms ease;
 }
 
 .sc-navbar__link:hover,
 .sc-navbar__link.is-active {
   color: #ffd233;
-  border-bottom-color: #ffd233;
+  background: rgba(255, 255, 255, 0.1);
 }
 
-.sc-navbar__actions {
+.sc-navbar__action {
+  width: 100%;
+  min-height: 2.75rem;
+  border: 0;
+  padding: 0.5rem 0.95rem;
+  border-radius: 999px;
   display: inline-flex;
   align-items: center;
-  justify-content: flex-end;
-  gap: 0.5rem;
-  flex-wrap: wrap;
-}
-
-.sc-navbar__action-link {
+  justify-content: center;
+  gap: 0.55rem;
   text-decoration: none;
+  font-weight: 700;
+  color: #fff;
+  background: rgba(255, 255, 255, 0.14);
+  cursor: pointer;
+  transition:
+    transform 180ms ease,
+    background-color 180ms ease,
+    box-shadow 180ms ease;
 }
 
-@media (max-width: 900px) {
+.sc-navbar__action:hover {
+  transform: translateY(-1px);
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.sc-navbar__action:focus-visible,
+.sc-navbar__toggle:focus-visible {
+  outline: 3px solid rgba(255, 210, 51, 0.35);
+  outline-offset: 2px;
+}
+
+.sc-navbar__action.is-active {
+  background: rgba(255, 255, 255, 0.24);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.12);
+}
+
+.sc-navbar__action-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1rem;
+  height: 1rem;
+}
+
+.sc-navbar__action-icon svg {
+  width: 100%;
+  height: 100%;
+}
+
+@media (min-width: 901px) {
   .sc-navbar {
-    grid-template-columns: 1fr;
-    justify-items: center;
-    padding-block: 1rem;
+    padding: 0 1.5rem;
+    grid-template-columns: auto 1fr;
+    gap: 1.25rem;
+  }
+
+  .sc-navbar__toggle {
+    display: none;
+  }
+
+  .sc-navbar__menu,
+  .sc-navbar__menu.is-open {
+    grid-column: auto;
+    padding-top: 0;
+    border-top: 0;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: center;
+    gap: 1.25rem;
+  }
+
+  .sc-navbar__links {
+    display: inline-flex;
+    justify-content: center;
+    gap: 0.9rem;
+    flex-wrap: wrap;
+  }
+
+  .sc-navbar__link {
+    padding: 0.35rem 0.1rem;
+    border-radius: 0;
+    border-bottom: 2px solid transparent;
+    background: transparent;
+  }
+
+  .sc-navbar__link:hover,
+  .sc-navbar__link.is-active {
+    border-bottom-color: #ffd233;
+    background: transparent;
   }
 
   .sc-navbar__actions {
-    justify-content: center;
+    display: inline-flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+  }
+
+  .sc-navbar__action {
+    width: auto;
+    min-height: 2.5rem;
+    padding: 0.4rem 0.95rem;
+  }
+
+  .sc-navbar__action--icon {
+    width: 2.5rem;
+    padding-inline: 0;
   }
 }

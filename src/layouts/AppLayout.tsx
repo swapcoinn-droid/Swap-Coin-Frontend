@@ -1,9 +1,19 @@
-import { Outlet } from 'react-router-dom'
+import { Outlet, useNavigate } from 'react-router-dom'
 
+import { LogoutIcon, UserIcon } from '../components/icons/AuthIcons'
 import { Navbar } from '../components/navbar/Navbar'
+import { useAuth } from '../hooks/useAuth'
 import { routes } from '../router/routes'
 
 export function AppLayout() {
+  const { endSession } = useAuth()
+  const navigate = useNavigate()
+
+  const handleLogout = () => {
+    endSession()
+    navigate(routes.home)
+  }
+
   return (
     <div className="app-shell">
       <Navbar
@@ -15,8 +25,8 @@ export function AppLayout() {
           { label: 'History', to: routes.history },
         ]}
         actions={[
-          { label: 'Profile', to: routes.dashboard, variant: 'ghost' },
-          { label: 'Logout', to: routes.home, variant: 'primary' },
+          { label: 'Profile', to: routes.dashboard, variant: 'pill', icon: <UserIcon /> },
+          { label: 'Logout', variant: 'icon', icon: <LogoutIcon />, onClick: handleLogout },
         ]}
         activeLinkLabel="Dashboard"
       />
