@@ -1,7 +1,6 @@
 import type { ReactNode } from 'react'
 
 import { Card } from './card/Card'
-import { Badge } from './Badge'
 
 import './metric-card.css'
 
@@ -11,7 +10,7 @@ type MetricCardProps = {
   label?: string
   tone?: 'brand' | 'secondary'
   icon?: ReactNode
-  footerLabel?: string
+  footerNote?: string
 }
 
 export function MetricCard({
@@ -20,23 +19,23 @@ export function MetricCard({
   label,
   tone = 'brand',
   icon,
-  footerLabel,
+  footerNote,
 }: MetricCardProps) {
   return (
     <Card className={['sc-metric-card', `sc-metric-card--${tone}`].join(' ')}>
-      <div className="sc-metric-card__top">
-        <div className="sc-metric-card__copy">
+      <div className="sc-metric-card__content">
+        <div className="sc-metric-card__header">
           <span className="sc-metric-card__title">{title}</span>
+          {icon ? <div className="sc-metric-card__icon">{icon}</div> : null}
+        </div>
+
+        <div className="sc-metric-card__balance">
           <strong className="sc-metric-card__value">{value}</strong>
-          {label ? <span className="sc-metric-card__label">{label}</span> : null}
+          {label ? <span className="sc-metric-card__label">Saldo en {label}</span> : null}
         </div>
-        {icon ? <div className="sc-metric-card__icon">{icon}</div> : null}
+
+        {footerNote ? <span className="sc-metric-card__footer-note">{footerNote}</span> : null}
       </div>
-      {footerLabel ? (
-        <div className="sc-metric-card__footer">
-          <Badge tone={tone === 'brand' ? 'brand' : 'neutral'}>{footerLabel}</Badge>
-        </div>
-      ) : null}
     </Card>
   )
 }

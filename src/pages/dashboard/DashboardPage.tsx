@@ -155,7 +155,7 @@ export function DashboardPage() {
             label={metric.label}
             tone={metric.tone}
             icon={<CurrencyFlag currency={metric.label} />}
-            footerLabel={metric.footerLabel}
+            footerNote={metric.footerNote}
           />
         ))}
       </section>
