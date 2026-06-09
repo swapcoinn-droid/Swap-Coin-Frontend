@@ -246,20 +246,6 @@ export function DashboardPage() {
         </Card>
       </section>
 
-      <footer className="dashboard-page__footer">
-        <div>
-          <strong className="dashboard-page__footer-brand">Swap-Coin</strong>
-          <p>© 2024 Swap-Coin. Built for the modern nomad.</p>
-        </div>
-
-        <nav className="dashboard-page__footer-links" aria-label="Enlaces informativos">
-          <a href="#">Privacy Policy</a>
-          <a href="#">Terms of Service</a>
-          <a href="#">Help Center</a>
-          <a href="#">Contact</a>
-        </nav>
-      </footer>
-
       <FloatingActionButton label="Abrir chat" icon={<ChatIcon />} />
     </div>
   )

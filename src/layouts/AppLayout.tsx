@@ -2,6 +2,7 @@ import { Outlet, useNavigate } from 'react-router-dom'
 
 import { LogoutIcon } from '../components/icons/AuthIcons'
 import { Navbar } from '../components/navbar/Navbar'
+import { PublicFooter } from '../components/public-layout/PublicFooter'
 import { useAuth } from '../hooks/useAuth'
 import { routes } from '../router/routes'
 
@@ -32,6 +33,8 @@ export function AppLayout() {
       <main className="app-shell__content">
         <Outlet />
       </main>
+
+      <PublicFooter />
     </div>
   )
 }
