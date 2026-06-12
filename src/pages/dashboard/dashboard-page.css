@@ -194,6 +194,14 @@
   gap: 0.2rem;
 }
 
+.dashboard-panel__status {
+  margin: 0;
+  padding: 1.35rem 0.25rem;
+  color: #5d6c7e;
+  font-size: 0.92rem;
+  font-weight: 600;
+}
+
 .dashboard-panel--transactions .sc-transaction-item {
   border-top: 1px solid rgba(123, 139, 160, 0.22);
 }
