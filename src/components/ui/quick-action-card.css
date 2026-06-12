@@ -37,6 +37,20 @@
   box-shadow: 0 14px 28px rgba(255, 208, 29, 0.28);
 }
 
+.sc-quick-action-card--success {
+  background: linear-gradient(180deg, rgba(237, 250, 244, 0.96) 0%, #ffffff 100%);
+  border-color: rgba(42, 126, 90, 0.24);
+  color: #23704f;
+  box-shadow: 0 12px 26px rgba(42, 126, 90, 0.12);
+}
+
+.sc-quick-action-card--danger {
+  background: linear-gradient(180deg, rgba(253, 241, 243, 0.96) 0%, #ffffff 100%);
+  border-color: rgba(178, 58, 72, 0.24);
+  color: #b23a48;
+  box-shadow: 0 12px 26px rgba(178, 58, 72, 0.12);
+}
+
 .sc-quick-action-card__icon {
   font-size: 2rem;
   line-height: 1;

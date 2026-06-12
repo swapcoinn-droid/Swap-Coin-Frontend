@@ -46,13 +46,13 @@ export const quickActionsMock = [
   },
   {
     label: 'Retirar',
-    tone: 'neutral' as const,
+    tone: 'danger' as const,
     icon: 'bank' as DashboardIconKey,
     route: 'withdraw' as DashboardRouteKey,
   },
   {
     label: 'Agregar saldo',
-    tone: 'neutral' as const,
+    tone: 'success' as const,
     icon: 'plus' as DashboardIconKey,
     route: 'topUp' as DashboardRouteKey,
   },
