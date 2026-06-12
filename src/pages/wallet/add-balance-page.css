@@ -73,6 +73,10 @@
   gap: 1.25rem;
 }
 
+.add-balance-page--withdraw .add-balance-summary {
+  order: -1;
+}
+
 .add-balance-form,
 .add-balance-summary {
   border: 1px solid rgba(81, 111, 154, 0.14);
@@ -293,6 +297,10 @@
 
   .add-balance-page__grid {
     grid-template-columns: minmax(0, 1.1fr) minmax(280px, 0.9fr);
+  }
+
+  .add-balance-page--withdraw .add-balance-page__grid {
+    grid-template-columns: minmax(280px, 0.9fr) minmax(0, 1.1fr);
   }
 
   .add-balance-form,
