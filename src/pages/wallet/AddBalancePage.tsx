@@ -2,7 +2,7 @@ import { useEffect, useMemo, useState, type FormEvent } from 'react'
 import { Link } from 'react-router-dom'
 
 import { SelectField, TextField } from '../../components/forms'
-import { BankIcon, PlusIcon } from '../../components/icons/AuthIcons'
+import { ArrowLeftIcon, BankIcon, PlusIcon } from '../../components/icons/AuthIcons'
 import { Button } from '../../components/ui/button/Button'
 import { routes } from '../../router/routes'
 import {
@@ -114,7 +114,10 @@ export function AddBalancePage() {
           <h1>Agregar saldo</h1>
           <p>Selecciona una moneda e ingresa el monto que quieres acreditar a tu billetera.</p>
         </div>
-        <Link to={routes.dashboard}>Volver al inicio</Link>
+        <Link className="add-balance-page__back-link" to={routes.dashboard}>
+          <ArrowLeftIcon />
+          <span>Volver al inicio</span>
+        </Link>
       </header>
 
       <section className="add-balance-page__grid">

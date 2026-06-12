@@ -33,11 +33,33 @@
   color: var(--brand-dark);
 }
 
-.add-balance-page__header a {
+.add-balance-page__back-link {
   width: fit-content;
-  color: var(--brand);
+  min-height: 3.25rem;
+  padding: 0.85rem 1.25rem;
+  border-radius: 14px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.55rem;
+  background: linear-gradient(135deg, #ffd233 0%, #ffcb14 100%);
+  color: #4c3a00;
   font-weight: 800;
   text-decoration: none;
+  box-shadow: 0 10px 22px rgba(255, 203, 20, 0.24);
+  transition:
+    transform 180ms ease,
+    box-shadow 180ms ease;
+}
+
+.add-balance-page__back-link:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 13px 26px rgba(255, 203, 20, 0.3);
+}
+
+.add-balance-page__back-link:focus-visible {
+  outline: 3px solid rgba(54, 110, 169, 0.25);
+  outline-offset: 2px;
 }
 
 .add-balance-page__grid {
