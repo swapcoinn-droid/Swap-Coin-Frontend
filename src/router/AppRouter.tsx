@@ -4,6 +4,7 @@ import { AppLayout } from '../layouts/AppLayout'
 import { DashboardPage } from '../pages/dashboard/DashboardPage'
 import { LandingPage } from '../pages/landing/LandingPage'
 import { AddBalancePage } from '../pages/wallet/AddBalancePage'
+import { WithdrawBalancePage } from '../pages/wallet/WithdrawBalancePage'
 import { RoutePlaceholder } from '../pages/RoutePlaceholder'
 import { LoginPage } from '../pages/auth/LoginPage'
 import { RegisterPage } from '../pages/auth/RegisterPage'
@@ -37,7 +38,7 @@ export function AppRouter() {
               />
               <Route
                 path="retirar"
-                element={<RoutePlaceholder title="Retirar" />}
+                element={<WithdrawBalancePage />}
               />
               <Route
                 path="agregar-saldo"

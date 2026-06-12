@@ -23,6 +23,12 @@ export type DepositResult = {
   newBalance: number
 }
 
+export type WithdrawResult = {
+  currency: CurrencyCode
+  withdrawn: number
+  newBalance: number
+}
+
 export type WalletTransaction = {
   id: number
   type: 'deposit' | 'withdrawal' | 'exchange'
@@ -68,6 +74,14 @@ export function getWallet() {
 
 export function depositFunds(amount: number, currency: CurrencyCode) {
   return apiRequest<DepositResult>('/api/wallet/deposit', {
+    method: 'POST',
+    headers: getAuthHeaders(),
+    body: JSON.stringify({ amount, currency }),
+  })
+}
+
+export function withdrawFunds(amount: number, currency: CurrencyCode) {
+  return apiRequest<WithdrawResult>('/api/wallet/withdraw', {
     method: 'POST',
     headers: getAuthHeaders(),
     body: JSON.stringify({ amount, currency }),
