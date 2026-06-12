@@ -182,6 +182,86 @@
   color: #fff;
 }
 
+.add-balance-modal__backdrop {
+  position: fixed;
+  z-index: 100;
+  inset: 0;
+  padding: 1rem;
+  display: grid;
+  place-items: center;
+  background: rgba(20, 38, 58, 0.62);
+  backdrop-filter: blur(5px);
+}
+
+.add-balance-modal {
+  width: min(100%, 31rem);
+  padding: 1.5rem;
+  border: 1px solid rgba(81, 111, 154, 0.18);
+  border-radius: 24px;
+  display: grid;
+  gap: 1.25rem;
+  background: #fff;
+  box-shadow: 0 28px 70px rgba(20, 38, 58, 0.28);
+}
+
+.add-balance-modal__icon {
+  width: 3.5rem;
+  height: 3.5rem;
+  padding: 0.95rem;
+  border-radius: 18px;
+  display: inline-flex;
+  background: rgba(255, 210, 51, 0.25);
+  color: var(--accent-ink);
+}
+
+.add-balance-modal__icon svg {
+  width: 100%;
+  height: 100%;
+}
+
+.add-balance-modal__copy {
+  display: grid;
+  gap: 0.35rem;
+}
+
+.add-balance-modal__copy > span {
+  color: #8d6b00;
+  font-size: 0.78rem;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.add-balance-modal__copy h2 {
+  font-size: clamp(1.35rem, 5vw, 1.8rem);
+}
+
+.add-balance-modal__amount {
+  padding: 1rem;
+  border-radius: 16px;
+  display: grid;
+  gap: 0.2rem;
+  background: #edf5fc;
+  color: #5d6c7e;
+  text-align: center;
+}
+
+.add-balance-modal__amount strong {
+  color: var(--brand-dark);
+  font-size: clamp(1.8rem, 7vw, 2.6rem);
+  line-height: 1.1;
+}
+
+.add-balance-modal__amount span {
+  font-size: 0.82rem;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.add-balance-modal__actions {
+  display: grid;
+  gap: 0.75rem;
+}
+
 @media (min-width: 800px) {
   .add-balance-page__header {
     padding: 2rem;
@@ -196,5 +276,13 @@
   .add-balance-form,
   .add-balance-summary {
     padding: 2rem;
+  }
+
+  .add-balance-modal {
+    padding: 2rem;
+  }
+
+  .add-balance-modal__actions {
+    grid-template-columns: 1fr 1.35fr;
   }
 }

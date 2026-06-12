@@ -19,6 +19,11 @@ const currencies: Array<{ code: CurrencyCode; label: string }> = [
   { code: 'EUR', label: 'Euro' },
 ]
 
+type PendingDeposit = {
+  amount: number
+  currency: CurrencyCode
+}
+
 function formatMoney(amount: number, currency: CurrencyCode) {
   return new Intl.NumberFormat('es-CO', {
     style: 'currency',
@@ -40,6 +45,7 @@ export function AddBalancePage() {
   const [successMessage, setSuccessMessage] = useState('')
   const [isLoading, setIsLoading] = useState(true)
   const [isSubmitting, setIsSubmitting] = useState(false)
+  const [pendingDeposit, setPendingDeposit] = useState<PendingDeposit | null>(null)
 
   const selectedBalance = useMemo(
     () => wallet?.balances.find((balance) => balance.currency === currency),
@@ -71,7 +77,23 @@ export function AddBalancePage() {
     }
   }, [])
 
-  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
+  useEffect(() => {
+    if (!pendingDeposit) return
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape' && !isSubmitting) {
+        setPendingDeposit(null)
+      }
+    }
+
+    window.addEventListener('keydown', handleKeyDown)
+
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown)
+    }
+  }, [isSubmitting, pendingDeposit])
+
+  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault()
     const numericAmount = Number(amount)
     const hasMoreThanTwoDecimals = !/^\d+(\.\d{1,2})?$/.test(amount)
@@ -90,14 +112,21 @@ export function AddBalancePage() {
       return
     }
 
+    setPendingDeposit({ amount: numericAmount, currency })
+  }
+
+  const confirmDeposit = async () => {
+    if (!pendingDeposit) return
+
     setIsSubmitting(true)
 
     try {
-      const result = await depositFunds(numericAmount, currency)
+      const result = await depositFunds(pendingDeposit.amount, pendingDeposit.currency)
       setSuccessMessage(
         `Agregaste ${formatMoney(result.deposited, result.currency)}. Tu nuevo saldo es ${formatMoney(result.newBalance, result.currency)}.`,
       )
       setAmount('')
+      setPendingDeposit(null)
       setWallet(await getWallet())
     } catch (error) {
       setPageError(getErrorMessage(error))
@@ -201,6 +230,61 @@ export function AddBalancePage() {
           </p>
         </aside>
       </section>
+
+      {pendingDeposit ? (
+        <div
+          className="add-balance-modal__backdrop"
+          onClick={() => {
+            if (!isSubmitting) setPendingDeposit(null)
+          }}
+        >
+          <section
+            className="add-balance-modal"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="deposit-confirmation-title"
+            aria-describedby="deposit-confirmation-description"
+            onClick={(event) => event.stopPropagation()}
+          >
+            <span className="add-balance-modal__icon" aria-hidden="true">
+              <BankIcon />
+            </span>
+            <div className="add-balance-modal__copy">
+              <span>Confirma tu recarga</span>
+              <h2 id="deposit-confirmation-title">¿Deseas agregar este saldo?</h2>
+              <p id="deposit-confirmation-description">
+                Revisa el monto antes de confirmar la operación.
+              </p>
+            </div>
+
+            <div className="add-balance-modal__amount">
+              <span>Monto a agregar</span>
+              <strong>{formatMoney(pendingDeposit.amount, pendingDeposit.currency)}</strong>
+              <span>{pendingDeposit.currency}</span>
+            </div>
+
+            <div className="add-balance-modal__actions">
+              <Button
+                variant="secondary"
+                size="lg"
+                onClick={() => setPendingDeposit(null)}
+                disabled={isSubmitting}
+                autoFocus
+              >
+                Cancelar
+              </Button>
+              <Button
+                size="lg"
+                trailingIcon={<PlusIcon />}
+                onClick={confirmDeposit}
+                disabled={isSubmitting}
+              >
+                {isSubmitting ? 'Agregando saldo...' : 'Confirmar recarga'}
+              </Button>
+            </div>
+          </section>
+        </div>
+      ) : null}
     </div>
   )
 }
