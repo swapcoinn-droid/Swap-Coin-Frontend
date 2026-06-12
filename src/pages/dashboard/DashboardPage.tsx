@@ -1,4 +1,4 @@
-import type { ReactNode } from 'react'
+import { useEffect, useState, type ReactNode } from 'react'
 
 import { useNavigate } from 'react-router-dom'
 
@@ -25,13 +25,16 @@ import {
 import { useAuth } from '../../hooks/useAuth'
 import { routes } from '../../router/routes'
 import {
-  dashboardMetricsMock,
-  dashboardSummaryMock,
+  getWallet,
+  getWalletTransactions,
+  type CurrencyCode,
+  type Wallet,
+  type WalletTransaction,
+} from '../../services/walletApi'
+import {
   exchangeRatesMock,
   goalsMock,
   quickActionsMock,
-  transactionsMock,
-  type CurrencyCode,
   type DashboardIconKey,
   type DashboardRouteKey,
 } from './dashboard.mocks'
@@ -113,9 +116,71 @@ const quickActionRoutes: Record<DashboardRouteKey, string> = {
   withdraw: routes.withdraw,
 }
 
+const transactionIcons: Record<WalletTransaction['type'], DashboardIconKey> = {
+  deposit: 'plus',
+  withdrawal: 'bank',
+  exchange: 'swap',
+}
+
+function formatMoney(amount: number, currency: CurrencyCode) {
+  return new Intl.NumberFormat('es-CO', {
+    style: 'currency',
+    currency,
+    maximumFractionDigits: 2,
+  }).format(amount)
+}
+
+function formatDate(date: string) {
+  return new Intl.DateTimeFormat('es-CO', {
+    dateStyle: 'medium',
+    timeStyle: 'short',
+  }).format(new Date(date))
+}
+
+function getTransactionTitle(transaction: WalletTransaction) {
+  if (transaction.type === 'deposit') return 'Recarga de saldo'
+  if (transaction.type === 'withdrawal') return 'Retiro de saldo'
+
+  return `Cambio ${transaction.currency} a ${transaction.targetCurrency ?? ''}`.trim()
+}
+
+function getErrorMessage(error: unknown) {
+  return error instanceof Error ? error.message : 'No fue posible consultar la información financiera.'
+}
+
 export function DashboardPage() {
   const { currentName } = useAuth()
   const navigate = useNavigate()
+  const [wallet, setWallet] = useState<Wallet | null>(null)
+  const [transactions, setTransactions] = useState<WalletTransaction[]>([])
+  const [financialError, setFinancialError] = useState('')
+  const [isFinancialDataLoading, setIsFinancialDataLoading] = useState(true)
+
+  useEffect(() => {
+    let isActive = true
+
+    Promise.all([getWallet(), getWalletTransactions(1, 4)])
+      .then(([walletData, transactionResponse]) => {
+        if (isActive) {
+          setWallet(walletData)
+          setTransactions(transactionResponse.data)
+        }
+      })
+      .catch((error: unknown) => {
+        if (isActive) {
+          setFinancialError(getErrorMessage(error))
+        }
+      })
+      .finally(() => {
+        if (isActive) {
+          setIsFinancialDataLoading(false)
+        }
+      })
+
+    return () => {
+      isActive = false
+    }
+  }, [])
 
   const openGoals = () => {
     navigate(routes.goals)
@@ -135,9 +200,31 @@ export function DashboardPage() {
         </div>
 
         <aside className="dashboard-page__hero-panel" aria-label="Resumen financiero">
-          <span className="dashboard-page__hero-panel-label">Saldo total estimado</span>
-          <strong>{dashboardSummaryMock.totalBalance}</strong>
-          <span className="dashboard-page__hero-panel-note">{dashboardSummaryMock.updatedLabel}</span>
+          <div className="dashboard-page__hero-panel-heading">
+            <span className="dashboard-page__hero-panel-label">Saldo total estimado</span>
+            <span className="dashboard-page__hero-panel-currency">Total en COP</span>
+          </div>
+
+          <div className="dashboard-page__hero-panel-total">
+            <span>Valor consolidado de tus divisas</span>
+            <strong>
+              {isFinancialDataLoading
+                ? 'Consultando...'
+                : formatMoney(wallet?.totalEstimatedCOP ?? 0, 'COP')}
+            </strong>
+          </div>
+
+          <span
+            className={[
+              'dashboard-page__hero-panel-note',
+              financialError ? 'is-error' : '',
+            ]
+              .filter(Boolean)
+              .join(' ')}
+          >
+            <span className="dashboard-page__hero-panel-status" aria-hidden="true" />
+            {financialError || 'Información actualizada desde tu wallet'}
+          </span>
 
           <div className="dashboard-page__rates" aria-label="Tasas destacadas">
             {exchangeRatesMock.map((rate) => (
@@ -151,15 +238,16 @@ export function DashboardPage() {
       </section>
 
       <section className="dashboard-page__metrics" aria-label="Resumen de saldos">
-        {dashboardMetricsMock.map((metric) => (
+        {wallet?.balances.map((balance) => (
           <MetricCard
-            key={metric.title}
-            title={metric.title}
-            value={metric.value}
-            label={metric.label}
-            tone={metric.tone}
-            icon={<CurrencyFlag currency={metric.label} />}
-            footerNote={metric.footerNote}
+            key={balance.currency}
+            title={balance.name}
+            value={formatMoney(balance.amount, balance.currency)}
+            label={balance.currency}
+            tone={balance.currency === 'USD' ? 'secondary' : 'brand'}
+            icon={<CurrencyFlag currency={balance.currency} />}
+            footerNote={`${formatMoney(balance.estimatedCOP, 'COP')} ${balance.currency === 'COP' ? 'total' : 'estimados'}`}
+            footerLabel="COP"
           />
         ))}
       </section>
@@ -231,15 +319,23 @@ export function DashboardPage() {
           />
 
           <div className="dashboard-panel__transactions-list">
-            {transactionsMock.map((transaction) => (
+            {isFinancialDataLoading ? (
+              <p className="dashboard-panel__status">Consultando movimientos...</p>
+            ) : null}
+
+            {!isFinancialDataLoading && transactions.length === 0 ? (
+              <p className="dashboard-panel__status">Todavía no tienes transacciones registradas.</p>
+            ) : null}
+
+            {transactions.map((transaction) => (
               <TransactionItem
-                key={`${transaction.title}-${transaction.subtitle}`}
-                title={transaction.title}
-                subtitle={transaction.subtitle}
-                amount={transaction.amount}
-                amountTone={transaction.amountTone}
-                icon={<IconBubble tone="light">{dashboardIcons[transaction.icon]}</IconBubble>}
-                meta={transaction.meta}
+                key={transaction.id}
+                title={getTransactionTitle(transaction)}
+                subtitle={formatDate(transaction.createdAt)}
+                amount={`${transaction.type === 'deposit' ? '+' : '-'} ${formatMoney(transaction.amount, transaction.currency)}`}
+                amountTone={transaction.type === 'deposit' ? 'positive' : 'negative'}
+                icon={<IconBubble tone="light">{dashboardIcons[transactionIcons[transaction.type]]}</IconBubble>}
+                meta={transaction.description}
               />
             ))}
           </div>

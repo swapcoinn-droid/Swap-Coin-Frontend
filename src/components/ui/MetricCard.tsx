@@ -11,6 +11,7 @@ type MetricCardProps = {
   tone?: 'brand' | 'secondary'
   icon?: ReactNode
   footerNote?: string
+  footerLabel?: string
 }
 
 export function MetricCard({
@@ -20,6 +21,7 @@ export function MetricCard({
   tone = 'brand',
   icon,
   footerNote,
+  footerLabel,
 }: MetricCardProps) {
   return (
     <Card
@@ -48,7 +50,7 @@ export function MetricCard({
         {footerNote ? (
           <div className="sc-metric-card__footer">
             <span>{footerNote}</span>
-            {label ? <strong>{label}</strong> : null}
+            {footerLabel || label ? <strong>{footerLabel ?? label}</strong> : null}
           </div>
         ) : null}
       </div>
