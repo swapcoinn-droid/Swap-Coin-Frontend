@@ -200,13 +200,29 @@ export function DashboardPage() {
         </div>
 
         <aside className="dashboard-page__hero-panel" aria-label="Resumen financiero">
-          <span className="dashboard-page__hero-panel-label">Saldo total estimado</span>
-          <strong>
-            {isFinancialDataLoading
-              ? 'Consultando...'
-              : formatMoney(wallet?.totalEstimatedCOP ?? 0, 'COP')}
-          </strong>
-          <span className="dashboard-page__hero-panel-note">
+          <div className="dashboard-page__hero-panel-heading">
+            <span className="dashboard-page__hero-panel-label">Saldo total estimado</span>
+            <span className="dashboard-page__hero-panel-currency">Total en COP</span>
+          </div>
+
+          <div className="dashboard-page__hero-panel-total">
+            <span>Valor consolidado de tus divisas</span>
+            <strong>
+              {isFinancialDataLoading
+                ? 'Consultando...'
+                : formatMoney(wallet?.totalEstimatedCOP ?? 0, 'COP')}
+            </strong>
+          </div>
+
+          <span
+            className={[
+              'dashboard-page__hero-panel-note',
+              financialError ? 'is-error' : '',
+            ]
+              .filter(Boolean)
+              .join(' ')}
+          >
+            <span className="dashboard-page__hero-panel-status" aria-hidden="true" />
             {financialError || 'Información actualizada desde tu wallet'}
           </span>
 

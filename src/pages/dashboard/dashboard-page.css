@@ -53,37 +53,97 @@
 .dashboard-page__hero-panel {
   width: min(100%, 25rem);
   border-radius: 18px;
-  padding: 1rem;
+  padding: 1.15rem;
   align-self: stretch;
   display: grid;
   align-content: center;
+  gap: 0.85rem;
   background: rgba(255, 255, 255, 0.72);
   border: 1px solid rgba(81, 111, 154, 0.14);
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.78);
 }
 
-.dashboard-page__hero-panel-label,
-.dashboard-page__hero-panel-note {
-  color: #5d6c7e;
-  font-size: 0.88rem;
+.dashboard-page__hero-panel-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+
+.dashboard-page__hero-panel-label {
+  color: #324960;
+  font-size: 0.95rem;
+  font-weight: 800;
+}
+
+.dashboard-page__hero-panel-currency {
+  padding: 0.28rem 0.55rem;
+  border-radius: 999px;
+  background: rgba(47, 111, 159, 0.1);
+  color: #285d87;
+  font-size: 0.7rem;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.dashboard-page__hero-panel-total {
+  padding: 0.9rem 1rem;
+  border: 1px solid rgba(47, 111, 159, 0.12);
+  border-radius: 16px;
+  display: grid;
+  gap: 0.15rem;
+  background:
+    radial-gradient(circle at top right, rgba(255, 210, 51, 0.22), transparent 42%),
+    rgba(237, 245, 252, 0.9);
+}
+
+.dashboard-page__hero-panel-total > span {
+  color: #60758c;
+  font-size: 0.76rem;
   font-weight: 700;
 }
 
-.dashboard-page__hero-panel strong {
-  margin-top: 0.2rem;
-  color: #1d2b3d;
-  font-size: clamp(1.75rem, 3vw, 2.45rem);
+.dashboard-page__hero-panel-total strong {
+  color: #163d61;
+  font-size: clamp(2rem, 3.4vw, 2.75rem);
   line-height: 1.05;
 }
 
 .dashboard-page__hero-panel-note {
-  margin-top: 0.25rem;
+  width: fit-content;
+  padding: 0.45rem 0.7rem;
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  background: rgba(42, 126, 90, 0.1);
+  color: #23704f;
+  font-size: 0.76rem;
+  font-weight: 800;
+}
+
+.dashboard-page__hero-panel-note.is-error {
+  background: rgba(178, 58, 72, 0.1);
+  color: #a52f3e;
+}
+
+.dashboard-page__hero-panel-status {
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 50%;
+  flex: 0 0 auto;
+  background: currentColor;
+  box-shadow: 0 0 0 4px rgba(42, 126, 90, 0.12);
+}
+
+.dashboard-page__hero-panel-note.is-error .dashboard-page__hero-panel-status {
+  box-shadow: 0 0 0 4px rgba(178, 58, 72, 0.12);
 }
 
 .dashboard-page__rates {
   display: grid;
   gap: 0.55rem;
-  margin-top: 1rem;
+  margin-top: 0.15rem;
 }
 
 .dashboard-page__rate {
