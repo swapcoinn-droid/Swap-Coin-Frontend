@@ -36,6 +36,11 @@ export function SelectField({
         >
           {children}
         </select>
+        <span className="sc-field__select-indicator" aria-hidden="true">
+          <svg viewBox="0 0 20 20" focusable="false">
+            <path d="m5 7.5 5 5 5-5" />
+          </svg>
+        </span>
       </span>
       {helperText || errorText ? (
         <span className={['sc-field__help', errorText ? 'is-error' : ''].filter(Boolean).join(' ')} id={descriptionId}>
