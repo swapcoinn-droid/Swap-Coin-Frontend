@@ -36,7 +36,7 @@
 .add-balance-page__header h1 {
   font-size: clamp(2rem, 5vw, 3.5rem);
   line-height: 1;
-  color: var(--brand-dark);
+  color: #23704f;
 }
 
 .add-balance-page__back-link {
