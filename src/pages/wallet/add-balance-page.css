@@ -39,6 +39,10 @@
   color: #23704f;
 }
 
+.add-balance-page--withdraw .add-balance-page__header h1 {
+  color: #b23a48;
+}
+
 .add-balance-page__back-link {
   width: fit-content;
   min-height: 3.25rem;
