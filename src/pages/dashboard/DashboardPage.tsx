@@ -230,7 +230,8 @@ export function DashboardPage() {
             label={balance.currency}
             tone={balance.currency === 'USD' ? 'secondary' : 'brand'}
             icon={<CurrencyFlag currency={balance.currency} />}
-            footerNote={`${formatMoney(balance.estimatedCOP, 'COP')} estimados`}
+            footerNote={`${formatMoney(balance.estimatedCOP, 'COP')} ${balance.currency === 'COP' ? 'total' : 'estimados'}`}
+            footerLabel="COP"
           />
         ))}
       </section>
