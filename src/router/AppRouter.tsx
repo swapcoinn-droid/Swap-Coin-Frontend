@@ -2,6 +2,7 @@ import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom'
 
 import { AppLayout } from '../layouts/AppLayout'
 import { DashboardPage } from '../pages/dashboard/DashboardPage'
+import { GoalsPage } from '../pages/goals/GoalsPage'
 import { LandingPage } from '../pages/landing/LandingPage'
 import { TransactionsPage } from '../pages/transactions/TransactionsPage'
 import { AddBalancePage } from '../pages/wallet/AddBalancePage'
@@ -48,7 +49,7 @@ export function AppRouter() {
               />
               <Route
                 path="metas"
-                element={<RoutePlaceholder title="Metas" />}
+                element={<GoalsPage />}
               />
               <Route
                 path="historial"

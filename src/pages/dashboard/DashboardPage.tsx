@@ -24,6 +24,7 @@ import {
 } from '../../components/icons/AuthIcons'
 import { useAuth } from '../../hooks/useAuth'
 import { routes } from '../../router/routes'
+import { getGoals, type SavingsGoal } from '../../services/goalsApi'
 import {
   getWallet,
   getWalletTransactions,
@@ -33,7 +34,6 @@ import {
 } from '../../services/walletApi'
 import {
   exchangeRatesMock,
-  goalsMock,
   quickActionsMock,
   type DashboardIconKey,
   type DashboardRouteKey,
@@ -153,6 +153,7 @@ export function DashboardPage() {
   const navigate = useNavigate()
   const [wallet, setWallet] = useState<Wallet | null>(null)
   const [transactions, setTransactions] = useState<WalletTransaction[]>([])
+  const [goals, setGoals] = useState<SavingsGoal[]>([])
   const [financialError, setFinancialError] = useState('')
   const [isFinancialDataLoading, setIsFinancialDataLoading] = useState(true)
 
@@ -176,6 +177,20 @@ export function DashboardPage() {
           setIsFinancialDataLoading(false)
         }
       })
+
+    return () => {
+      isActive = false
+    }
+  }, [])
+
+  useEffect(() => {
+    let isActive = true
+
+    getGoals(1, 2).then((response) => {
+      if (isActive) setGoals(response.data)
+    }).catch(() => {
+      if (isActive) setGoals([])
+    })
 
     return () => {
       isActive = false
@@ -288,17 +303,21 @@ export function DashboardPage() {
           />
 
           <div className="dashboard-panel__goals-list">
-            {goalsMock.map((goal) => (
+            {goals.map((goal) => (
               <GoalRow
-                key={goal.title}
-                title={goal.title}
-                amount={goal.amount}
+                key={goal.id}
+                title={goal.name}
+                amount={`${formatMoney(goal.currentAmount, goal.currency)} / ${formatMoney(goal.targetAmount, goal.currency)}`}
                 progress={goal.progress}
-                subtitle={goal.subtitle}
-                icon={dashboardIcons[goal.icon]}
-                progressTone={goal.progressTone}
+                subtitle={goal.targetDate ? `Fecha límite: ${formatDate(goal.targetDate)}` : 'Sin fecha límite'}
+                icon={dashboardIcons.plane}
+                progressTone={goal.status === 'completed' ? 'brand' : 'warning'}
               />
             ))}
+
+            {goals.length === 0 ? (
+              <p className="dashboard-panel__status">Todavía no tienes metas de ahorro.</p>
+            ) : null}
 
             <div className="dashboard-panel__new-goal" aria-hidden="true">
               <span>+</span>
