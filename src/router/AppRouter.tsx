@@ -4,6 +4,7 @@ import { AppLayout } from '../layouts/AppLayout'
 import { DashboardPage } from '../pages/dashboard/DashboardPage'
 import { LandingPage } from '../pages/landing/LandingPage'
 import { AddBalancePage } from '../pages/wallet/AddBalancePage'
+import { CurrencyExchangePage } from '../pages/wallet/CurrencyExchangePage'
 import { WithdrawBalancePage } from '../pages/wallet/WithdrawBalancePage'
 import { RoutePlaceholder } from '../pages/RoutePlaceholder'
 import { LoginPage } from '../pages/auth/LoginPage'
@@ -34,7 +35,7 @@ export function AppRouter() {
               <Route path="dashboard" element={<DashboardPage />} />
               <Route
                 path="cambiar-divisa"
-                element={<RoutePlaceholder title="Cambiar divisa" />}
+                element={<CurrencyExchangePage />}
               />
               <Route
                 path="retirar"
