@@ -68,6 +68,10 @@ function getTransactionTone(transaction: WalletTransaction) {
   return 'negative'
 }
 
+function getTransactionIconClass(transaction: WalletTransaction) {
+  return `transactions-page__icon transactions-page__icon--${transaction.type}`
+}
+
 function getTransactionMeta(transaction: WalletTransaction) {
   if (transaction.type !== 'exchange' || !transaction.targetCurrency) {
     return transaction.description
@@ -326,7 +330,11 @@ export function TransactionsPage() {
               subtitle={formatDate(transaction.createdAt)}
               amount={getTransactionAmount(transaction)}
               amountTone={getTransactionTone(transaction)}
-              icon={<IconBubble tone="light">{transactionIcons[transaction.type]}</IconBubble>}
+              icon={
+                <IconBubble tone="light" className={getTransactionIconClass(transaction)}>
+                  {transactionIcons[transaction.type]}
+                </IconBubble>
+              }
               meta={getTransactionMeta(transaction)}
             />
           ))}
