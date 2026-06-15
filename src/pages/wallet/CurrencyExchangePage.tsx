@@ -126,6 +126,18 @@ export function CurrencyExchangePage() {
     }
   }, [isSubmitting, pendingExchange])
 
+  useEffect(() => {
+    if (!successMessage) return
+
+    const timeoutId = window.setTimeout(() => {
+      setSuccessMessage('')
+    }, 7000)
+
+    return () => {
+      window.clearTimeout(timeoutId)
+    }
+  }, [successMessage])
+
   const resetMessages = () => {
     setAmountError('')
     setPageError('')
