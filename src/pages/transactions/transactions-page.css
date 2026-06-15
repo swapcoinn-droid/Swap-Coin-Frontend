@@ -1,0 +1,202 @@
+.transactions-page {
+  display: grid;
+  gap: 1.25rem;
+}
+
+.transactions-page__hero {
+  border: 1px solid rgba(47, 111, 159, 0.14);
+  border-radius: 28px;
+  padding: clamp(1.35rem, 4vw, 2.25rem);
+  display: grid;
+  gap: 1.25rem;
+  background:
+    radial-gradient(circle at top right, rgba(255, 210, 51, 0.28), transparent 28%),
+    linear-gradient(135deg, #ffffff, #eaf4fb);
+  box-shadow: 0 18px 44px rgba(47, 78, 117, 0.08);
+}
+
+.transactions-page__eyebrow,
+.transactions-page__filters-heading span,
+.transactions-page__list-heading span,
+.transactions-page__summary-card span,
+.transactions-page__hero-card span {
+  color: #2f6f9f;
+  font-size: 0.78rem;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.transactions-page__hero h1 {
+  margin-top: 0.25rem;
+  color: var(--brand-dark);
+  font-size: clamp(2.1rem, 6vw, 4rem);
+  line-height: 0.95;
+}
+
+.transactions-page__hero p {
+  margin-top: 0.75rem;
+  max-width: 38rem;
+  color: #5d6c7e;
+  font-size: 1.05rem;
+  font-weight: 600;
+}
+
+.transactions-page__hero-card {
+  border: 1px solid rgba(47, 111, 159, 0.14);
+  border-radius: 22px;
+  padding: 1.1rem;
+  display: grid;
+  gap: 0.25rem;
+  align-content: center;
+  background: #fff;
+}
+
+.transactions-page__hero-card strong {
+  color: var(--brand-dark);
+  font-size: 2.5rem;
+  line-height: 1;
+}
+
+.transactions-page__hero-card small {
+  color: #6a7788;
+  font-weight: 700;
+}
+
+.transactions-page__summary {
+  display: grid;
+  gap: 0.8rem;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.transactions-page__summary-card .sc-card__body {
+  display: grid;
+  gap: 0.2rem;
+}
+
+.transactions-page__summary-card strong {
+  color: var(--brand-dark);
+  font-size: 2rem;
+  line-height: 1;
+}
+
+.transactions-page__summary-card.is-positive {
+  border-color: rgba(46, 125, 80, 0.2);
+  background: #f2fbf6;
+}
+
+.transactions-page__summary-card.is-negative {
+  border-color: rgba(184, 57, 75, 0.2);
+  background: #fff4f6;
+}
+
+.transactions-page__summary-card.is-exchange {
+  border-color: rgba(255, 203, 20, 0.34);
+  background: #fff9dc;
+}
+
+.transactions-page__filters,
+.transactions-page__list-card {
+  border-radius: 24px;
+}
+
+.transactions-page__filters-heading,
+.transactions-page__list-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.transactions-page__filters-heading h2,
+.transactions-page__list-heading h2 {
+  color: var(--brand-dark);
+  font-size: clamp(1.4rem, 4vw, 2rem);
+  line-height: 1;
+}
+
+.transactions-page__filters-grid {
+  display: grid;
+  gap: 1rem;
+}
+
+.transactions-page__list-heading strong {
+  border-radius: 999px;
+  padding: 0.55rem 0.85rem;
+  background: #edf5fc;
+  color: #225984;
+  font-size: 0.86rem;
+}
+
+.transactions-page__status {
+  border-radius: 16px;
+  padding: 0.9rem 1rem;
+  background: #edf5fc;
+  color: #225984;
+  font-weight: 800;
+}
+
+.transactions-page__status.is-error {
+  background: #fff0f2;
+  color: #b8394b;
+}
+
+.transactions-page__list {
+  display: grid;
+}
+
+.transactions-page__list .sc-transaction-item {
+  padding-inline: 0;
+}
+
+.transactions-page__list .sc-transaction-item:first-child {
+  border-top: 0;
+}
+
+.transactions-page__pagination {
+  border-top: 1px solid rgba(81, 111, 154, 0.14);
+  padding-top: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.8rem;
+}
+
+.transactions-page__pagination span {
+  color: #5d6c7e;
+  font-size: 0.9rem;
+  font-weight: 800;
+  text-align: center;
+}
+
+@media (min-width: 760px) {
+  .transactions-page__hero {
+    grid-template-columns: minmax(0, 1fr) minmax(220px, 0.32fr);
+    align-items: stretch;
+  }
+
+  .transactions-page__summary {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  .transactions-page__filters-grid {
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+  }
+
+  .transactions-page__filters-grid .sc-field:first-child {
+    grid-column: span 2;
+  }
+
+  .transactions-page__filters-grid .sc-field {
+    grid-column: span 2;
+  }
+}
+
+@media (max-width: 620px) {
+  .transactions-page__filters-heading,
+  .transactions-page__list-heading,
+  .transactions-page__pagination {
+    align-items: stretch;
+    flex-direction: column;
+  }
+}
