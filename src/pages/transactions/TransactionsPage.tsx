@@ -119,9 +119,6 @@ export function TransactionsPage() {
   useEffect(() => {
     let isActive = true
 
-    setIsLoading(true)
-    setErrorMessage('')
-
     getWalletTransactions(page, 12)
       .then((response) => {
         if (isActive) {
@@ -144,6 +141,12 @@ export function TransactionsPage() {
       isActive = false
     }
   }, [page])
+
+  const changePage = (nextPage: number) => {
+    setIsLoading(true)
+    setErrorMessage('')
+    setPage(nextPage)
+  }
 
   const filteredTransactions = useMemo(() => {
     const normalizedQuery = query.trim().toLowerCase()
@@ -344,7 +347,7 @@ export function TransactionsPage() {
           <Button
             variant="outline"
             size="sm"
-            onClick={() => setPage((currentPage) => Math.max(currentPage - 1, 1))}
+            onClick={() => changePage(Math.max(page - 1, 1))}
             disabled={isLoading || !pagination?.hasPrevPage}
           >
             Anterior
@@ -355,7 +358,7 @@ export function TransactionsPage() {
           <Button
             variant="outline"
             size="sm"
-            onClick={() => setPage((currentPage) => currentPage + 1)}
+            onClick={() => changePage(page + 1)}
             disabled={isLoading || !pagination?.hasNextPage}
           >
             Siguiente
