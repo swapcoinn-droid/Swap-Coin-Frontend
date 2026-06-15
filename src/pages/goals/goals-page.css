@@ -65,6 +65,11 @@
   color: #a52f3e;
 }
 
+.goals-page__message.is-success {
+  background: rgba(42, 126, 90, 0.1);
+  color: #23704f;
+}
+
 .goals-page__state {
   min-height: 16rem;
   display: grid;
@@ -165,6 +170,60 @@
   border-top: 1px solid rgba(74, 104, 145, 0.14);
 }
 
+.goals-modal__backdrop {
+  position: fixed;
+  z-index: 100;
+  inset: 0;
+  padding: 1rem;
+  display: grid;
+  place-items: center;
+  overflow-y: auto;
+  background: rgba(20, 38, 58, 0.62);
+  backdrop-filter: blur(5px);
+}
+
+.goals-modal {
+  width: min(100%, 34rem);
+  max-height: calc(100vh - 2rem);
+  padding: 1.5rem;
+  border: 1px solid rgba(81, 111, 154, 0.18);
+  border-radius: 24px;
+  display: grid;
+  gap: 1.25rem;
+  overflow-y: auto;
+  background: #fff;
+  box-shadow: 0 28px 70px rgba(20, 38, 58, 0.28);
+}
+
+.goals-modal__heading {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+}
+
+.goals-modal__heading > div {
+  display: grid;
+  gap: 0.15rem;
+}
+
+.goals-modal__heading > div > span {
+  color: #8d6b00;
+  font-size: 0.75rem;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.goals-modal__form {
+  display: grid;
+  gap: 1rem;
+}
+
+.goals-modal__actions {
+  display: grid;
+  gap: 0.75rem;
+  margin-top: 0.25rem;
+}
+
 @media (min-width: 800px) {
   .goals-page__hero {
     padding: 2rem;
@@ -178,5 +237,13 @@
 
   .goals-page__grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .goals-modal {
+    padding: 2rem;
+  }
+
+  .goals-modal__actions {
+    grid-template-columns: 1fr 1.35fr;
   }
 }

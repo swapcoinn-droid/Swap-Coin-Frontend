@@ -1,10 +1,16 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState, type FormEvent } from 'react'
 import { Link } from 'react-router-dom'
 
+import { SelectField, TextField } from '../../components/forms'
 import { ArrowLeftIcon, PlaneIcon, PlusIcon } from '../../components/icons/AuthIcons'
 import { Badge, Button, Card, ProgressBar } from '../../components/ui'
 import { routes } from '../../router/routes'
-import { getGoals, type GoalStatus, type SavingsGoal } from '../../services/goalsApi'
+import {
+  createGoal,
+  getGoals,
+  type GoalStatus,
+  type SavingsGoal,
+} from '../../services/goalsApi'
 import type { CurrencyCode } from '../../services/walletApi'
 import './goals-page.css'
 
@@ -38,6 +44,14 @@ export function GoalsPage() {
   const [goals, setGoals] = useState<SavingsGoal[]>([])
   const [isLoading, setIsLoading] = useState(true)
   const [pageError, setPageError] = useState('')
+  const [successMessage, setSuccessMessage] = useState('')
+  const [isCreateOpen, setIsCreateOpen] = useState(false)
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [name, setName] = useState('')
+  const [targetAmount, setTargetAmount] = useState('')
+  const [currency, setCurrency] = useState<CurrencyCode>('COP')
+  const [targetDate, setTargetDate] = useState('')
+  const [formError, setFormError] = useState('')
 
   useEffect(() => {
     let isActive = true
@@ -58,6 +72,63 @@ export function GoalsPage() {
     }
   }, [])
 
+  const resetCreateForm = () => {
+    setName('')
+    setTargetAmount('')
+    setCurrency('COP')
+    setTargetDate('')
+    setFormError('')
+  }
+
+  const closeCreateModal = () => {
+    if (isSubmitting) return
+    setIsCreateOpen(false)
+    resetCreateForm()
+  }
+
+  const handleCreateGoal = async (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault()
+    const numericTarget = Number(targetAmount)
+
+    setFormError('')
+    setPageError('')
+    setSuccessMessage('')
+
+    if (!name.trim()) {
+      setFormError('Escribe un nombre para la meta.')
+      return
+    }
+
+    if (!Number.isFinite(numericTarget) || numericTarget <= 0) {
+      setFormError('El objetivo debe ser un monto mayor a cero.')
+      return
+    }
+
+    if (!/^\d+(\.\d{1,2})?$/.test(targetAmount)) {
+      setFormError('El objetivo puede tener máximo dos decimales.')
+      return
+    }
+
+    setIsSubmitting(true)
+
+    try {
+      const createdGoal = await createGoal({
+        name: name.trim(),
+        targetAmount: numericTarget,
+        currency,
+        targetDate: targetDate || null,
+      })
+      setGoals((currentGoals) => [createdGoal, ...currentGoals])
+      setSuccessMessage(`La meta “${createdGoal.name}” fue creada correctamente.`)
+      setIsCreateOpen(false)
+      resetCreateForm()
+    } catch (error) {
+      setFormError(getErrorMessage(error))
+    } finally {
+      setIsSubmitting(false)
+    }
+  }
+
   return (
     <div className="goals-page">
       <header className="goals-page__hero">
@@ -72,13 +143,14 @@ export function GoalsPage() {
             <ArrowLeftIcon />
             <span>Volver al inicio</span>
           </Link>
-          <Button size="lg" trailingIcon={<PlusIcon />} disabled>
+          <Button size="lg" trailingIcon={<PlusIcon />} onClick={() => setIsCreateOpen(true)}>
             Nueva meta
           </Button>
         </div>
       </header>
 
       {pageError ? <p className="goals-page__message is-error" role="alert">{pageError}</p> : null}
+      {successMessage ? <p className="goals-page__message is-success" role="status">{successMessage}</p> : null}
 
       {isLoading ? (
         <Card className="goals-page__state">
@@ -133,6 +205,75 @@ export function GoalsPage() {
             </Card>
           ))}
         </section>
+      ) : null}
+
+      {isCreateOpen ? (
+        <div className="goals-modal__backdrop" onClick={closeCreateModal}>
+          <section
+            className="goals-modal"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="create-goal-title"
+            onClick={(event) => event.stopPropagation()}
+          >
+            <div className="goals-modal__heading">
+              <span className="goals-page__state-icon" aria-hidden="true"><PlusIcon /></span>
+              <div>
+                <span>Nueva meta de ahorro</span>
+                <h2 id="create-goal-title">Define tu próximo objetivo</h2>
+              </div>
+            </div>
+
+            <form className="goals-modal__form" onSubmit={handleCreateGoal} noValidate>
+              <TextField
+                label="Nombre de la meta"
+                value={name}
+                onChange={(event) => setName(event.target.value)}
+                placeholder="Ej. Viaje a Europa"
+                maxLength={80}
+                required
+              />
+              <TextField
+                label="Monto objetivo"
+                value={targetAmount}
+                onChange={(event) => setTargetAmount(event.target.value)}
+                type="number"
+                min="0.01"
+                step="0.01"
+                inputMode="decimal"
+                placeholder="Ej. 3000"
+                required
+              />
+              <SelectField
+                label="Moneda"
+                value={currency}
+                onChange={(event) => setCurrency(event.target.value as CurrencyCode)}
+              >
+                <option value="COP">COP - Peso colombiano</option>
+                <option value="USD">USD - Dólar americano</option>
+                <option value="EUR">EUR - Euro</option>
+              </SelectField>
+              <TextField
+                label="Fecha límite"
+                helperText="Opcional"
+                value={targetDate}
+                onChange={(event) => setTargetDate(event.target.value)}
+                type="date"
+              />
+
+              {formError ? <p className="goals-page__message is-error" role="alert">{formError}</p> : null}
+
+              <div className="goals-modal__actions">
+                <Button variant="secondary" size="lg" onClick={closeCreateModal} disabled={isSubmitting}>
+                  Cancelar
+                </Button>
+                <Button type="submit" size="lg" trailingIcon={<PlusIcon />} disabled={isSubmitting}>
+                  {isSubmitting ? 'Creando meta...' : 'Crear meta'}
+                </Button>
+              </div>
+            </form>
+          </section>
+        </div>
       ) : null}
     </div>
   )
