@@ -20,7 +20,7 @@ import {
   type GoalStatus,
   type SavingsGoal,
 } from '../../services/goalsApi'
-import type { CurrencyCode } from '../../services/walletApi'
+import { getWallet, type CurrencyCode, type Wallet } from '../../services/walletApi'
 import './goals-page.css'
 
 const statusLabels: Record<GoalStatus, string> = {
@@ -70,6 +70,7 @@ type GoalAction = 'contribute' | 'withdraw' | 'delete'
 
 export function GoalsPage() {
   const [goals, setGoals] = useState<SavingsGoal[]>([])
+  const [wallet, setWallet] = useState<Wallet | null>(null)
   const [isLoading, setIsLoading] = useState(true)
   const [pageError, setPageError] = useState('')
   const [successMessage, setSuccessMessage] = useState('')
@@ -89,14 +90,32 @@ export function GoalsPage() {
     let isActive = true
 
     getGoals()
-      .then((response) => {
-        if (isActive) setGoals(response.data.filter(isSavingsGoal))
+      .then((goalsResponse) => {
+        if (isActive) {
+          setGoals(goalsResponse.data.filter(isSavingsGoal))
+        }
       })
       .catch((error: unknown) => {
         if (isActive) setPageError(getErrorMessage(error))
       })
       .finally(() => {
         if (isActive) setIsLoading(false)
+      })
+
+    return () => {
+      isActive = false
+    }
+  }, [])
+
+  useEffect(() => {
+    let isActive = true
+
+    getWallet()
+      .then((walletResponse) => {
+        if (isActive) setWallet(walletResponse)
+      })
+      .catch(() => {
+        if (isActive) setWallet(null)
       })
 
     return () => {
@@ -205,6 +224,17 @@ export function GoalsPage() {
           return
         }
 
+        const availableBalance = wallet?.balances.find(
+          (balance) => balance.currency === selectedGoal.currency,
+        )?.amount ?? 0
+
+        if (goalAction === 'contribute' && wallet && numericAmount > availableBalance) {
+          setActionError(
+            `Saldo insuficiente. Tienes ${formatMoney(availableBalance, selectedGoal.currency)} disponibles.`,
+          )
+          return
+        }
+
         const response = goalAction === 'contribute'
           ? await contributeToGoal(selectedGoal.id, numericAmount)
           : await withdrawFromGoal(selectedGoal.id, numericAmount)
@@ -232,6 +262,7 @@ export function GoalsPage() {
       setGoalAction(null)
       setActionAmount('')
       setActionError('')
+      getWallet().then(setWallet).catch(() => setWallet(null))
     } catch (error) {
       setActionError(getErrorMessage(error))
     } finally {
@@ -454,6 +485,22 @@ export function GoalsPage() {
                     <strong>{formatMoney(selectedGoal.currentAmount, selectedGoal.currency)}</strong>
                     <span>Objetivo: {formatMoney(selectedGoal.targetAmount, selectedGoal.currency)}</span>
                   </div>
+                  {goalAction === 'contribute' ? (
+                    <div className="goals-modal__available-balance">
+                      <span>Saldo disponible para aportar</span>
+                      <strong>
+                        {wallet
+                          ? formatMoney(
+                              wallet.balances.find(
+                                (balance) => balance.currency === selectedGoal.currency,
+                              )?.amount ?? 0,
+                              selectedGoal.currency,
+                            )
+                          : 'No disponible'}
+                      </strong>
+                      <span>{selectedGoal.currency} en tu wallet</span>
+                    </div>
+                  ) : null}
                   <TextField
                     label={goalAction === 'contribute' ? 'Monto a aportar' : 'Monto a retirar'}
                     value={actionAmount}

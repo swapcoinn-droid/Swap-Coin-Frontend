@@ -259,6 +259,33 @@
   font-size: clamp(1.6rem, 6vw, 2.25rem);
 }
 
+.goals-modal__available-balance {
+  padding: 0.8rem 0.95rem;
+  border: 1px solid rgba(42, 126, 90, 0.16);
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  background: rgba(42, 126, 90, 0.08);
+  color: #23704f;
+}
+
+.goals-modal__available-balance span {
+  font-size: 0.74rem;
+  font-weight: 700;
+}
+
+.goals-modal__available-balance span:last-child {
+  display: none;
+}
+
+.goals-modal__available-balance strong {
+  color: #175a3d;
+  font-size: 1rem;
+  white-space: nowrap;
+}
+
 .goals-modal__actions {
   display: grid;
   gap: 0.75rem;
@@ -286,5 +313,9 @@
 
   .goals-modal__actions {
     grid-template-columns: 1fr 1.35fr;
+  }
+
+  .goals-modal__available-balance span:last-child {
+    display: inline;
   }
 }
