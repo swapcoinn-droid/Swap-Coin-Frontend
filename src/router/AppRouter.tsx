@@ -3,6 +3,7 @@ import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom'
 import { AppLayout } from '../layouts/AppLayout'
 import { DashboardPage } from '../pages/dashboard/DashboardPage'
 import { LandingPage } from '../pages/landing/LandingPage'
+import { TransactionsPage } from '../pages/transactions/TransactionsPage'
 import { AddBalancePage } from '../pages/wallet/AddBalancePage'
 import { CurrencyExchangePage } from '../pages/wallet/CurrencyExchangePage'
 import { WithdrawBalancePage } from '../pages/wallet/WithdrawBalancePage'
@@ -51,7 +52,7 @@ export function AppRouter() {
               />
               <Route
                 path="historial"
-                element={<RoutePlaceholder title="Historial" />}
+                element={<TransactionsPage />}
               />
               <Route
                 path="comprar"
