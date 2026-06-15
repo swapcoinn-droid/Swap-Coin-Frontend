@@ -112,6 +112,18 @@
   gap: 1rem;
 }
 
+.goals-card__actions {
+  margin-top: 1rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.55rem;
+}
+
+.goals-card__actions .sc-button:last-child {
+  margin-left: auto;
+  color: #a52f3e;
+}
+
 .goals-card__heading {
   align-items: flex-start;
   margin-bottom: 1.25rem;
@@ -216,6 +228,35 @@
 .goals-modal__form {
   display: grid;
   gap: 1rem;
+}
+
+.goals-modal__form > p {
+  color: #5d6c7e;
+}
+
+.goals-modal__form > p strong {
+  color: #1d2b3d;
+}
+
+.goals-modal__summary {
+  padding: 1rem;
+  border-radius: 16px;
+  display: grid;
+  gap: 0.2rem;
+  background: #edf5fc;
+  text-align: center;
+}
+
+.goals-modal__summary span {
+  color: #60758c;
+  font-size: 0.78rem;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.goals-modal__summary strong {
+  color: var(--brand-dark);
+  font-size: clamp(1.6rem, 6vw, 2.25rem);
 }
 
 .goals-modal__actions {
