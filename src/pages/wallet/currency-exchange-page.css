@@ -100,6 +100,31 @@
   text-align: right;
 }
 
+.currency-exchange-form__received {
+  padding: 1rem;
+  border-radius: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  background: linear-gradient(135deg, #fff8d6, #fff1a8);
+  color: #6f5200;
+  box-shadow: 0 16px 30px rgba(255, 203, 20, 0.18);
+}
+
+.currency-exchange-form__received span {
+  font-size: 0.88rem;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.currency-exchange-form__received strong {
+  color: var(--brand-dark);
+  font-size: clamp(1.25rem, 4vw, 1.65rem);
+  line-height: 1;
+  text-align: right;
+}
+
 .currency-exchange-summary {
   border: 1px solid rgba(81, 111, 154, 0.14);
   border-radius: 24px;

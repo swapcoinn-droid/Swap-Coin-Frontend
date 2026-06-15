@@ -22,6 +22,11 @@ const currencies: Array<{ code: CurrencyCode; label: string }> = [
 ]
 
 const EXCHANGE_FEE_RATE = 0.01
+const REFERENCE_RATES: Record<CurrencyCode, Record<CurrencyCode, number>> = {
+  COP: { COP: 1, USD: 1 / 4075, EUR: 1 / 4390 },
+  USD: { COP: 4075, USD: 1, EUR: 4075 / 4390 },
+  EUR: { COP: 4390, USD: 4390 / 4075, EUR: 1 },
+}
 
 type PendingExchange = {
   amount: number
@@ -45,6 +50,10 @@ function getErrorMessage(error: unknown) {
 
 function getCurrencyName(currency: CurrencyCode) {
   return currencies.find((item) => item.code === currency)?.label ?? currency
+}
+
+function getReferenceRate(from: CurrencyCode, to: CurrencyCode) {
+  return REFERENCE_RATES[from][to]
 }
 
 export function CurrencyExchangePage() {
@@ -73,6 +82,7 @@ export function CurrencyExchangePage() {
   const parsedAmount = Number(amount)
   const feePreview = Number.isFinite(parsedAmount) && parsedAmount > 0 ? parsedAmount * EXCHANGE_FEE_RATE : 0
   const netAmountPreview = Math.max(parsedAmount - feePreview, 0)
+  const receivedPreview = netAmountPreview * getReferenceRate(fromCurrency, toCurrency)
 
   useEffect(() => {
     let isActive = true
@@ -294,6 +304,11 @@ export function CurrencyExchangePage() {
               <span>Monto que se cambia</span>
               <strong>{formatMoney(netAmountPreview, fromCurrency)}</strong>
             </div>
+          </div>
+
+          <div className="currency-exchange-form__received" aria-live="polite">
+            <span>Recibirás aproximadamente</span>
+            <strong>{formatMoney(receivedPreview, toCurrency)}</strong>
           </div>
 
           {pageError ? <p className="add-balance-form__message is-error" role="alert">{pageError}</p> : null}
