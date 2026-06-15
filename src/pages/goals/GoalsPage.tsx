@@ -30,6 +30,8 @@ const statusLabels: Record<GoalStatus, string> = {
 }
 
 function formatMoney(amount: number, currency: CurrencyCode) {
+  if (!Number.isFinite(amount) || !currency) return 'Monto no disponible'
+
   return new Intl.NumberFormat('es-CO', {
     style: 'currency',
     currency,
@@ -47,6 +49,18 @@ function formatTargetDate(date: string | null) {
 
 function getErrorMessage(error: unknown) {
   return error instanceof Error ? error.message : 'No fue posible consultar tus metas.'
+}
+
+function isSavingsGoal(goal: SavingsGoal) {
+  return Boolean(
+    goal
+    && Number.isFinite(goal.id)
+    && goal.name
+    && goal.currency
+    && Number.isFinite(goal.targetAmount)
+    && Number.isFinite(goal.currentAmount)
+    && Number.isFinite(goal.progress),
+  )
 }
 
 type GoalAction = 'contribute' | 'withdraw' | 'delete'
@@ -73,7 +87,7 @@ export function GoalsPage() {
 
     getGoals()
       .then((response) => {
-        if (isActive) setGoals(response.data)
+        if (isActive) setGoals(response.data.filter(isSavingsGoal))
       })
       .catch((error: unknown) => {
         if (isActive) setPageError(getErrorMessage(error))
@@ -127,14 +141,15 @@ export function GoalsPage() {
     setIsSubmitting(true)
 
     try {
-      const createdGoal = await createGoal({
+      await createGoal({
         name: name.trim(),
         targetAmount: numericTarget,
         currency,
         targetDate: targetDate || null,
       })
-      setGoals((currentGoals) => [createdGoal, ...currentGoals])
-      setSuccessMessage(`La meta “${createdGoal.name}” fue creada correctamente.`)
+      const goalsResponse = await getGoals()
+      setGoals(goalsResponse.data.filter(isSavingsGoal))
+      setSuccessMessage(`La meta “${name.trim()}” fue creada correctamente.`)
       setIsCreateOpen(false)
       resetCreateForm()
     } catch (error) {
