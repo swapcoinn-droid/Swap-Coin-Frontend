@@ -42,9 +42,12 @@ function formatMoney(amount: number, currency: CurrencyCode) {
 function formatTargetDate(date: string | null) {
   if (!date) return 'Sin fecha límite'
 
-  return new Intl.DateTimeFormat('es-CO', { dateStyle: 'medium' }).format(
-    new Date(`${date}T00:00:00`),
-  )
+  const calendarDate = date.split('T')[0]
+  const targetDate = new Date(`${calendarDate}T00:00:00`)
+
+  if (Number.isNaN(targetDate.getTime())) return 'Fecha no disponible'
+
+  return new Intl.DateTimeFormat('es-CO', { dateStyle: 'medium' }).format(targetDate)
 }
 
 function getErrorMessage(error: unknown) {
