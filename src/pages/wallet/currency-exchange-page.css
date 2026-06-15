@@ -70,6 +70,36 @@
   text-align: right;
 }
 
+.currency-exchange-form__fee {
+  display: grid;
+  gap: 0.65rem;
+  padding: 0.85rem;
+  border: 1px solid rgba(47, 111, 159, 0.12);
+  border-radius: 16px;
+  background: rgba(245, 248, 253, 0.9);
+}
+
+.currency-exchange-form__fee div,
+.currency-exchange-modal__breakdown div {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.currency-exchange-form__fee span,
+.currency-exchange-modal__breakdown span {
+  color: #5d6c7e;
+  font-size: 0.84rem;
+  font-weight: 800;
+}
+
+.currency-exchange-form__fee strong,
+.currency-exchange-modal__breakdown strong {
+  color: #1d2b3d;
+  text-align: right;
+}
+
 .currency-exchange-summary {
   border: 1px solid rgba(81, 111, 154, 0.14);
   border-radius: 24px;
@@ -140,6 +170,14 @@
 
 .currency-exchange-summary__rate strong {
   color: #fff;
+}
+
+.currency-exchange-modal__breakdown {
+  display: grid;
+  gap: 0.55rem;
+  padding: 0.85rem;
+  border-radius: 14px;
+  background: #f4f8fc;
 }
 
 @media (min-width: 800px) {

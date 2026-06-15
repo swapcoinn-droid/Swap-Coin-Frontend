@@ -21,8 +21,12 @@ const currencies: Array<{ code: CurrencyCode; label: string }> = [
   { code: 'EUR', label: 'Euro' },
 ]
 
+const EXCHANGE_FEE_RATE = 0.01
+
 type PendingExchange = {
   amount: number
+  fee: number
+  netAmount: number
   from: CurrencyCode
   to: CurrencyCode
 }
@@ -65,6 +69,10 @@ export function CurrencyExchangePage() {
     () => wallet?.balances.find((balance) => balance.currency === toCurrency),
     [toCurrency, wallet],
   )
+
+  const parsedAmount = Number(amount)
+  const feePreview = Number.isFinite(parsedAmount) && parsedAmount > 0 ? parsedAmount * EXCHANGE_FEE_RATE : 0
+  const netAmountPreview = Math.max(parsedAmount - feePreview, 0)
 
   useEffect(() => {
     let isActive = true
@@ -148,7 +156,10 @@ export function CurrencyExchangePage() {
       return
     }
 
-    setPendingExchange({ amount: numericAmount, from: fromCurrency, to: toCurrency })
+    const fee = numericAmount * EXCHANGE_FEE_RATE
+    const netAmount = numericAmount - fee
+
+    setPendingExchange({ amount: numericAmount, fee, netAmount, from: fromCurrency, to: toCurrency })
   }
 
   const confirmExchange = async () => {
@@ -160,12 +171,12 @@ export function CurrencyExchangePage() {
       const result = await exchangeFunds(
         pendingExchange.from,
         pendingExchange.to,
-        pendingExchange.amount,
+        pendingExchange.netAmount,
       )
 
       setLastExchange(result)
       setSuccessMessage(
-        `Cambiaste ${formatMoney(result.from.debited, result.from.currency)} por ${formatMoney(result.to.credited, result.to.currency)}.`,
+        `Cambiaste ${formatMoney(result.from.debited, result.from.currency)} por ${formatMoney(result.to.credited, result.to.currency)}. Comisión: ${formatMoney(pendingExchange.fee, pendingExchange.from)}.`,
       )
       setAmount('')
       setPendingExchange(null)
@@ -183,7 +194,7 @@ export function CurrencyExchangePage() {
         <div>
           <span className="add-balance-page__eyebrow">Wallet multimoneda</span>
           <h1>Cambiar divisa</h1>
-          <p>Convierte saldo entre monedas usando la tasa vigente del backend.</p>
+          <p>Convierte saldo entre monedas con una experiencia clara y una comisión transparente.</p>
         </div>
         <Link className="add-balance-page__back-link" to={routes.dashboard}>
           <ArrowLeftIcon />
@@ -274,6 +285,17 @@ export function CurrencyExchangePage() {
             </strong>
           </div>
 
+          <div className="currency-exchange-form__fee" aria-live="polite">
+            <div>
+              <span>Comisión Swap-Coin</span>
+              <strong>{formatMoney(feePreview, fromCurrency)}</strong>
+            </div>
+            <div>
+              <span>Monto que se cambia</span>
+              <strong>{formatMoney(netAmountPreview, fromCurrency)}</strong>
+            </div>
+          </div>
+
           {pageError ? <p className="add-balance-form__message is-error" role="alert">{pageError}</p> : null}
           {successMessage ? <p className="add-balance-form__message is-success" role="status">{successMessage}</p> : null}
 
@@ -308,7 +330,7 @@ export function CurrencyExchangePage() {
           </div>
 
           <div className="currency-exchange-summary__rate">
-            <span>Tasa aplicada por backend</span>
+            <span>Tasa aplicada</span>
             <strong>
               {lastExchange
                 ? `1 ${lastExchange.from.currency} = ${lastExchange.appliedRate.toLocaleString('es-CO')} ${lastExchange.to.currency}`
@@ -340,14 +362,25 @@ export function CurrencyExchangePage() {
               <span>Confirma tu cambio</span>
               <h2 id="exchange-confirmation-title">¿Deseas cambiar esta divisa?</h2>
               <p id="exchange-confirmation-description">
-                La tasa final se aplicará desde el backend al confirmar la operación.
+                Revisa el monto, la comisión y la moneda destino antes de confirmar.
               </p>
             </div>
 
             <div className="add-balance-modal__amount">
-              <span>Monto a cambiar</span>
+              <span>Monto total</span>
               <strong>{formatMoney(pendingExchange.amount, pendingExchange.from)}</strong>
               <span>{pendingExchange.from} a {pendingExchange.to}</span>
+            </div>
+
+            <div className="currency-exchange-modal__breakdown">
+              <div>
+                <span>Comisión</span>
+                <strong>{formatMoney(pendingExchange.fee, pendingExchange.from)}</strong>
+              </div>
+              <div>
+                <span>Se cambiará</span>
+                <strong>{formatMoney(pendingExchange.netAmount, pendingExchange.from)}</strong>
+              </div>
             </div>
 
             <div className="add-balance-modal__actions">
