@@ -32,6 +32,7 @@ type PendingExchange = {
   amount: number
   fee: number
   netAmount: number
+  receivedAmount: number
   from: CurrencyCode
   to: CurrencyCode
 }
@@ -168,8 +169,16 @@ export function CurrencyExchangePage() {
 
     const fee = numericAmount * EXCHANGE_FEE_RATE
     const netAmount = numericAmount - fee
+    const receivedAmount = netAmount * getReferenceRate(fromCurrency, toCurrency)
 
-    setPendingExchange({ amount: numericAmount, fee, netAmount, from: fromCurrency, to: toCurrency })
+    setPendingExchange({
+      amount: numericAmount,
+      fee,
+      netAmount,
+      receivedAmount,
+      from: fromCurrency,
+      to: toCurrency,
+    })
   }
 
   const confirmExchange = async () => {
@@ -396,6 +405,11 @@ export function CurrencyExchangePage() {
                 <span>Se cambiará</span>
                 <strong>{formatMoney(pendingExchange.netAmount, pendingExchange.from)}</strong>
               </div>
+            </div>
+
+            <div className="currency-exchange-modal__received">
+              <span>Recibirás aproximadamente</span>
+              <strong>{formatMoney(pendingExchange.receivedAmount, pendingExchange.to)}</strong>
             </div>
 
             <div className="add-balance-modal__actions">

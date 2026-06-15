@@ -112,7 +112,8 @@
   box-shadow: 0 16px 30px rgba(255, 203, 20, 0.18);
 }
 
-.currency-exchange-form__received span {
+.currency-exchange-form__received span,
+.currency-exchange-modal__received span {
   font-size: 0.88rem;
   font-weight: 900;
   text-transform: uppercase;
@@ -122,6 +123,23 @@
   color: var(--brand-dark);
   font-size: clamp(1.25rem, 4vw, 1.65rem);
   line-height: 1;
+  text-align: right;
+}
+
+.currency-exchange-modal__received {
+  padding: 0.95rem 1rem;
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  background: #fff3bd;
+  color: #755700;
+}
+
+.currency-exchange-modal__received strong {
+  color: var(--brand-dark);
+  font-size: 1.15rem;
   text-align: right;
 }
 
