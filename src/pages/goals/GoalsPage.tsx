@@ -67,6 +67,10 @@ function isSavingsGoal(goal: SavingsGoal) {
   )
 }
 
+function getMinimumEditableTarget(goal: SavingsGoal) {
+  return Math.max(goal.currentAmount, goal.targetAmount)
+}
+
 type GoalAction = 'contribute' | 'withdraw' | 'delete'
 
 export function GoalsPage() {
@@ -90,6 +94,18 @@ export function GoalsPage() {
   const [editTargetAmount, setEditTargetAmount] = useState('')
   const [editTargetDate, setEditTargetDate] = useState('')
   const [editError, setEditError] = useState('')
+
+  const editTargetValue = Number(editTargetAmount)
+  const minimumEditableTarget = editingGoal ? getMinimumEditableTarget(editingGoal) : 0
+  const editTargetError = editingGoal && editTargetAmount
+    ? !Number.isFinite(editTargetValue) || editTargetValue <= 0
+      ? 'El nuevo objetivo debe ser un monto mayor a cero.'
+      : !/^\d+(\.\d{1,2})?$/.test(editTargetAmount)
+        ? 'El objetivo puede tener máximo dos decimales.'
+        : editTargetValue < minimumEditableTarget
+          ? `El nuevo objetivo debe ser igual o mayor a ${formatMoney(minimumEditableTarget, editingGoal.currency)}.`
+          : ''
+    : ''
 
   useEffect(() => {
     let isActive = true
@@ -238,9 +254,9 @@ export function GoalsPage() {
       return
     }
 
-    if (numericTarget < editingGoal.currentAmount) {
+    if (numericTarget < minimumEditableTarget) {
       setEditError(
-        `El objetivo no puede ser menor al ahorro actual: ${formatMoney(editingGoal.currentAmount, editingGoal.currency)}.`,
+        `El nuevo objetivo debe ser igual o mayor a ${formatMoney(minimumEditableTarget, editingGoal.currency)}.`,
       )
       return
     }
@@ -554,16 +570,20 @@ export function GoalsPage() {
                 <span>Ahorro actual</span>
                 <strong>{formatMoney(editingGoal.currentAmount, editingGoal.currency)}</strong>
                 <span>
-                  El nuevo objetivo debe ser igual o mayor a este monto.
+                  El nuevo objetivo debe ser igual o mayor al objetivo actual.
                 </span>
               </div>
 
               <TextField
                 label="Nuevo monto objetivo"
                 value={editTargetAmount}
-                onChange={(event) => setEditTargetAmount(event.target.value)}
+                errorText={editTargetError}
+                onChange={(event) => {
+                  setEditTargetAmount(event.target.value)
+                  setEditError('')
+                }}
                 type="number"
-                min={Math.max(editingGoal.currentAmount, 0.01)}
+                min={Math.max(minimumEditableTarget, 0.01)}
                 step="0.01"
                 inputMode="decimal"
                 required
@@ -582,7 +602,12 @@ export function GoalsPage() {
                 <Button variant="secondary" size="lg" onClick={closeEditGoal} disabled={isSubmitting}>
                   Cancelar
                 </Button>
-                <Button type="submit" size="lg" trailingIcon={<PlusIcon />} disabled={isSubmitting}>
+                <Button
+                  type="submit"
+                  size="lg"
+                  trailingIcon={<PlusIcon />}
+                  disabled={isSubmitting || Boolean(editTargetError)}
+                >
                   {isSubmitting ? 'Actualizando meta...' : 'Guardar cambios'}
                 </Button>
               </div>
