@@ -36,6 +36,12 @@ export type CreateGoalInput = {
   targetDate?: string | null
 }
 
+export type UpdateGoalInput = {
+  name?: string
+  targetAmount?: number
+  targetDate?: string | null
+}
+
 export type GoalActionResponse = {
   id: number
   name: string
@@ -70,6 +76,14 @@ export function getGoals(page = 1, limit = 100) {
 export function createGoal(input: CreateGoalInput) {
   return apiRequest<SavingsGoal>('/api/goals', {
     method: 'POST',
+    headers: getAuthHeaders(),
+    body: JSON.stringify(input),
+  })
+}
+
+export function updateGoal(goalId: number, input: UpdateGoalInput) {
+  return apiRequest<SavingsGoal>(`/api/goals/${goalId}`, {
+    method: 'PATCH',
     headers: getAuthHeaders(),
     body: JSON.stringify(input),
   })
