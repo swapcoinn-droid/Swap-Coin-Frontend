@@ -15,7 +15,7 @@
   color: #4c3a00;
   box-shadow: 0 16px 35px rgba(255, 203, 20, 0.3);
   cursor: pointer;
-  z-index: 30;
+  z-index: 90;
   transition:
     transform 180ms ease,
     box-shadow 180ms ease;
