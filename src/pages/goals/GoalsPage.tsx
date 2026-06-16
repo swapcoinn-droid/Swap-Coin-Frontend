@@ -273,15 +273,13 @@ export function GoalsPage() {
     setIsSubmitting(true)
 
     try {
-      const updatedGoal = await updateGoal(editingGoal.id, {
+      await updateGoal(editingGoal.id, {
         ...(hasTargetAmountChanged ? { targetAmount: numericTarget } : {}),
         ...(hasTargetDateChanged ? { targetDate: editTargetDate || null } : {}),
       })
-
-      setGoals((currentGoals) =>
-        currentGoals.map((goal) => (goal.id === updatedGoal.id ? updatedGoal : goal)),
-      )
-      setSuccessMessage(`La meta “${updatedGoal.name}” fue actualizada correctamente.`)
+      const goalsResponse = await getGoals()
+      setGoals(goalsResponse.data.filter(isSavingsGoal))
+      setSuccessMessage(`La meta “${editingGoal.name}” fue actualizada correctamente.`)
       setEditingGoal(null)
       setEditTargetAmount('')
       setEditTargetDate('')
