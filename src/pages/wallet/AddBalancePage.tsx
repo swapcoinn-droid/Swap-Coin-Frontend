@@ -93,6 +93,18 @@ export function AddBalancePage() {
     }
   }, [isSubmitting, pendingDeposit])
 
+  useEffect(() => {
+    if (!successMessage) return
+
+    const timeoutId = window.setTimeout(() => {
+      setSuccessMessage('')
+    }, 7000)
+
+    return () => {
+      window.clearTimeout(timeoutId)
+    }
+  }, [successMessage])
+
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault()
     const numericAmount = Number(amount)

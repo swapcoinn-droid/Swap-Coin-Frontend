@@ -144,6 +144,18 @@ export function GoalsPage() {
     }
   }, [])
 
+  useEffect(() => {
+    if (!successMessage) return
+
+    const timeoutId = window.setTimeout(() => {
+      setSuccessMessage('')
+    }, 7000)
+
+    return () => {
+      window.clearTimeout(timeoutId)
+    }
+  }, [successMessage])
+
   const resetCreateForm = () => {
     setName('')
     setTargetAmount('')
