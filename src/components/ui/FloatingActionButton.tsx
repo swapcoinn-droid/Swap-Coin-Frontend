@@ -16,6 +16,7 @@ export function FloatingActionButton({ icon, label, className = '', ...props }: 
       {...props}
     >
       {icon ? <span className="sc-fab__icon">{icon}</span> : null}
+      <span className="sc-fab__label">{label}</span>
     </button>
   )
 }

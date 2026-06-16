@@ -2,9 +2,10 @@ import { useEffect, useState } from 'react'
 
 import { Outlet, useLocation, useNavigate } from 'react-router-dom'
 
-import { LogoutIcon } from '../components/icons/AuthIcons'
+import { ChatIcon, LogoutIcon } from '../components/icons/AuthIcons'
 import { Navbar } from '../components/navbar/Navbar'
 import { PublicFooter } from '../components/public-layout/PublicFooter'
+import { FloatingActionButton } from '../components/ui'
 import { Button } from '../components/ui/button/Button'
 import { useAuth } from '../hooks/useAuth'
 import { routes } from '../router/routes'
@@ -60,6 +61,8 @@ export function AppLayout() {
       </main>
 
       <PublicFooter />
+
+      <FloatingActionButton label="Abrir chat" icon={<ChatIcon />} />
 
       {isLogoutModalOpen ? (
         <div
