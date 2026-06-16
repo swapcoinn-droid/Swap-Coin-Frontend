@@ -5,7 +5,6 @@ import { useNavigate } from 'react-router-dom'
 import {
   Button,
   Card,
-  FloatingActionButton,
   GoalRow,
   IconBubble,
   MetricCard,
@@ -16,7 +15,6 @@ import {
 import {
   BagIcon,
   BankIcon,
-  ChatIcon,
   HomeIcon,
   PlaneIcon,
   PlusIcon,
@@ -361,7 +359,6 @@ export function DashboardPage() {
         </Card>
       </section>
 
-      <FloatingActionButton label="Abrir chat" icon={<ChatIcon />} />
     </div>
   )
 }

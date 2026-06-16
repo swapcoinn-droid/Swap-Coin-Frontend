@@ -1,5 +1,7 @@
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom'
 
+import { ChatIcon } from '../components/icons/AuthIcons'
+import { FloatingActionButton } from '../components/ui'
 import { AppLayout } from '../layouts/AppLayout'
 import { DashboardPage } from '../pages/dashboard/DashboardPage'
 import { GoalsPage } from '../pages/goals/GoalsPage'
@@ -67,6 +69,7 @@ export function AppRouter() {
             element={<RoutePlaceholder title="Página no encontrada" />}
           />
         </Routes>
+        <FloatingActionButton label="Abrir chat" icon={<ChatIcon />} />
       </AuthProvider>
     </BrowserRouter>
   )

@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState, type ReactNode } from 'react'
 
 import { SelectField, TextField } from '../../components/forms'
-import { BankIcon, PlusIcon, SwapIcon } from '../../components/icons/AuthIcons'
+import { ArrowLeftIcon, ArrowRightIcon, BankIcon, PlusIcon, SwapIcon } from '../../components/icons/AuthIcons'
 import { Button, Card, EmptyState, IconBubble, TransactionItem } from '../../components/ui'
 import {
   getWalletTransactions,
@@ -345,23 +345,27 @@ export function TransactionsPage() {
 
         <div className="transactions-page__pagination">
           <Button
+            className="transactions-page__pagination-button"
             variant="outline"
             size="sm"
+            aria-label="Página anterior"
             onClick={() => changePage(Math.max(page - 1, 1))}
             disabled={isLoading || !pagination?.hasPrevPage}
           >
-            Anterior
+            <ArrowLeftIcon />
           </Button>
           <span>
             Página {pagination?.page ?? page} de {pagination?.totalPages ?? 1}
           </span>
           <Button
+            className="transactions-page__pagination-button"
             variant="outline"
             size="sm"
+            aria-label="Página siguiente"
             onClick={() => changePage(page + 1)}
             disabled={isLoading || !pagination?.hasNextPage}
           >
-            Siguiente
+            <ArrowRightIcon />
           </Button>
         </div>
       </Card>

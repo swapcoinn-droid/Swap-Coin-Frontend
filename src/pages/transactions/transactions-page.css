@@ -178,9 +178,9 @@
 .transactions-page__pagination {
   border-top: 1px solid rgba(81, 111, 154, 0.14);
   padding-top: 1rem;
-  display: flex;
+  display: grid;
+  grid-template-columns: 3.25rem minmax(0, 1fr) 3.25rem;
   align-items: center;
-  justify-content: space-between;
   gap: 0.8rem;
 }
 
@@ -189,6 +189,17 @@
   font-size: 0.9rem;
   font-weight: 800;
   text-align: center;
+}
+
+.transactions-page__pagination-button {
+  width: 3.25rem;
+  min-width: 3.25rem;
+  padding-inline: 0;
+}
+
+.transactions-page__pagination-button svg {
+  width: 1.2rem;
+  height: 1.2rem;
 }
 
 @media (min-width: 760px) {
@@ -216,8 +227,7 @@
 
 @media (max-width: 620px) {
   .transactions-page__filters-heading,
-  .transactions-page__list-heading,
-  .transactions-page__pagination {
+  .transactions-page__list-heading {
     align-items: stretch;
     flex-direction: column;
   }
