@@ -207,7 +207,7 @@ export function CurrencyExchangePage() {
 
       setLastExchange(result)
       setSuccessMessage(
-        `Cambiaste ${formatMoney(result.from.debited, result.from.currency)} por ${formatMoney(result.to.credited, result.to.currency)}. Comisión: ${formatMoney(pendingExchange.fee, pendingExchange.from)}.`,
+        `Cambiaste ${formatMoney(result.from.debited, result.from.currency)} por ${formatMoney(result.to.credited, result.to.currency)}. Comisión: ${formatMoney(pendingExchange.fee, pendingExchange.from)}. Enviamos un correo con el detalle de la transacción; revisa también tu bandeja de spam.`,
       )
       setAmount('')
       setPendingExchange(null)

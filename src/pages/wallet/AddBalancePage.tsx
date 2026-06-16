@@ -135,7 +135,7 @@ export function AddBalancePage() {
     try {
       const result = await depositFunds(pendingDeposit.amount, pendingDeposit.currency)
       setSuccessMessage(
-        `Agregaste ${formatMoney(result.deposited, result.currency)}. Tu nuevo saldo es ${formatMoney(result.newBalance, result.currency)}.`,
+        `Agregaste ${formatMoney(result.deposited, result.currency)}. Tu nuevo saldo es ${formatMoney(result.newBalance, result.currency)}. Enviamos un correo con el detalle de la transacción; revisa también tu bandeja de spam.`,
       )
       setAmount('')
       setPendingDeposit(null)

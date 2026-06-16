@@ -141,7 +141,7 @@ export function WithdrawBalancePage() {
     try {
       const result = await withdrawFunds(pendingWithdraw.amount, pendingWithdraw.currency)
       setSuccessMessage(
-        `Retiraste ${formatMoney(result.withdrawn, result.currency)}. Tu nuevo saldo es ${formatMoney(result.newBalance, result.currency)}.`,
+        `Retiraste ${formatMoney(result.withdrawn, result.currency)}. Tu nuevo saldo es ${formatMoney(result.newBalance, result.currency)}. Enviamos un correo con el detalle de la transacción; revisa también tu bandeja de spam.`,
       )
       setAmount('')
       setPendingWithdraw(null)
