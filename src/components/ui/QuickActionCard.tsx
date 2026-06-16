@@ -7,7 +7,7 @@ import './quick-action-card.css'
 type QuickActionCardProps = ButtonHTMLAttributes<HTMLButtonElement> & {
   label: string
   icon: ReactNode
-  tone?: 'highlight' | 'neutral'
+  tone?: 'highlight' | 'neutral' | 'success' | 'danger'
   to?: string
 }
 

@@ -46,34 +46,15 @@ export const quickActionsMock = [
   },
   {
     label: 'Retirar',
-    tone: 'neutral' as const,
+    tone: 'danger' as const,
     icon: 'bank' as DashboardIconKey,
     route: 'withdraw' as DashboardRouteKey,
   },
   {
     label: 'Agregar saldo',
-    tone: 'neutral' as const,
+    tone: 'success' as const,
     icon: 'plus' as DashboardIconKey,
     route: 'topUp' as DashboardRouteKey,
-  },
-]
-
-export const goalsMock = [
-  {
-    title: 'Vuelo a Bali',
-    amount: '$850 / $1,200 USD',
-    progress: 70,
-    subtitle: 'Ahorro para viaje',
-    icon: 'plane' as DashboardIconKey,
-    progressTone: 'brand' as const,
-  },
-  {
-    title: 'Nómada Hub Rent',
-    amount: '€400 / €600 EUR',
-    progress: 66,
-    subtitle: 'Renta mensual',
-    icon: 'home' as DashboardIconKey,
-    progressTone: 'warning' as const,
   },
 ]
 

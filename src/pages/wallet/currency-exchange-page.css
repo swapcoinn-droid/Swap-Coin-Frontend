@@ -1,0 +1,239 @@
+.currency-exchange-page__header {
+  background:
+    radial-gradient(circle at top right, rgba(47, 111, 159, 0.18), transparent 34%),
+    radial-gradient(circle at bottom left, rgba(255, 210, 51, 0.18), transparent 28%),
+    linear-gradient(135deg, #fff, #eaf3fb);
+}
+
+.currency-exchange-page__header h1 {
+  color: var(--brand-dark);
+}
+
+.currency-exchange-page__grid {
+  display: grid;
+  gap: 1.25rem;
+}
+
+.currency-exchange-form__icon,
+.currency-exchange-modal__icon {
+  background: rgba(47, 111, 159, 0.12);
+  color: var(--brand-dark);
+}
+
+.currency-exchange-form__selectors {
+  display: grid;
+  gap: 0.85rem;
+}
+
+.currency-exchange-form__swap {
+  width: 3rem;
+  height: 3rem;
+  border: 1px solid rgba(47, 111, 159, 0.18);
+  border-radius: 999px;
+  display: inline-grid;
+  place-items: center;
+  justify-self: center;
+  background: #edf5fc;
+  color: var(--brand-dark);
+  cursor: pointer;
+  transition:
+    transform 180ms ease,
+    background-color 180ms ease,
+    box-shadow 180ms ease;
+}
+
+.currency-exchange-form__swap:hover {
+  transform: rotate(180deg);
+  background: #e1effa;
+  box-shadow: 0 12px 22px rgba(47, 78, 117, 0.12);
+}
+
+.currency-exchange-form__swap:focus-visible {
+  outline: 3px solid rgba(47, 111, 159, 0.22);
+  outline-offset: 2px;
+}
+
+.currency-exchange-form__available {
+  padding: 0.9rem 1rem;
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  background: #edf5fc;
+  color: #5d6c7e;
+  font-weight: 800;
+}
+
+.currency-exchange-form__available strong {
+  color: var(--brand-dark);
+  text-align: right;
+}
+
+.currency-exchange-form__fee {
+  display: grid;
+  gap: 0.65rem;
+  padding: 0.85rem;
+  border: 1px solid rgba(47, 111, 159, 0.12);
+  border-radius: 16px;
+  background: rgba(245, 248, 253, 0.9);
+}
+
+.currency-exchange-form__fee div,
+.currency-exchange-modal__breakdown div {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.currency-exchange-form__fee span,
+.currency-exchange-modal__breakdown span {
+  color: #5d6c7e;
+  font-size: 0.84rem;
+  font-weight: 800;
+}
+
+.currency-exchange-form__fee strong,
+.currency-exchange-modal__breakdown strong {
+  color: #1d2b3d;
+  text-align: right;
+}
+
+.currency-exchange-form__received {
+  padding: 1rem;
+  border-radius: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  background: linear-gradient(135deg, #fff8d6, #fff1a8);
+  color: #6f5200;
+  box-shadow: 0 16px 30px rgba(255, 203, 20, 0.18);
+}
+
+.currency-exchange-form__received span,
+.currency-exchange-modal__received span {
+  font-size: 0.88rem;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.currency-exchange-form__received strong {
+  color: var(--brand-dark);
+  font-size: clamp(1.25rem, 4vw, 1.65rem);
+  line-height: 1;
+  text-align: right;
+}
+
+.currency-exchange-modal__received {
+  padding: 0.95rem 1rem;
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  background: #fff3bd;
+  color: #755700;
+}
+
+.currency-exchange-modal__received strong {
+  color: var(--brand-dark);
+  font-size: 1.15rem;
+  text-align: right;
+}
+
+.currency-exchange-summary {
+  border: 1px solid rgba(81, 111, 154, 0.14);
+  border-radius: 24px;
+  padding: 1.35rem;
+  display: grid;
+  gap: 0.9rem;
+  align-content: center;
+  background:
+    radial-gradient(circle at top right, rgba(255, 210, 51, 0.24), transparent 32%),
+    linear-gradient(145deg, #356f9e, #225984);
+  box-shadow: 0 18px 44px rgba(47, 78, 117, 0.09);
+}
+
+.currency-exchange-summary__card,
+.currency-exchange-summary__rate {
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 18px;
+  padding: 1rem;
+  background: rgba(255, 255, 255, 0.12);
+  color: rgba(255, 255, 255, 0.78);
+  backdrop-filter: blur(12px);
+}
+
+.currency-exchange-summary__card {
+  display: grid;
+  gap: 0.25rem;
+}
+
+.currency-exchange-summary__card span,
+.currency-exchange-summary__rate span {
+  font-size: 0.78rem;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.currency-exchange-summary__card strong {
+  color: #fff;
+  font-size: clamp(2rem, 7vw, 3rem);
+  line-height: 1;
+}
+
+.currency-exchange-summary__card p {
+  color: #fff;
+  font-weight: 800;
+}
+
+.currency-exchange-summary__card small {
+  color: rgba(255, 255, 255, 0.72);
+  font-weight: 700;
+}
+
+.currency-exchange-summary__bridge {
+  width: 3rem;
+  height: 3rem;
+  border-radius: 999px;
+  display: grid;
+  place-items: center;
+  justify-self: center;
+  background: var(--accent);
+  color: var(--accent-ink);
+  box-shadow: 0 14px 28px rgba(255, 203, 20, 0.22);
+}
+
+.currency-exchange-summary__rate {
+  display: grid;
+  gap: 0.35rem;
+}
+
+.currency-exchange-summary__rate strong {
+  color: #fff;
+}
+
+.currency-exchange-modal__breakdown {
+  display: grid;
+  gap: 0.55rem;
+  padding: 0.85rem;
+  border-radius: 14px;
+  background: #f4f8fc;
+}
+
+@media (min-width: 800px) {
+  .currency-exchange-page__grid {
+    grid-template-columns: minmax(0, 1.05fr) minmax(300px, 0.95fr);
+  }
+
+  .currency-exchange-form__selectors {
+    grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+    align-items: end;
+  }
+
+  .currency-exchange-summary {
+    padding: 2rem;
+  }
+}

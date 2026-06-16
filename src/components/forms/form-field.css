@@ -88,7 +88,36 @@
 
 .sc-field__input--select {
   appearance: none;
-  padding-right: 2.5rem;
+  padding-right: 3rem;
+  cursor: pointer;
+}
+
+.sc-field__select-indicator {
+  position: absolute;
+  right: 1rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: #60758c;
+  pointer-events: none;
+  transition:
+    color 180ms ease,
+    transform 180ms ease;
+}
+
+.sc-field__select-indicator svg {
+  width: 1.2rem;
+  height: 1.2rem;
+  fill: none;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 2;
+}
+
+.sc-field__control:focus-within .sc-field__select-indicator {
+  color: #2f6f9f;
+  transform: translateY(1px);
 }
 
 .sc-field__help {

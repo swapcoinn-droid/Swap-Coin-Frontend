@@ -2,7 +2,12 @@ import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom'
 
 import { AppLayout } from '../layouts/AppLayout'
 import { DashboardPage } from '../pages/dashboard/DashboardPage'
+import { GoalsPage } from '../pages/goals/GoalsPage'
 import { LandingPage } from '../pages/landing/LandingPage'
+import { TransactionsPage } from '../pages/transactions/TransactionsPage'
+import { AddBalancePage } from '../pages/wallet/AddBalancePage'
+import { CurrencyExchangePage } from '../pages/wallet/CurrencyExchangePage'
+import { WithdrawBalancePage } from '../pages/wallet/WithdrawBalancePage'
 import { RoutePlaceholder } from '../pages/RoutePlaceholder'
 import { LoginPage } from '../pages/auth/LoginPage'
 import { RegisterPage } from '../pages/auth/RegisterPage'
@@ -32,23 +37,23 @@ export function AppRouter() {
               <Route path="dashboard" element={<DashboardPage />} />
               <Route
                 path="cambiar-divisa"
-                element={<RoutePlaceholder title="Cambiar divisa" />}
+                element={<CurrencyExchangePage />}
               />
               <Route
                 path="retirar"
-                element={<RoutePlaceholder title="Retirar" />}
+                element={<WithdrawBalancePage />}
               />
               <Route
                 path="agregar-saldo"
-                element={<RoutePlaceholder title="Agregar saldo" />}
+                element={<AddBalancePage />}
               />
               <Route
                 path="metas"
-                element={<RoutePlaceholder title="Metas" />}
+                element={<GoalsPage />}
               />
               <Route
                 path="historial"
-                element={<RoutePlaceholder title="Historial" />}
+                element={<TransactionsPage />}
               />
               <Route
                 path="comprar"
