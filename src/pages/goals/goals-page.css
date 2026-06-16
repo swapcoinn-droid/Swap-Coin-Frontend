@@ -96,11 +96,13 @@
 
 .goals-page__grid {
   display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 21rem), 1fr));
   gap: 1rem;
 }
 
 .goals-card {
   padding: 1.25rem;
+  min-width: 0;
 }
 
 .goals-card__heading,
@@ -115,7 +117,7 @@
 .goals-card__actions {
   margin-top: 1rem;
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(7.25rem, 1fr));
   gap: 0.55rem;
 }
 
@@ -129,6 +131,7 @@
 }
 
 .goals-card__heading > div {
+  min-width: 0;
   display: grid;
   gap: 0.25rem;
 }
@@ -145,6 +148,7 @@
 
 .goals-card__heading h2 {
   font-size: 1.25rem;
+  overflow-wrap: anywhere;
 }
 
 .goals-card__progress-heading {
@@ -158,11 +162,12 @@
 .goals-card__amounts {
   margin-top: 1.1rem;
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(9rem, 1fr));
   gap: 0.75rem;
 }
 
 .goals-card__amounts div {
+  min-width: 0;
   padding: 0.85rem;
   border-radius: 14px;
   display: grid;
@@ -173,12 +178,17 @@
 .goals-card__amounts strong,
 .goals-card__footer strong {
   color: #1d2b3d;
+  overflow-wrap: anywhere;
 }
 
 .goals-card__footer {
   margin-top: 1rem;
   padding-top: 1rem;
   border-top: 1px solid rgba(74, 104, 145, 0.14);
+}
+
+.goals-card__footer strong {
+  text-align: right;
 }
 
 .goals-modal__backdrop {
@@ -302,12 +312,8 @@
     justify-content: flex-end;
   }
 
-  .goals-page__grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-
   .goals-card__actions {
-    grid-template-columns: repeat(4, auto);
+    grid-template-columns: repeat(auto-fit, minmax(7.25rem, 1fr));
   }
 
   .goals-modal {
