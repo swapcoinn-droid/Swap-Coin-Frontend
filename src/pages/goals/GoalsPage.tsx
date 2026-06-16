@@ -16,6 +16,7 @@ import {
   contributeToGoal,
   deleteGoal,
   getGoals,
+  updateGoal,
   withdrawFromGoal,
   type GoalStatus,
   type SavingsGoal,
@@ -85,6 +86,10 @@ export function GoalsPage() {
   const [goalAction, setGoalAction] = useState<GoalAction | null>(null)
   const [actionAmount, setActionAmount] = useState('')
   const [actionError, setActionError] = useState('')
+  const [editingGoal, setEditingGoal] = useState<SavingsGoal | null>(null)
+  const [editTargetAmount, setEditTargetAmount] = useState('')
+  const [editTargetDate, setEditTargetDate] = useState('')
+  const [editError, setEditError] = useState('')
 
   useEffect(() => {
     let isActive = true
@@ -195,6 +200,81 @@ export function GoalsPage() {
     setGoalAction(null)
     setActionAmount('')
     setActionError('')
+  }
+
+  const openEditGoal = (goal: SavingsGoal) => {
+    setEditingGoal(goal)
+    setEditTargetAmount(String(goal.targetAmount))
+    setEditTargetDate(goal.targetDate?.split('T')[0] ?? '')
+    setEditError('')
+    setSuccessMessage('')
+  }
+
+  const closeEditGoal = () => {
+    if (isSubmitting) return
+    setEditingGoal(null)
+    setEditTargetAmount('')
+    setEditTargetDate('')
+    setEditError('')
+  }
+
+  const handleEditGoal = async (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault()
+    if (!editingGoal) return
+
+    const numericTarget = Number(editTargetAmount)
+
+    setEditError('')
+    setPageError('')
+    setSuccessMessage('')
+
+    if (!Number.isFinite(numericTarget) || numericTarget <= 0) {
+      setEditError('El nuevo objetivo debe ser un monto mayor a cero.')
+      return
+    }
+
+    if (!/^\d+(\.\d{1,2})?$/.test(editTargetAmount)) {
+      setEditError('El objetivo puede tener máximo dos decimales.')
+      return
+    }
+
+    if (numericTarget < editingGoal.currentAmount) {
+      setEditError(
+        `El objetivo no puede ser menor al ahorro actual: ${formatMoney(editingGoal.currentAmount, editingGoal.currency)}.`,
+      )
+      return
+    }
+
+    const originalTargetDate = editingGoal.targetDate?.split('T')[0] ?? ''
+    const hasTargetAmountChanged = numericTarget !== editingGoal.targetAmount
+    const hasTargetDateChanged = editTargetDate !== originalTargetDate
+
+    if (!hasTargetAmountChanged && !hasTargetDateChanged) {
+      setEditError('Modifica el monto objetivo o la fecha límite antes de guardar.')
+      return
+    }
+
+    setIsSubmitting(true)
+
+    try {
+      const updatedGoal = await updateGoal(editingGoal.id, {
+        ...(hasTargetAmountChanged ? { targetAmount: numericTarget } : {}),
+        ...(hasTargetDateChanged ? { targetDate: editTargetDate || null } : {}),
+      })
+
+      setGoals((currentGoals) =>
+        currentGoals.map((goal) => (goal.id === updatedGoal.id ? updatedGoal : goal)),
+      )
+      setSuccessMessage(`La meta “${updatedGoal.name}” fue actualizada correctamente.`)
+      setEditingGoal(null)
+      setEditTargetAmount('')
+      setEditTargetDate('')
+      setEditError('')
+    } catch (error) {
+      setEditError(getErrorMessage(error))
+    } finally {
+      setIsSubmitting(false)
+    }
   }
 
   const handleGoalAction = async (event: FormEvent<HTMLFormElement>) => {
@@ -363,6 +443,14 @@ export function GoalsPage() {
                   Retirar
                 </Button>
                 <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={() => openEditGoal(goal)}
+                  disabled={goal.status !== 'active'}
+                >
+                  Ajustar meta
+                </Button>
+                <Button
                   variant="ghost"
                   size="sm"
                   onClick={() => openGoalAction(goal, 'delete')}
@@ -437,6 +525,65 @@ export function GoalsPage() {
                 </Button>
                 <Button type="submit" size="lg" trailingIcon={<PlusIcon />} disabled={isSubmitting}>
                   {isSubmitting ? 'Creando meta...' : 'Crear meta'}
+                </Button>
+              </div>
+            </form>
+          </section>
+        </div>
+      ) : null}
+
+      {editingGoal ? (
+        <div className="goals-modal__backdrop" onClick={closeEditGoal}>
+          <section
+            className="goals-modal goals-modal--action"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="edit-goal-title"
+            onClick={(event) => event.stopPropagation()}
+          >
+            <div className="goals-modal__heading">
+              <span className="goals-page__state-icon" aria-hidden="true"><PlusIcon /></span>
+              <div>
+                <span>Más tiempo y más dinero</span>
+                <h2 id="edit-goal-title">Ajustar “{editingGoal.name}”</h2>
+              </div>
+            </div>
+
+            <form className="goals-modal__form" onSubmit={handleEditGoal} noValidate>
+              <div className="goals-modal__summary">
+                <span>Ahorro actual</span>
+                <strong>{formatMoney(editingGoal.currentAmount, editingGoal.currency)}</strong>
+                <span>
+                  El nuevo objetivo debe ser igual o mayor a este monto.
+                </span>
+              </div>
+
+              <TextField
+                label="Nuevo monto objetivo"
+                value={editTargetAmount}
+                onChange={(event) => setEditTargetAmount(event.target.value)}
+                type="number"
+                min={Math.max(editingGoal.currentAmount, 0.01)}
+                step="0.01"
+                inputMode="decimal"
+                required
+              />
+              <TextField
+                label="Nueva fecha límite"
+                helperText="Opcional"
+                value={editTargetDate}
+                onChange={(event) => setEditTargetDate(event.target.value)}
+                type="date"
+              />
+
+              {editError ? <p className="goals-page__message is-error" role="alert">{editError}</p> : null}
+
+              <div className="goals-modal__actions">
+                <Button variant="secondary" size="lg" onClick={closeEditGoal} disabled={isSubmitting}>
+                  Cancelar
+                </Button>
+                <Button type="submit" size="lg" trailingIcon={<PlusIcon />} disabled={isSubmitting}>
+                  {isSubmitting ? 'Actualizando meta...' : 'Guardar cambios'}
                 </Button>
               </div>
             </form>

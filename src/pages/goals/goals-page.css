@@ -114,13 +114,12 @@
 
 .goals-card__actions {
   margin-top: 1rem;
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 0.55rem;
 }
 
 .goals-card__actions .sc-button:last-child {
-  margin-left: auto;
   color: #a52f3e;
 }
 
@@ -305,6 +304,10 @@
 
   .goals-page__grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .goals-card__actions {
+    grid-template-columns: repeat(4, auto);
   }
 
   .goals-modal {
