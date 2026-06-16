@@ -40,6 +40,12 @@
   height: 100%;
 }
 
+.sc-navbar__brand-text,
+.sc-navbar__link,
+.sc-navbar__action {
+  white-space: nowrap;
+}
+
 .sc-navbar__brand-text {
   font-size: 1.2rem;
 }
@@ -162,7 +168,7 @@
   height: 100%;
 }
 
-@media (min-width: 901px) {
+@media (min-width: 1120px) {
   .sc-navbar {
     width: min(calc(100% - 3rem), 1180px);
     padding: 1.05rem 1.5rem;
@@ -190,7 +196,7 @@
     display: inline-flex;
     justify-content: center;
     gap: 1rem;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
   }
 
   .sc-navbar__link {
@@ -213,7 +219,7 @@
     align-items: center;
     justify-content: flex-end;
     gap: 0.5rem;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
   }
 
   .sc-navbar__action {
