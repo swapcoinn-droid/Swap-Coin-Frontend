@@ -9,7 +9,7 @@ import {
   PlaneIcon,
   PlusIcon,
 } from '../../components/icons/AuthIcons'
-import { Badge, Button, Card, ProgressBar } from '../../components/ui'
+import { Badge, Button, Card, ProgressBar, ScrollToTopButton } from '../../components/ui'
 import { routes } from '../../router/routes'
 import {
   createGoal,
@@ -576,10 +576,16 @@ export function GoalsPage() {
             </div>
 
             <form className="goals-modal__form" onSubmit={handleEditGoal} noValidate>
-              <div className="goals-modal__summary">
-                <span>Ahorro actual</span>
-                <strong>{formatMoney(editingGoal.currentAmount, editingGoal.currency)}</strong>
-                <span>
+              <div className="goals-modal__summary goals-modal__summary--split">
+                <div>
+                  <span>Ahorro actual</span>
+                  <strong>{formatMoney(editingGoal.currentAmount, editingGoal.currency)}</strong>
+                </div>
+                <div>
+                  <span>Monto objetivo</span>
+                  <strong>{formatMoney(editingGoal.targetAmount, editingGoal.currency)}</strong>
+                </div>
+                <span className="goals-modal__summary-note">
                   El nuevo objetivo debe ser igual o mayor al objetivo actual.
                 </span>
               </div>
@@ -662,10 +668,15 @@ export function GoalsPage() {
                 </p>
               ) : (
                 <>
-                  <div className="goals-modal__summary">
-                    <span>Ahorro actual</span>
-                    <strong>{formatMoney(selectedGoal.currentAmount, selectedGoal.currency)}</strong>
-                    <span>Objetivo: {formatMoney(selectedGoal.targetAmount, selectedGoal.currency)}</span>
+                  <div className="goals-modal__summary goals-modal__summary--split">
+                    <div>
+                      <span>Ahorro actual</span>
+                      <strong>{formatMoney(selectedGoal.currentAmount, selectedGoal.currency)}</strong>
+                    </div>
+                    <div>
+                      <span>Monto objetivo</span>
+                      <strong>{formatMoney(selectedGoal.targetAmount, selectedGoal.currency)}</strong>
+                    </div>
                   </div>
                   {goalAction === 'contribute' ? (
                     <div className="goals-modal__available-balance">
@@ -722,6 +733,8 @@ export function GoalsPage() {
           </section>
         </div>
       ) : null}
+
+      <ScrollToTopButton />
     </div>
   )
 }

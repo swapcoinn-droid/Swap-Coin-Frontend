@@ -1,8 +1,10 @@
 import { useEffect, useMemo, useState, type ReactNode } from 'react'
+import { Link } from 'react-router-dom'
 
 import { SelectField, TextField } from '../../components/forms'
 import { ArrowLeftIcon, ArrowRightIcon, BankIcon, PlusIcon, SwapIcon } from '../../components/icons/AuthIcons'
-import { Button, Card, EmptyState, IconBubble, TransactionItem } from '../../components/ui'
+import { Button, Card, EmptyState, IconBubble, ScrollToTopButton, TransactionItem } from '../../components/ui'
+import { routes } from '../../router/routes'
 import {
   getWalletTransactions,
   type CurrencyCode,
@@ -211,10 +213,17 @@ export function TransactionsPage() {
           <p>Consulta tus recargas, retiros y cambios de divisa en un solo lugar.</p>
         </div>
 
-        <div className="transactions-page__hero-card" aria-label="Resumen filtrado">
-          <span>Movimientos encontrados</span>
-          <strong>{isLoading ? '...' : summary.total}</strong>
-          <small>{pagination ? `${pagination.total} transacciones registradas` : 'Historial financiero'}</small>
+        <div className="transactions-page__hero-side">
+          <Link className="transactions-page__back-link" to={routes.dashboard}>
+            <ArrowLeftIcon />
+            <span>Volver al inicio</span>
+          </Link>
+
+          <div className="transactions-page__hero-card" aria-label="Resumen filtrado">
+            <span>Movimientos encontrados</span>
+            <strong>{isLoading ? '...' : summary.total}</strong>
+            <small>{pagination ? `${pagination.total} transacciones registradas` : 'Historial financiero'}</small>
+          </div>
         </div>
       </section>
 
@@ -369,6 +378,7 @@ export function TransactionsPage() {
           </Button>
         </div>
       </Card>
+      <ScrollToTopButton />
     </div>
   )
 }

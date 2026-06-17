@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import { ArrowRightIcon } from '../../components/icons/AuthIcons'
 import { PublicFooter } from '../../components/public-layout/PublicFooter'
 import { PublicNavbar } from '../../components/public-layout/PublicNavbar'
+import { ScrollToTopButton } from '../../components/ui'
 import { routes } from '../../router/routes'
 import './landing-page.css'
 
@@ -144,6 +145,7 @@ export function LandingPage() {
       </section>
 
       <PublicFooter />
+      <ScrollToTopButton />
     </main>
   )
 }
