@@ -10,6 +10,7 @@ import {
   IconBubble,
   MetricCard,
   QuickActionCard,
+  ScrollToTopButton,
   SectionHeader,
   TransactionItem,
 } from '../../components/ui'
@@ -362,6 +363,7 @@ export function DashboardPage() {
       </section>
 
       <FloatingActionButton label="Abrir chat" icon={<ChatIcon />} />
+      <ScrollToTopButton />
     </div>
   )
 }

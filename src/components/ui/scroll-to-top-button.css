@@ -1,6 +1,6 @@
 .sc-scroll-top {
   position: fixed;
-  right: calc(1rem + env(safe-area-inset-right));
+  left: calc(1rem + env(safe-area-inset-left));
   bottom: calc(5rem + env(safe-area-inset-bottom));
   z-index: 80;
   width: 3.1rem;

@@ -9,7 +9,7 @@ import {
   PlaneIcon,
   PlusIcon,
 } from '../../components/icons/AuthIcons'
-import { Badge, Button, Card, ProgressBar } from '../../components/ui'
+import { Badge, Button, Card, ProgressBar, ScrollToTopButton } from '../../components/ui'
 import { routes } from '../../router/routes'
 import {
   createGoal,
@@ -733,6 +733,8 @@ export function GoalsPage() {
           </section>
         </div>
       ) : null}
+
+      <ScrollToTopButton />
     </div>
   )
 }

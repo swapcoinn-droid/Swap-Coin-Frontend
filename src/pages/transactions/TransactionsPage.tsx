@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 
 import { SelectField, TextField } from '../../components/forms'
 import { ArrowLeftIcon, BankIcon, PlusIcon, SwapIcon } from '../../components/icons/AuthIcons'
-import { Button, Card, EmptyState, IconBubble, TransactionItem } from '../../components/ui'
+import { Button, Card, EmptyState, IconBubble, ScrollToTopButton, TransactionItem } from '../../components/ui'
 import { routes } from '../../router/routes'
 import {
   getWalletTransactions,
@@ -374,6 +374,7 @@ export function TransactionsPage() {
           </Button>
         </div>
       </Card>
+      <ScrollToTopButton />
     </div>
   )
 }
