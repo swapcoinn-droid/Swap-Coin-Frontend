@@ -240,8 +240,28 @@
     padding: 7rem 1rem 0;
   }
 
+  .login-copy {
+    gap: 0.8rem;
+  }
+
   .login-copy__stats {
-    grid-template-columns: 1fr;
+    width: 100%;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0.45rem;
+  }
+
+  .login-copy__stats span {
+    min-height: 4.45rem;
+    padding: 0.65rem 0.35rem;
+    border-radius: 14px;
+    place-items: center;
+    text-align: center;
+    font-size: 0.68rem;
+    line-height: 1.1;
+  }
+
+  .login-copy__stats strong {
+    font-size: 1.25rem;
   }
 
   .login-card {
