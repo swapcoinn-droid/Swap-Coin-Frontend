@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 
 import { Outlet, useLocation, useNavigate } from 'react-router-dom'
 
+import { ChatbotWidget } from '../components/chatbot/ChatbotWidget'
 import { LogoutIcon } from '../components/icons/AuthIcons'
 import { Navbar } from '../components/navbar/Navbar'
 import { PublicFooter } from '../components/public-layout/PublicFooter'
@@ -60,6 +61,7 @@ export function AppLayout() {
       </main>
 
       <PublicFooter />
+      <ChatbotWidget />
 
       {isLogoutModalOpen ? (
         <div

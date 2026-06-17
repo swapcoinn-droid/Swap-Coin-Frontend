@@ -267,7 +267,7 @@ export function DashboardPage() {
       </section>
 
       <section className="dashboard-page__section">
-        <SectionHeader eyebrow="Acciones rápidas" title="Acciones rápidas" />
+        <SectionHeader eyebrow="Nuestras funcionalidades" title="Nuestras Funcionalidades" />
 
         <div className="dashboard-page__quick-actions">
           {quickActionsMock.map((action) => (

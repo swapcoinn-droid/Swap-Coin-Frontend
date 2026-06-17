@@ -87,6 +87,7 @@
 }
 
 .dashboard-page__hero-panel-total {
+  min-width: 0;
   padding: 0.9rem 1rem;
   border: 1px solid rgba(47, 111, 159, 0.12);
   border-radius: 16px;
@@ -105,8 +106,11 @@
 
 .dashboard-page__hero-panel-total strong {
   color: #163d61;
-  font-size: clamp(2rem, 3.4vw, 2.75rem);
+  max-width: 100%;
+  font-size: clamp(1.55rem, 3vw, 2.45rem);
   line-height: 1.05;
+  overflow-wrap: anywhere;
+  word-break: break-word;
 }
 
 .dashboard-page__hero-panel-note {
