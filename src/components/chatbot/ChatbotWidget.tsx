@@ -189,6 +189,12 @@ export function ChatbotWidget() {
                 rows={2}
                 value={message}
                 onChange={(event) => setMessage(event.target.value)}
+                onKeyDown={(event) => {
+                  if (event.key === 'Enter' && !event.shiftKey) {
+                    event.preventDefault()
+                    void sendMessage(message)
+                  }
+                }}
                 disabled={isSending}
               />
               <Button
