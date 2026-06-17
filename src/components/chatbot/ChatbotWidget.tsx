@@ -43,6 +43,7 @@ export function ChatbotWidget() {
   const [history, setHistory] = useState<ChatHistoryItem[]>([])
   const [isSending, setIsSending] = useState(false)
   const [errorMessage, setErrorMessage] = useState('')
+  const widgetRef = useRef<HTMLDivElement | null>(null)
   const messagesEndRef = useRef<HTMLDivElement | null>(null)
 
   useEffect(() => {
@@ -54,15 +55,23 @@ export function ChatbotWidget() {
   useEffect(() => {
     if (!isOpen) return
 
+    const handlePointerDown = (event: PointerEvent) => {
+      if (widgetRef.current && !widgetRef.current.contains(event.target as Node)) {
+        setIsOpen(false)
+      }
+    }
+
     const handleKeyDown = (event: KeyboardEvent) => {
       if (event.key === 'Escape') {
         setIsOpen(false)
       }
     }
 
+    window.addEventListener('pointerdown', handlePointerDown)
     window.addEventListener('keydown', handleKeyDown)
 
     return () => {
+      window.removeEventListener('pointerdown', handlePointerDown)
       window.removeEventListener('keydown', handleKeyDown)
     }
   }, [isOpen])
@@ -112,7 +121,7 @@ export function ChatbotWidget() {
   }
 
   return (
-    <div className="chatbot-widget">
+    <div className="chatbot-widget" ref={widgetRef}>
       {isOpen ? (
         <section
           className="chatbot-widget__panel"
@@ -124,12 +133,12 @@ export function ChatbotWidget() {
               <h2>SwapBot</h2>
             </div>
             <button
-              className="chatbot-widget__close"
+              className="chatbot-widget__minimize"
               type="button"
-              aria-label="Cerrar chat"
+              aria-label="Minimizar chat"
               onClick={() => setIsOpen(false)}
             >
-              ×
+              <span aria-hidden="true" />
             </button>
           </header>
 
@@ -215,12 +224,12 @@ export function ChatbotWidget() {
       <button
         className="chatbot-widget__trigger"
         type="button"
-        aria-label={isOpen ? 'Cerrar chat' : 'Abrir chat'}
+        aria-label={isOpen ? 'Minimizar chat' : 'Abrir chat'}
         aria-expanded={isOpen}
         onClick={() => setIsOpen((currentValue) => !currentValue)}
       >
         <ChatIcon />
-        <span>{isOpen ? 'Cerrar chat' : 'Abrir chat'}</span>
+        <span>{isOpen ? 'Minimizar chat' : 'Abrir chat'}</span>
       </button>
     </div>
   )
