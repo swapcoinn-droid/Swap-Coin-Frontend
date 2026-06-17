@@ -142,6 +142,11 @@
   gap: 0.55rem;
 }
 
+.goals-card__actions .sc-button {
+  min-width: 0;
+  padding-inline: 0.75rem;
+}
+
 .goals-card__actions .sc-button:last-child {
   color: #a52f3e;
 }
@@ -352,7 +357,7 @@
   }
 
   .goals-card__actions {
-    grid-template-columns: repeat(4, auto);
+    grid-template-columns: repeat(auto-fit, minmax(6.75rem, 1fr));
   }
 
   .goals-modal {
