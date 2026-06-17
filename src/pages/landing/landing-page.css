@@ -385,6 +385,23 @@
     width: min(100% - 2rem, 1180px);
   }
 
+  .landing-hero {
+    padding-top: 6.5rem;
+  }
+
+  .landing-hero__content {
+    gap: 1rem;
+  }
+
+  .landing-hero h1 {
+    font-size: clamp(2.55rem, 12vw, 3.25rem);
+    line-height: 0.95;
+  }
+
+  .landing-hero p {
+    font-size: 0.95rem;
+  }
+
   .landing-wallet {
     padding: 1.25rem;
   }
