@@ -52,6 +52,24 @@
   color: #2e6797;
   font-weight: 800;
   text-decoration: none;
+  box-shadow: 0 8px 18px rgba(59, 92, 126, 0.08);
+  transition:
+    transform 180ms ease,
+    border-color 180ms ease,
+    background-color 180ms ease,
+    box-shadow 180ms ease;
+}
+
+.goals-page__back-link:hover {
+  transform: translateY(-2px);
+  border-color: rgba(47, 111, 159, 0.58);
+  background: #f3f9ff;
+  box-shadow: 0 14px 28px rgba(47, 111, 159, 0.16);
+}
+
+.goals-page__back-link:focus-visible {
+  outline: 3px solid rgba(54, 110, 169, 0.25);
+  outline-offset: 3px;
 }
 
 .goals-page__message {
