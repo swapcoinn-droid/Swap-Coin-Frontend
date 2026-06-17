@@ -86,6 +86,18 @@
   color: #8a95a5;
 }
 
+.sc-field__input[type='number'] {
+  appearance: textfield;
+  -moz-appearance: textfield;
+}
+
+.sc-field__input[type='number']::-webkit-outer-spin-button,
+.sc-field__input[type='number']::-webkit-inner-spin-button {
+  margin: 0;
+  appearance: none;
+  -webkit-appearance: none;
+}
+
 .sc-field__input--select {
   appearance: none;
   padding-right: 3rem;
