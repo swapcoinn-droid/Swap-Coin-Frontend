@@ -61,6 +61,7 @@
 }
 
 .sc-metric-card__balance {
+  min-width: 0;
   display: grid;
   gap: 0.45rem;
   align-content: center;
@@ -82,10 +83,13 @@
 }
 
 .sc-metric-card__value {
-  font-size: clamp(2rem, 3.1vw, 2.75rem);
+  max-width: 100%;
+  font-size: clamp(1.65rem, 2.8vw, 2.55rem);
   line-height: 0.95;
   color: #1d2b3d;
   letter-spacing: 0;
+  overflow-wrap: anywhere;
+  word-break: break-word;
 }
 
 .sc-metric-card__label {
@@ -121,6 +125,7 @@
 }
 
 .sc-metric-card__footer {
+  min-width: 0;
   min-height: 2.65rem;
   display: flex;
   align-items: center;
@@ -135,6 +140,12 @@
 }
 
 .sc-metric-card__footer strong {
+  flex: 0 0 auto;
   color: #1d2b3d;
   font-size: 0.82rem;
+}
+
+.sc-metric-card__footer span {
+  min-width: 0;
+  overflow-wrap: anywhere;
 }
