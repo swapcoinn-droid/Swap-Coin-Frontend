@@ -1,8 +1,10 @@
 import { useEffect, useMemo, useState, type ReactNode } from 'react'
+import { Link } from 'react-router-dom'
 
 import { SelectField, TextField } from '../../components/forms'
-import { BankIcon, PlusIcon, SwapIcon } from '../../components/icons/AuthIcons'
-import { Button, Card, EmptyState, IconBubble, TransactionItem } from '../../components/ui'
+import { ArrowLeftIcon, ArrowRightIcon, BankIcon, PlusIcon, SwapIcon } from '../../components/icons/AuthIcons'
+import { Button, Card, EmptyState, IconBubble, ScrollToTopButton, TransactionItem } from '../../components/ui'
+import { routes } from '../../router/routes'
 import {
   getWalletTransactions,
   type CurrencyCode,
@@ -211,10 +213,17 @@ export function TransactionsPage() {
           <p>Consulta tus recargas, retiros y cambios de divisa en un solo lugar.</p>
         </div>
 
-        <div className="transactions-page__hero-card" aria-label="Resumen filtrado">
-          <span>Movimientos encontrados</span>
-          <strong>{isLoading ? '...' : summary.total}</strong>
-          <small>{pagination ? `${pagination.total} transacciones registradas` : 'Historial financiero'}</small>
+        <div className="transactions-page__hero-side">
+          <Link className="transactions-page__back-link" to={routes.dashboard}>
+            <ArrowLeftIcon />
+            <span>Volver al inicio</span>
+          </Link>
+
+          <div className="transactions-page__hero-card" aria-label="Resumen filtrado">
+            <span>Movimientos encontrados</span>
+            <strong>{isLoading ? '...' : summary.total}</strong>
+            <small>{pagination ? `${pagination.total} transacciones registradas` : 'Historial financiero'}</small>
+          </div>
         </div>
       </section>
 
@@ -345,26 +354,31 @@ export function TransactionsPage() {
 
         <div className="transactions-page__pagination">
           <Button
+            className="transactions-page__pagination-button"
             variant="outline"
             size="sm"
+            aria-label="Página anterior"
             onClick={() => changePage(Math.max(page - 1, 1))}
             disabled={isLoading || !pagination?.hasPrevPage}
           >
-            Anterior
+            <ArrowLeftIcon />
           </Button>
           <span>
             Página {pagination?.page ?? page} de {pagination?.totalPages ?? 1}
           </span>
           <Button
+            className="transactions-page__pagination-button"
             variant="outline"
             size="sm"
+            aria-label="Página siguiente"
             onClick={() => changePage(page + 1)}
             disabled={isLoading || !pagination?.hasNextPage}
           >
-            Siguiente
+            <ArrowRightIcon />
           </Button>
         </div>
       </Card>
+      <ScrollToTopButton />
     </div>
   )
 }
