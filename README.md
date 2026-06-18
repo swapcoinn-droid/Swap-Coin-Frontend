@@ -35,6 +35,7 @@ Swap-Coin es una aplicación web para gestionar una wallet multidivisa, consulta
 - [Instrucciones Para Clonar El Repositorio](#instrucciones-para-clonar-el-repositorio)
 - [Flujo Recomendado De Trabajo Con Git](#flujo-recomendado-de-trabajo-con-git)
 - [Pruebas](#pruebas)
+- [Autores](#autores)
 
 ## Descripción General
 
@@ -329,7 +330,6 @@ PF-Frontend/
 │   ├── routes/
 │   ├── services/
 │   ├── test/
-│   ├── tests/
 │   ├── types/
 │   └── utils/
 ├── .env.example
@@ -530,3 +530,11 @@ Las pruebas actuales cubren:
 - Metas de ahorro.
 - Historial de transacciones.
 - Componentes reutilizables de UI.
+
+## Autores
+
+- Juan Andrés Arias Tascón: Desarrollador Frontend.
+- Sam Bracamonte: Desarrolladora Backend.
+- Luna Catalina Gómez Amar: Desarrolladora Frontend.
+
+Este proyecto fue desarrollado con fines educativos, como proyecto final del bootcamp de desarrollo fullstack WebFT72 de la Academia Henry.
