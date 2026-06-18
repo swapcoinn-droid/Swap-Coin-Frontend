@@ -534,7 +534,7 @@ Las pruebas actuales cubren:
 ## Autores
 
 - Juan Andrés Arias Tascón: Desarrollador Frontend.
-- Sam Bracamonte: Desarrolladora Backend.
-- Luna Catalina Gómez Amar: Desarrolladora Frontend.
+- Sam Bracamonte: Desarrollador Backend.
+- Luna Catalina Gómez Amar: Desarrollador Frontend.
 
 Este proyecto fue desarrollado con fines educativos, como proyecto final del bootcamp de desarrollo fullstack WebFT72 de la Academia Henry.
